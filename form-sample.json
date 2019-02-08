@@ -1,0 +1,52 @@
+{
+	
+	"form_id" : "1",
+	"form_settings" : {
+		"basics" : {
+			"title" : "My Custom Form",
+			"description": "This is my custom form description"
+		},
+		"layout" : {
+			"label_placement" : "bi(BELOW INPUT) or ai(ABOVE INPUT)",
+			"attr" : [ {"class":"form-css-class"}, {"id":"form-id-1"}, {"autocomplete":"on"} ]
+		},
+		"button" : {
+			"text" : "Submit",
+			"attr" : [ {"class":"form-css-class"}, {"id":"form-id-1"}, {"data-id":"54321"}, {"type":"button"} ],
+			"css" : [ {"backgroundColor":"#543212"}, {"fontSize":"20px"}, {"color":"#ffffff"} ]
+		},
+		"confirmation" : {
+			"type" : "m(MESSAGE) or r(REDIRECT)",
+			"message" : {
+				"text" : "Your Form Has been successfully submitted",
+				"wrapper" : "<h1></h1>",
+				"attr" : [ {"class":"form-css-class"}, {"id":"form-id-1"}, {"data-id":"54321"} ],
+				"css" : [ {"backgroundColor":"#543212"}, {"fontSize":"20px"}, {"color":"#ffffff"} ]
+			},
+			"redirect" : {
+				"url" : "https://example.com",
+				"query_string" : [ {"message":"Thank you"}, {"form_id":"1"} ]
+			}
+		},
+		"notifications" : {
+			"admin" : {
+				"to" : [ "abc@edensolutions.co.in", "xyz@premierlister.com" ],
+				"from" : "{user-email}",
+				"reply_to" : "{user-email}",
+				"bcc" : [ "someone@something.com" ],
+				"subject" : "Received an order from {user-name}",
+				"message" : "You jus received an order from {user-name} for a session"
+			},
+			"user" : {
+				"to" : [ "{user-email}", "xyz@premierlister.com" ],
+				"from" : "{xyz@premierlister.com}",
+				"reply_to" : "{xyz@premierlister.com}",
+				"bcc" : [ "someone@something.com" ],
+				"subject" : "Your form has been submitted successfully",
+				"message" : "Hi {user-name}, you have successfully submitted the form at our website"
+			}
+		},
+		"custom_css" : "ALL CSS TEXT GOES HERE"
+	}
+
+}
