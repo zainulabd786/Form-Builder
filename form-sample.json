@@ -1,5 +1,5 @@
 {
-	
+
 	"form_id" : "1",
 	"form_settings" : {
 		"basics" : {
@@ -13,13 +13,14 @@
 		"button" : {
 			"text" : "Submit",
 			"attr" : [ {"class":"form-css-class"}, {"id":"form-id-1"}, {"data-id":"54321"}, {"type":"button"} ],
-			"css" : [ {"backgroundColor":"#543212"}, {"fontSize":"20px"}, {"color":"#ffffff"} ]
+			"css" : [ {"backgroundColor":"#543212"}, {"fontSize":"20px"}, {"color":"#ffffff"} ],
+			"wrapper" : "span"
 		},
 		"confirmation" : {
 			"type" : "m(MESSAGE) or r(REDIRECT)",
 			"message" : {
 				"text" : "Your Form Has been successfully submitted",
-				"wrapper" : "<h1></h1>",
+				"wrapper" : "h1",
 				"attr" : [ {"class":"form-css-class"}, {"id":"form-id-1"}, {"data-id":"54321"} ],
 				"css" : [ {"backgroundColor":"#543212"}, {"fontSize":"20px"}, {"color":"#ffffff"} ]
 			},
@@ -47,6 +48,265 @@
 			}
 		},
 		"custom_css" : "ALL CSS TEXT GOES HERE"
-	}
+	},
+	"form_fields" : [
+		{
+			"field_1" : {
+				"field_name" : "Text",
+				"id" : "1",
+				"visibility" : "h(HIDE) or s(Show)",
+				"tooltip" : "Please Enter your name here",
+				"column" : {
+					"width" : "4",
+					"sequence" : ["field_1", "field_2", "field_3", "field_4"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-control col-md-12"}, {"id":"input54321-wrapper"}, {"data-id":"54321"}],
+					"css" : "WRAPPER CSS GOES HERE"
+				},
+				"label" : {
+					"text" : "First Name",
+					"label_placement" : "bi(BELOW INPUT) or ai(ABOVE INPUT)"
+				},
+				"input" : {
+					"tag" : "input",
+					"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"First Name"}, {"disabled":"false"}, {"required":"true"}],
+					"css" : "INPUT TAG CSS GOES HERE",
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_0",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		}, 
+		{
+			"field_2" : {
+				"field_name" : "TextArea",
+				"id" : "2",
+				"visibility" : "h(HIDE) or s(Show)",
+				"tooltip" : "Please Enter your Long description here here",
+				"column" : {
+					"width" : "1",
+					"sequence" : ["field_2"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-control col-md-12"}, {"id":"input54321-wrapper"}, {"data-id":"54321"}],
+					"css" : "WRAPPER CSS GOES HERE"
+				},
+				"label" : {
+					"text" : "Description",
+					"label_placement" : "bi(BELOW INPUT) or ai(ABOVE INPUT)"
+				},
+				"input" : {
+					"tag" : "textarea",
+					"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"34"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"Your Description"}, {"disabled":"false"}, {"required":"true"}],
+					"css" : "INPUT TAG CSS GOES HERE",
+				},
+				"conditional_logic" : {
+					"set" : "true",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_0",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field_3" : {
+				"field_name" : "Number",
+				"id" : "3",
+				"visibility" : "h(HIDE) or s(Show)",
+				"tooltip" : "type umbers only",
+				"column" : {
+					"width" : "1",
+					"sequence" : ["field_3"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-group col-md-12"}, {"id":"input54321-wrapper"}, {"data-id":"54321"}],
+					"css" : "WRAPPER CSS GOES HERE"
+				},
+				"label" : {
+					"text" : "Your age",
+					"label_placement" : "bi(BELOW INPUT) or ai(ABOVE INPUT)"
+				},
+				"input" : {
+					"tag" : "input",
+					"attr" : [{"type":"number"}, {"value":""}, {"min":"18"}, {"max":"50"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"Your Description"}, {"disabled":"false"}, {"required":"true"}],
+					"css" : "INPUT TAG CSS GOES HERE",
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_3",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field_4" : {
+				"field_name" : "Radio Buttons",
+				"id" : "4",
+				"visibility" : "h(HIDE) or s(Show)",
+				"tooltip" : "Select one option",
+				"column" : {
+					"width" : "2",
+					"sequence" : ["field_4", "field_5"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-group col-md-12"}, {"id":"input54321-wrapper"}, {"data-id":"54321"}],
+					"css" : "WRAPPER CSS GOES HERE"
+				},
+				"label" : {
+					"text" : "Number of Sessions",
+					"label_placement" : "bi(BELOW INPUT) or ai(ABOVE INPUT)"
+				},
+				"input" : {
+					"tag" : "input",
+					"attr" : [{"type":"radio"}, {"value":""}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"disabled":"false"}, {"required":"true"}],
+					"options" : ["1", "2", "3", "4"],
+					"selected" : ["2"],
+					"css" : "INPUT TAG CSS GOES HERE",
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_3",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field_5" : {
+				"field_name" : "CheckBoxes",
+				"id" : "5",
+				"visibility" : "h(HIDE) or s(Show)",
+				"tooltip" : "Select Multiple options",
+				"column" : {
+					"width" : "2",
+					"sequence" : ["field_4", "field_5"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-group col-md-12"}, {"id":"input54321-wrapper"}, {"data-id":"54321"}],
+					"css" : "WRAPPER CSS GOES HERE"
+				},
+				"label" : {
+					"text" : "Photo Sizes",
+					"label_placement" : "bi(BELOW INPUT) or ai(ABOVE INPUT)"
+				},
+				"input" : {
+					"tag" : "input",
+					"attr" : [{"type":"checkbox"}, {"value":""}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"disabled":"false"}, {"required":"true"}],
+					"options" : ["1024x800", "720x1200", "1920x1080"],
+					"selected" : [ "720x1200", "1920x1080" ],
+					"css" : "INPUT TAG CSS GOES HERE",
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_3",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field_6" : {
+				"field_name" : "Dropdown",
+				"id" : "6",
+				"visibility" : "h(HIDE) or s(Show)",
+				"tooltip" : "Select from dropdown",
+				"column" : {
+					"width" : "1",
+					"sequence" : ["field_6"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-control col-md-12"}, {"id":"input54321-wrapper"}, {"data-id":"54321"}],
+					"css" : "WRAPPER CSS GOES HERE"
+				},
+				"label" : {
+					"text" : "Pick from the list",
+					"label_placement" : "bi(BELOW INPUT) or ai(ABOVE INPUT)"
+				},
+				"input" : {
+					"tag" : "select",
+					"attr" : [{"class":"form-group col-md-12"}, {"id":"input54321"}, {"disabled":"false"}, {"required":"true"}],
+					"options" : ["option1", "option2", "option3"],
+					"css" : "INPUT TAG CSS GOES HERE",
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_3",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field_7" : {
+				"field_name" : "Date",
+				"id" : "7",
+				"visibility" : "h(HIDE) or s(Show)",
+				"tooltip" : "Select a date",
+				"column" : {
+					"width" : "1",
+					"sequence" : ["field_6"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-group col-md-12"}, {"id":"input54321-wrapper"}, {"data-id":"54321"}],
+					"css" : "WRAPPER CSS GOES HERE"
+				},
+				"label" : {
+					"text" : "Pick date",
+					"label_placement" : "bi(BELOW INPUT) or ai(ABOVE INPUT)"
+				},
+				"input" : {
+					"tag" : "input",
+					"attr" : [{"type":"text"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"disabled":"false"}, {"required":"true"}],
+					"css" : "INPUT TAG CSS GOES HERE",
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_3",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				},
+				"datepicker_settings" : {
+					"noWeekends" : "true",
+					"minDate" : {"key":"days|weeks|months|years", "val":"2"},
+					"maxDate" : {"key":"days|weeks|months|years", "val":"2"},
+					"disabled_dates" : ["2013-03-14","2013-03-15","2013-03-16"],
+					"css": "CSS GOES HERE"
+				}
+			}
+		}
+	]
 
 }
