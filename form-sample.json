@@ -4,7 +4,8 @@
 	"form_settings" : {
 		"basics" : {
 			"title" : "My Custom Form",
-			"description": "This is my custom form description"
+			"description": "This is my custom form description",
+			"ajax_url": "https://example.com/file.php"
 		},
 		"layout" : {
 			"label_placement" : "bi(BELOW INPUT) or ai(ABOVE INPUT)",
@@ -252,6 +253,7 @@
 					"tag" : "select",
 					"attr" : [{"class":"form-group col-md-12"}, {"id":"input54321"}, {"disabled":"false"}, {"required":"true"}],
 					"options" : ["option1", "option2", "option3"],
+					"selected" : "option2",
 					"css" : "INPUT TAG CSS GOES HERE",
 				},
 				"conditional_logic" : {
@@ -303,7 +305,254 @@
 					"minDate" : {"key":"days|weeks|months|years", "val":"2"},
 					"maxDate" : {"key":"days|weeks|months|years", "val":"2"},
 					"disabled_dates" : ["2013-03-14","2013-03-15","2013-03-16"],
+					"theme" : "dark",
 					"css": "CSS GOES HERE"
+				}
+			}
+		},
+		{
+			"field_8" : {
+				"field_name" : "Address",
+				"id" : "8",
+				"visibility" : "h(HIDE) or s(Show)",
+				"tooltip" : "Please fill in your address",
+				"column" : {
+					"width" : "1",
+					"sequence" : ["field_8"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-control col-md-12"}, {"id":"input54321-wrapper"}, {"data-id":"54321"}],
+					"css" : "WRAPPER CSS GOES HERE"
+				},
+				"label" : {
+					"text" : "Address",
+					"label_placement" : "bi(BELOW INPUT) or ai(ABOVE INPUT)"
+				},
+				"address_fields" : {
+					"street_address" : {
+						"tag" : "input",
+						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"First Name"}, {"disabled":"false"}, {"required":"true"}],
+						"css" : "INPUT TAG CSS GOES HERE",
+					},
+					"address_line_2" : {
+						"tag" : "input",
+						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"First Name"}, {"disabled":"false"}, {"required":"true"}],
+						"css" : "INPUT TAG CSS GOES HERE",
+					},
+					"city" : {
+						"tag" : "input",
+						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"First Name"}, {"disabled":"false"}, {"required":"true"}],
+						"css" : "INPUT TAG CSS GOES HERE",
+					},
+					"state" : {
+						"tag" : "input",
+						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"First Name"}, {"disabled":"false"}, {"required":"true"}],
+						"css" : "INPUT TAG CSS GOES HERE",
+					},
+					"zip" : {
+						"tag" : "input",
+						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"First Name"}, {"disabled":"false"}, {"required":"true"}],
+						"css" : "INPUT TAG CSS GOES HERE",
+					},
+					"country" : {
+						"tag" : "select",
+						"attr" : [{"class":"form-control col-md-12"}, {"id":"input54321"}, {"disabled":"false"}, {"required":"true"}],
+						"options" : ["India", "US", "UK"],
+						"selected" : "India",
+						"css" : "INPUT TAG CSS GOES HERE",
+					}
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_0",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field_9" : {
+				"field_name" : "Name",
+				"id" : "9",
+				"visibility" : "h(HIDE) or s(Show)",
+				"tooltip" : "Please Enter your name here",
+				"column" : {
+					"width" : "4",
+					"sequence" : ["field_9"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-control col-md-12"}, {"id":"input54321-wrapper"}, {"data-id":"54321"}],
+					"css" : "WRAPPER CSS GOES HERE"
+				},
+				"label" : {
+					"text" : "First Name",
+					"label_placement" : "bi(BELOW INPUT) or ai(ABOVE INPUT)"
+				},
+				"name_fields" : {
+					"first_name" : {
+						"tag" : "input",
+						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"First Name"}, {"disabled":"false"}, {"required":"true"}],
+						"css" : "INPUT TAG CSS GOES HERE",
+					},
+					"last_name" : {
+						"tag" : "input",
+						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"Last Name"}, {"disabled":"false"}, {"required":"true"}],
+						"css" : "INPUT TAG CSS GOES HERE",
+					}
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_0",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field_10" : {
+				"field_name" : "Phone",
+				"id" : "10",
+				"visibility" : "h(HIDE) or s(Show)",
+				"tooltip" : "Please Enter your phone number",
+				"column" : {
+					"width" : "1",
+					"sequence" : ["field_10"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-control col-md-12"}, {"id":"input54321-wrapper"}, {"data-id":"54321"}],
+					"css" : "WRAPPER CSS GOES HERE"
+				},
+				"label" : {
+					"text" : "Phone",
+					"label_placement" : "bi(BELOW INPUT) or ai(ABOVE INPUT)"
+				},
+				"input" : {
+					"tag" : "input",
+					"attr" : [{"type":"tel"}, {"value":""}, {"minlength":"10"}, {"maxlength":"10"}, {"pattern":"^\\d{4}-\\d{3}-\\d{4}$"} {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"First Name"}, {"disabled":"false"}, {"required":"true"}],
+					"css" : "INPUT TAG CSS GOES HERE",
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_0",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field_11" : {
+				"field_name" : "Website",
+				"id" : "11",
+				"visibility" : "h(HIDE) or s(Show)",
+				"tooltip" : "Please Enter your website",
+				"column" : {
+					"width" : "1",
+					"sequence" : ["field_11"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-control col-md-12"}, {"id":"input54321-wrapper"}, {"data-id":"54321"}],
+					"css" : "WRAPPER CSS GOES HERE"
+				},
+				"label" : {
+					"text" : "Website",
+					"label_placement" : "bi(BELOW INPUT) or ai(ABOVE INPUT)"
+				},
+				"input" : {
+					"tag" : "input",
+					"attr" : [{"type":"url"}, {"value":""}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"Website"}, {"disabled":"false"}, {"required":"true"}],
+					"css" : "INPUT TAG CSS GOES HERE",
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_0",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field_12" : {
+				"field_name" : "Email",
+				"id" : "12",
+				"visibility" : "h(HIDE) or s(Show)",
+				"tooltip" : "Please Enter your email",
+				"column" : {
+					"width" : "1",
+					"sequence" : ["field_12"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-control col-md-12"}, {"id":"input54321-wrapper"}, {"data-id":"54321"}],
+					"css" : "WRAPPER CSS GOES HERE"
+				},
+				"label" : {
+					"text" : "E-mail",
+					"label_placement" : "bi(BELOW INPUT) or ai(ABOVE INPUT)"
+				},
+				"input" : {
+					"tag" : "input",
+					"attr" : [{"type":"email"}, {"value":""}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"Email"}, {"disabled":"false"}, {"required":"true"}],
+					"css" : "INPUT TAG CSS GOES HERE",
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_0",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field_13" : {
+				"field_name" : "File",
+				"id" : "13",
+				"visibility" : "h(HIDE) or s(Show)",
+				"tooltip" : "Select a File",
+				"column" : {
+					"width" : "1",
+					"sequence" : ["field_13"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-control col-md-12"}, {"id":"input54321-wrapper"}, {"data-id":"54321"}],
+					"css" : "WRAPPER CSS GOES HERE"
+				},
+				"label" : {
+					"text" : "Select a file",
+					"label_placement" : "bi(BELOW INPUT) or ai(ABOVE INPUT)"
+				},
+				"input" : {
+					"tag" : "input",
+					"attr" : [{"type":"file"}, {"value":""}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"Email"}, {"disabled":"false"}, {"required":"true"}],
+					"css" : "INPUT TAG CSS GOES HERE",
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_0",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
 				}
 			}
 		}
