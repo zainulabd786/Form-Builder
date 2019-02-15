@@ -1,0 +1,566 @@
+{
+	"fields" : [
+		{
+			"field" : {
+				"field_name" : "Text",
+				"id" : "1",
+				"visibility" : "s",
+				"tooltip" : "Please Enter your name here",
+				"column" : {
+					"width" : "4",
+					"sequence" : ["1", "2", "3", "4"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-group"}],
+					"css" : ""
+				},
+				"label" : {
+					"text" : "First Name",
+					"label_placement" : "ai"
+				},
+				"input" : {
+					"tag" : "input",
+					"attr" : [{"type":"text"}, {"class":"form-control"}, {"placeholder":"First Name"}],
+					"css" : "INPUT TAG CSS GOES HERE"
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s",
+					"if" : {
+						"field" : "field_0",
+						"condition" : "IS",
+						"value" : "other"
+					}
+				}
+			}
+		}, 
+		{
+			"field" : {
+				"field_name" : "TextArea",
+				"id" : "2",
+				"visibility" : "s",
+				"tooltip" : "Please Enter your Long description here here",
+				"column" : {
+					"width" : "1",
+					"sequence" : ["2"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-control col-md-12"}],
+					"css" : ""
+				},
+				"label" : {
+					"text" : "Description",
+					"label_placement" : "ai"
+				},
+				"input" : {
+					"tag" : "textarea",
+					"attr" : [{"maxlength":"34"}, {"class":"form-control"}, {"placeholder":"Your Description"}, {"required":"true"}],
+					"css" : "INPUT TAG CSS GOES HERE"
+				},
+				"conditional_logic" : {
+					"set" : "true",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_0",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field" : {
+				"field_name" : "Number",
+				"id" : "3",
+				"visibility" : "s",
+				"tooltip" : "type umbers only",
+				"column" : {
+					"width" : "1",
+					"sequence" : ["3"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-group"}],
+					"css" : ""
+				},
+				"label" : {
+					"text" : "Your age",
+					"label_placement" : "ai"
+				},
+				"input" : {
+					"tag" : "input",
+					"attr" : [{"type":"number"}, {"value":""}, {"min":"18"}, {"max":"50"}, {"class":"form-control"}, {"placeholder":"Your age"}, {"required":"true"}],
+					"css" : ""
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_3",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field" : {
+				"field_name" : "Radio Buttons",
+				"id" : "4",
+				"visibility" : "s",
+				"tooltip" : "Select one option",
+				"column" : {
+					"width" : "2",
+					"sequence" : ["4", "5"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-check"}],
+					"css" : ""
+				},
+				"label" : {
+					"text" : "Number of Sessions",
+					"attr" : [{"class":"form-check-label"}]
+				},
+				"input" : {
+					"tag" : "input",
+					"attr" : [{"type":"radio"}, {"value":""}, {"class":"form-check-input"}, {"required":"true"}],
+					"options" : ["one", "two", "three", "four"],
+					"selected" : ["2"],
+					"css" : ""
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_3",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field" : {
+				"field_name" : "CheckBoxes",
+				"id" : "5",
+				"visibility" : "h(HIDE) or s(Show)",
+				"tooltip" : "Select Multiple options",
+				"column" : {
+					"width" : "2",
+					"sequence" : ["4", "5"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-check"}],
+					"css" : ""
+				},
+				"label" : {
+					"text" : "Photo Sizes",
+					"label_placement" : "ai"
+				},
+				"input" : {
+					"tag" : "input",
+					"attr" : [{"type":"checkbox"}, {"class":"form-check-input"}, {"required":"true"}],
+					"options" : ["1024x800", "720x1200", "1920x1080"],
+					"selected" : [ "720x1200", "1920x1080" ],
+					"css" : ""
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_3",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field" : {
+				"field_name" : "Dropdown",
+				"id" : "6",
+				"visibility" : "h",
+				"tooltip" : "Select from dropdown",
+				"column" : {
+					"width" : "1",
+					"sequence" : ["6"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-group"}],
+					"css" : ""
+				},
+				"label" : {
+					"text" : "Pick from the list",
+					"label_placement" : "bi"
+				},
+				"input" : {
+					"tag" : "select",
+					"attr" : [{"class":"form-control"}],
+					"options" : ["", "option1", "option2", "option3"],
+					"selected" : "option2",
+					"css" : ""
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_3",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field" : {
+				"field_name" : "Date",
+				"id" : "7",
+				"visibility" : "s",
+				"tooltip" : "Select a date",
+				"column" : {
+					"width" : "1",
+					"sequence" : ["6"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-group"}],
+					"css" : ""
+				},
+				"label" : {
+					"text" : "Pick date",
+					"label_placement" : "ai"
+				},
+				"input" : {
+					"tag" : "input",
+					"attr" : [{"type":"text"}, {"class":"form-control"}, {"id":"date"}],
+					"css" : ""
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_3",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				},
+				"datepicker_settings" : {
+					"noWeekends" : "true",
+					"minDate" : {"key":"days|weeks|months|years", "val":"2"},
+					"maxDate" : {"key":"days|weeks|months|years", "val":"2"},
+					"disabled_dates" : ["2013-03-14","2013-03-15","2013-03-16"],
+					"theme" : "dark",
+					"css": "CSS GOES HERE"
+				}
+			}
+		},
+		{
+			"field" : {
+				"field_name" : "Address",
+				"id" : "8",
+				"visibility" : "h(HIDE) or s(Show)",
+				"tooltip" : "Please fill in your address",
+				"column" : {
+					"width" : "1",
+					"sequence" : ["8"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-group"}],
+					"css" : ""
+				},
+				"label" : {
+					"text" : "Address",
+					"label_placement" : "ai"
+				},
+				"address_fields" : {
+					"street_address" : {
+						"set": true,
+						"tag" : "input",
+						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"placeholder":"Street Address"}],
+						"css" : ""
+					},
+					"address_line_2" : {
+						"set": true,
+						"tag" : "input",
+						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"placeholder":"Address Line 2"}],
+						"css" : ""
+					},
+					"city" : {
+						"set": true,
+						"tag" : "input",
+						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"placeholder":"City"}],
+						"css" : ""
+					},
+					"state" : {
+						"set": true,
+						"tag" : "input",
+						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"placeholder":"State"}],
+						"css" : ""
+					},
+					"zip" : {
+						"set": true,
+						"tag" : "input",
+						"attr" : [{"type":"text"}, {"value":""},{"class":"form-control"}, {"placeholder":"ZIP"}],
+						"css" : ""
+					},
+					"country" : {
+						"set": true,
+						"tag" : "select",
+						"attr" : [{"class":"form-control"}],
+						"options" : ["India", "US", "UK"],
+						"selected" : "India",
+						"css" : ""
+					}
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_0",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field" : {
+				"field_name" : "Name",
+				"id" : "9",
+				"visibility" : "s",
+				"tooltip" : "Please Enter your name here",
+				"column" : {
+					"width" : "4",
+					"sequence" : ["9"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-group"}],
+					"css" : ""
+				},
+				"label" : {
+					"text" : "Name",
+					"label_placement" : "ai"
+				},
+				"name_fields" : {
+					"first_name" : {
+						"set": true,
+						"tag" : "input",
+						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control"}, {"placeholder":"First Name"}],
+						"css" : ""
+					},
+					"last_name" : {
+						"set": true,
+						"tag" : "input",
+						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control"}, {"placeholder":"Last Name"}],
+						"css" : ""
+					}
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_0",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field" : {
+				"field_name" : "Phone",
+				"id" : "10",
+				"visibility" : "h(HIDE) or s(Show)",
+				"tooltip" : "Please Enter your phone number",
+				"column" : {
+					"width" : "1",
+					"sequence" : ["10"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-group"}],
+					"css" : ""
+				},
+				"label" : {
+					"text" : "Phone",
+					"label_placement" : "ai"
+				},
+				"input" : {
+					"tag" : "input",
+					"attr" : [{"type":"tel"}, {"value":""}, {"minlength":"10"}, {"maxlength":"10"}, {"pattern":"^\\/d{4}-\\/d{3}-\\/d{4}$"}, {"class":"form-control"}, {"placeholder":"Phone Number"}],
+					"css" : ""
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_0",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field" : {
+				"field_name" : "Website",
+				"id" : "11",
+				"visibility" : "h(HIDE) or s(Show)",
+				"tooltip" : "Please Enter your website",
+				"column" : {
+					"width" : "1",
+					"sequence" : ["11"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-group"}],
+					"css" : ""
+				},
+				"label" : {
+					"text" : "Website",
+					"label_placement" : "ai"
+				},
+				"input" : {
+					"tag" : "input",
+					"attr" : [{"type":"url"}, {"value":""}, {"class":"form-control"}, {"placeholder":"Website"}],
+					"css" : ""
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_0",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field" : {
+				"field_name" : "Email",
+				"id" : "12",
+				"visibility" : "s",
+				"tooltip" : "Please Enter your email",
+				"column" : {
+					"width" : "1",
+					"sequence" : ["12"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-group"}],
+					"css" : ""
+				},
+				"label" : {
+					"text" : "E-mail",
+					"label_placement" : "ai"
+				},
+				"input" : {
+					"tag" : "input",
+					"attr" : [{"type":"email"}, {"value":""}, {"class":"form-control"}, {"placeholder":"Email"}],
+					"css" : ""
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_0",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field" : {
+				"field_name" : "File",
+				"id" : "13",
+				"visibility" : "s",
+				"tooltip" : "Select a File",
+				"column" : {
+					"width" : "1",
+					"sequence" : ["13"]
+				},
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [{"class":"form-group"}],
+					"css" : ""
+				},
+				"label" : {
+					"text" : "Select a file",
+					"label_placement" : "ai"
+				},
+				"input" : {
+					"tag" : "input",
+					"attr" : [{"type":"file"}, {"value":""}, {"class":"form-control"}, {"placeholder":"Email"}],
+					"css" : ""
+				},
+				"conditional_logic" : {
+					"set" : "false",
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_0",
+						"condition" : "IS or IS NOT",
+						"value" : "other"
+					}
+				}
+			}
+		}
+	],
+	"form_settings" : {
+		"basics" : {
+			"title" : "My Custom Form",
+			"description": "This is my custom form description",
+			"ajax_url": "https://example.com/file.php"
+		},
+		"layout" : {
+			"label_placement" : "bi(BELOW INPUT) or ai(ABOVE INPUT)",
+			"attr" : [ {"class":"form-css-class"}, {"id":"form-id-1"}, {"autocomplete":"on"} ]
+		},
+		"button" : {
+			"text" : "Submit",
+			"attr" : [ {"class":"form-css-class"}, {"id":"form-id-1"}, {"data-id":"54321"}, {"type":"button"} ],
+			"css" : [ {"backgroundColor":"#543212"}, {"fontSize":"20px"}, {"color":"#ffffff"} ],
+			"wrapper" : "span"
+		},
+		"confirmation" : {
+			"type" : "m(MESSAGE) or r(REDIRECT)",
+			"message" : {
+				"text" : "Your Form Has been successfully submitted",
+				"wrapper" : "h1",
+				"attr" : [ {"class":"form-css-class"}, {"id":"form-id-1"}, {"data-id":"54321"} ],
+				"css" : [ {"backgroundColor":"#543212"}, {"fontSize":"20px"}, {"color":"#ffffff"} ]
+			},
+			"redirect" : {
+				"url" : "https://example.com",
+				"query_string" : [ {"message":"Thank you"}, {"form_id":"1"} ]
+			}
+		},
+		"notifications" : {
+			"admin" : {
+				"to" : [ "abc@edensolutions.co.in", "xyz@premierlister.com" ],
+				"from" : "{user-email}",
+				"reply_to" : "{user-email}",
+				"bcc" : [ "someone@something.com" ],
+				"subject" : "Received an order from {user-name}",
+				"message" : "You jus received an order from {user-name} for a session"
+			},
+			"user" : {
+				"to" : [ "{user-email}", "xyz@premierlister.com" ],
+				"from" : "{xyz@premierlister.com}",
+				"reply_to" : "{xyz@premierlister.com}",
+				"bcc" : [ "someone@something.com" ],
+				"subject" : "Your form has been submitted successfully",
+				"message" : "Hi {user-name}, you have successfully submitted the form at our website"
+			}
+		}
+	},
+	"element" : "#form-builder"
+}

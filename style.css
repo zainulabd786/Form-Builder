@@ -1,0 +1,31 @@
+.fb-full-width{
+	width: 100%;
+}
+.fb-fields-list{
+	list-style-type: none;
+	padding: 10px;
+
+}
+.fb-fields-list li{
+	box-shadow: 1px 1px 5px -2px #000;
+    margin: 10px 5px;
+    padding: 10px;
+    text-align: center;
+    background-color: #f2f2f2;
+}
+.fb-form{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f2f2;
+}
+.fb-form form{
+	width: 80%;
+	min-height: 100px;
+	margin: 10px;
+	background-color: #fff;
+	padding: 15px;
+}
+.drop-hover{
+	background-color: red;
+}

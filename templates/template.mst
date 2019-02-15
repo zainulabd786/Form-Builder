@@ -1,0 +1,114 @@
+
+
+<div class="container">
+	<div class="row">
+		<!-- ------------------------Form Tabs---------------- -->				
+		<ul class="nav nav-tabs fb-full-width" role="tablist"><!-- Form Tabs -->
+			<li class="nav-item">
+			    <a class="nav-link active" data-toggle="tab" href="#fb-build-it">Build it</a>
+			</li>
+			<li class="nav-item">
+			    <a class="nav-link" data-toggle="tab" href="#fb-settings">Settings</a>
+			</li>
+		</ul><!-- Form Tabs -->
+
+		<div class="tab-content fb-full-width"><!-- Form Tab Content -->
+			<div id="fb-build-it" class="tab-pane active"><!-- Build it Tab -->
+			    <div class="row"><!-- row -->
+			    	<div class="col-md-8 fb-build-area"><!-- col-md-8 -->
+						<div class="fb-form">
+							<form class="droppable sortable">
+								
+							</form>
+						</div>
+				   	</div><!-- col-md-8 -->
+				    <div class="col-md-4"><!-- col-md-4 -->
+				    	<!---------------------------------- Field Tabs---------------------------- -->
+						<ul class="nav nav-tabs" role="tablist"><!-- field Tabs -->
+						    <li class="nav-item">
+						    	<a class="nav-link active" data-toggle="tab" href="#fb-add-field">Add Field</a>
+						    </li>
+						    <li class="nav-item">
+						    	<a class="nav-link" data-toggle="tab" href="#fb-field-settings">Field Settings</a>
+						    </li>
+						</ul><!-- Field Tabs -->
+						<div class="tab-content"><!-- Form Tab Content -->
+						    <div id="fb-add-field" class="tab-pane active"><!-- Add Field Tab -->
+								<ul class="fb-fields-list">
+									{{#fields}}
+										{{#field}}
+											<li class="draggable" data-id="{{field.id}}">{{field.field_name}}</li>
+										{{/field}}
+									{{/fields}}
+								</ul>
+							</div><!-- Add Field Tab -->
+							<div id="fb-field-settings" class="tab-pane fade"><!-- Settings Tab -->
+							    <p>Field Settings</p>
+							</div><!-- Settings Tab -->
+			  			</div><!-- Form Tab Content -->
+			  			<!---------------------------------- Field Tabs---------------------------- -->
+				    </div><!-- col-md-4 -->
+				</div><!-- row -->
+			</div><!-- Build it Tab -->
+
+			<div id="fb-settings" class="tab-pane fade"><!-- Settings Tab -->
+			    <div class="row"><!-- row -->
+			    	<div class="col-md-12">
+			    		<ul class="nav nav-tabs" role="tablist"><!-- Form Settings Tabs -->
+						    <li class="nav-item">
+						    	<a class="nav-link active" data-toggle="tab" href="#fb-basic-settings">Basic</a>
+						    </li>
+						    <li class="nav-item">
+						    	<a class="nav-link" data-toggle="tab" href="#fb-layout-settings">Layout</a>
+						    </li>
+						    <li class="nav-item">
+						    	<a class="nav-link" data-toggle="tab" href="#fb-confirmation-settings">Confirmation</a>
+						    </li>
+						    <li class="nav-item">
+						    	<a class="nav-link" data-toggle="tab" href="#fb-notifications-settings">Notifications</a>
+						    </li>
+						</ul><!-- Form settings Tabs -->
+						<div class="tab-content"><!-- Form Tab Content -->
+						    <div id="fb-basic-settings" class="tab-pane active"><!-- Form Basic Settings Tab -->
+						    	<h3>Basic Settings</h3>
+							    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							</div><!-- Form Basic Settings Tab -->
+							<div id="fb-layout-settings" class="tab-pane fade"><!-- Form Layout Settings Tab -->
+								<h3>Layout Settings</h3>
+								<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+							</div><!-- Form Layout Settings Tab -->
+							<div id="fb-confirmation-settings" class="tab-pane fade"><!-- Form confirmation Settings Tab -->
+								<h3>Confirmation Settings</h3>
+								<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+							</div><!-- Form confirmation Settings Tab -->
+							<div id="fb-notifications-settings" class="tab-pane fade"><!-- Form notification Settings Tab -->
+								<h3>notification Settings</h3>
+								<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+							</div><!-- Form notification Settings Tab -->
+			  			</div><!-- Form Tab Content -->
+				    </div>
+				</div><!-- row -->
+			</div><!-- Settings Tab -->
+  		</div><!-- Form Tab Content -->
+		<!-- ------------------------Form Tabs---------------- -->
+	</div><!-- BS row -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

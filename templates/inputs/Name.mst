@@ -1,0 +1,6 @@
+<{{wrapperTag}} {{{wrapperAttributes}}}>
+	<label>{{label}}</label>
+	{{#name_fields}}
+			<{{tag}} {{{attr}}} >
+	{{/name_fields}}
+<{{wrapperTag}} {{{wrapperAttributes}}}>

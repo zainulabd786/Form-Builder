@@ -1,0 +1,15 @@
+<{{wrapperTag}} {{{wrapperAttributes}}}>
+	<label>{{label}}</label>
+	{{#address_fields}}
+		{{^options}}
+			<{{tag}} {{{attr}}} >
+		{{/options}}
+		{{#options.length}}
+			<{{tag}} {{{attr}}} >
+				{{#options}}
+					<option value="{{.}}">{{.}}</option>
+				{{/options}}
+			</{{tag}}>
+		{{/options.length}}
+	{{/address_fields}}
+<{{wrapperTag}} {{{wrapperAttributes}}}>

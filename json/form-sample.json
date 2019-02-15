@@ -73,7 +73,7 @@
 				"input" : {
 					"tag" : "input",
 					"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"First Name"}, {"disabled":"false"}, {"required":"true"}],
-					"css" : "INPUT TAG CSS GOES HERE",
+					"css" : "INPUT TAG CSS GOES HERE"
 				},
 				"conditional_logic" : {
 					"set" : "false",
@@ -108,7 +108,7 @@
 				"input" : {
 					"tag" : "textarea",
 					"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"34"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"Your Description"}, {"disabled":"false"}, {"required":"true"}],
-					"css" : "INPUT TAG CSS GOES HERE",
+					"css" : "INPUT TAG CSS GOES HERE"
 				},
 				"conditional_logic" : {
 					"set" : "true",
@@ -143,7 +143,7 @@
 				"input" : {
 					"tag" : "input",
 					"attr" : [{"type":"number"}, {"value":""}, {"min":"18"}, {"max":"50"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"Your Description"}, {"disabled":"false"}, {"required":"true"}],
-					"css" : "INPUT TAG CSS GOES HERE",
+					"css" : "INPUT TAG CSS GOES HERE"
 				},
 				"conditional_logic" : {
 					"set" : "false",
@@ -180,7 +180,7 @@
 					"attr" : [{"type":"radio"}, {"value":""}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"disabled":"false"}, {"required":"true"}],
 					"options" : ["1", "2", "3", "4"],
 					"selected" : ["2"],
-					"css" : "INPUT TAG CSS GOES HERE",
+					"css" : "INPUT TAG CSS GOES HERE"
 				},
 				"conditional_logic" : {
 					"set" : "false",
@@ -217,7 +217,7 @@
 					"attr" : [{"type":"checkbox"}, {"value":""}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"disabled":"false"}, {"required":"true"}],
 					"options" : ["1024x800", "720x1200", "1920x1080"],
 					"selected" : [ "720x1200", "1920x1080" ],
-					"css" : "INPUT TAG CSS GOES HERE",
+					"css" : "INPUT TAG CSS GOES HERE"
 				},
 				"conditional_logic" : {
 					"set" : "false",
@@ -254,7 +254,7 @@
 					"attr" : [{"class":"form-group col-md-12"}, {"id":"input54321"}, {"disabled":"false"}, {"required":"true"}],
 					"options" : ["option1", "option2", "option3"],
 					"selected" : "option2",
-					"css" : "INPUT TAG CSS GOES HERE",
+					"css" : "INPUT TAG CSS GOES HERE"
 				},
 				"conditional_logic" : {
 					"set" : "false",
@@ -289,7 +289,7 @@
 				"input" : {
 					"tag" : "input",
 					"attr" : [{"type":"text"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"disabled":"false"}, {"required":"true"}],
-					"css" : "INPUT TAG CSS GOES HERE",
+					"css" : "INPUT TAG CSS GOES HERE"
 				},
 				"conditional_logic" : {
 					"set" : "false",
@@ -333,34 +333,34 @@
 					"street_address" : {
 						"tag" : "input",
 						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"First Name"}, {"disabled":"false"}, {"required":"true"}],
-						"css" : "INPUT TAG CSS GOES HERE",
+						"css" : "INPUT TAG CSS GOES HERE"
 					},
 					"address_line_2" : {
 						"tag" : "input",
 						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"First Name"}, {"disabled":"false"}, {"required":"true"}],
-						"css" : "INPUT TAG CSS GOES HERE",
+						"css" : "INPUT TAG CSS GOES HERE"
 					},
 					"city" : {
 						"tag" : "input",
 						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"First Name"}, {"disabled":"false"}, {"required":"true"}],
-						"css" : "INPUT TAG CSS GOES HERE",
+						"css" : "INPUT TAG CSS GOES HERE"
 					},
 					"state" : {
 						"tag" : "input",
 						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"First Name"}, {"disabled":"false"}, {"required":"true"}],
-						"css" : "INPUT TAG CSS GOES HERE",
+						"css" : "INPUT TAG CSS GOES HERE"
 					},
 					"zip" : {
 						"tag" : "input",
 						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"First Name"}, {"disabled":"false"}, {"required":"true"}],
-						"css" : "INPUT TAG CSS GOES HERE",
+						"css" : "INPUT TAG CSS GOES HERE"
 					},
 					"country" : {
 						"tag" : "select",
 						"attr" : [{"class":"form-control col-md-12"}, {"id":"input54321"}, {"disabled":"false"}, {"required":"true"}],
 						"options" : ["India", "US", "UK"],
 						"selected" : "India",
-						"css" : "INPUT TAG CSS GOES HERE",
+						"css" : "INPUT TAG CSS GOES HERE"
 					}
 				},
 				"conditional_logic" : {
@@ -397,12 +397,12 @@
 					"first_name" : {
 						"tag" : "input",
 						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"First Name"}, {"disabled":"false"}, {"required":"true"}],
-						"css" : "INPUT TAG CSS GOES HERE",
+						"css" : "INPUT TAG CSS GOES HERE"
 					},
 					"last_name" : {
 						"tag" : "input",
 						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"Last Name"}, {"disabled":"false"}, {"required":"true"}],
-						"css" : "INPUT TAG CSS GOES HERE",
+						"css" : "INPUT TAG CSS GOES HERE"
 					}
 				},
 				"conditional_logic" : {
@@ -437,8 +437,8 @@
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"tel"}, {"value":""}, {"minlength":"10"}, {"maxlength":"10"}, {"pattern":"^\\d{4}-\\d{3}-\\d{4}$"} {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"First Name"}, {"disabled":"false"}, {"required":"true"}],
-					"css" : "INPUT TAG CSS GOES HERE",
+					"attr" : [{"type":"tel"}, {"value":""}, {"minlength":"10"}, {"maxlength":"10"}, {"pattern":"^\\/d{4}-\\/d{3}-\\/d{4}$"}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"First Name"}, {"disabled":"false"}, {"required":"true"}],
+					"css" : "INPUT TAG CSS GOES HERE"
 				},
 				"conditional_logic" : {
 					"set" : "false",
@@ -473,7 +473,7 @@
 				"input" : {
 					"tag" : "input",
 					"attr" : [{"type":"url"}, {"value":""}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"Website"}, {"disabled":"false"}, {"required":"true"}],
-					"css" : "INPUT TAG CSS GOES HERE",
+					"css" : "INPUT TAG CSS GOES HERE"
 				},
 				"conditional_logic" : {
 					"set" : "false",
@@ -508,7 +508,7 @@
 				"input" : {
 					"tag" : "input",
 					"attr" : [{"type":"email"}, {"value":""}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"Email"}, {"disabled":"false"}, {"required":"true"}],
-					"css" : "INPUT TAG CSS GOES HERE",
+					"css" : "INPUT TAG CSS GOES HERE"
 				},
 				"conditional_logic" : {
 					"set" : "false",
@@ -543,7 +543,7 @@
 				"input" : {
 					"tag" : "input",
 					"attr" : [{"type":"file"}, {"value":""}, {"class":"form-control col-md-12"}, {"id":"input54321"}, {"placeholder":"Email"}, {"disabled":"false"}, {"required":"true"}],
-					"css" : "INPUT TAG CSS GOES HERE",
+					"css" : "INPUT TAG CSS GOES HERE"
 				},
 				"conditional_logic" : {
 					"set" : "false",

@@ -1,0 +1,4 @@
+<{{wrapperTag}} {{{wrapperAttributes}}}>
+	<label>{{label}}</label>
+	<{{inputTag}} {{{inputAttributes}}}>
+</{{wrapperTag}}>

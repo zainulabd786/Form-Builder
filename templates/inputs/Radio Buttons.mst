@@ -1,0 +1,8 @@
+{{label}}
+{{#choices}}
+<{{wrapperTag}} {{{wrapperAttributes}}}>
+	<label {{{label_attributes}}}>
+		<{{inputTag}} {{{inputAttributes}}} name="{{.}}">{{.}}
+	</label>
+</{{wrapperTag}}>
+{{/choices}}
