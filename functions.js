@@ -54,37 +54,44 @@ let getFieldData = async (id) => {
 
 let initDrag = () => {
 	$( ".draggable" ).draggable({
-		connectToSortable: '.droppable',
-		cursor: "crosshair",
-		helper: "clone",
-		opacity: 0.35,
-		snap: true,
-		refreshPositions: true
+		connectToSortable: ".droppable",
+	    helper: "clone",
+	    revert: "invalid",
+	    stop: function(event, ui){
+	    	setTimeout(()=>{
+	    		$(formTag).empty();
+	    		afterDrop(event, ui);
+	    	}, 1000)
+	    }
 	})
 }
 let initSortable = () => {
 	$( ".droppable" ).sortable({
-		update: afterDrop
+		revert: true
+		//update: afterDrop
 	});
 }
-let initFlatpicker = () => $("#date").flatpickr();
 
 let afterDrop = (event, ui) => {
-	let fieldID = ui.item.attr("data-id");
-	ui.addClass("selected-zain")
+	//let fieldID = ui.item.attr("data-id")
+	let fieldID = $(event.target).attr("data-id")
 	getFieldData(fieldID).then(fieldData => {
 		fieldData[0].field.field_id = Date.now();
 		formBuildingJSON.form_fields.push(fieldData[0]);
 		appendFieldsMarkup()
 	})
+	$(ui.helper[0]).remove()
 }
+
+let initFlatpicker = () => $("#date").flatpickr();
 let appendFieldsMarkup = () => {
 	let data = jQuery.extend(true, {}, formBuildingJSON);
-	$(formTag).html("");
 	data.form_fields.forEach( i => {
 		let obj = {};
 		obj.wrapperTag = i.field.wrapper.tag;
+		obj.field_id = (i.field.field_id) ? i.field.wrapper.attr.push({"id":i.field.field_id}) : ""; 
 		obj.wrapperAttributes = generateTagAttributes(i.field.wrapper.attr)
+		console.log(obj.wrapperAttributes);
 		obj.label = i.field.label.text;
 		obj.label_placement = i.field.label.label_placement;
 		obj.inputTag = (i.field.input && i.field.input.tag) ? i.field.input.tag : "";
@@ -95,6 +102,7 @@ let appendFieldsMarkup = () => {
 		if(i.field.id == 9) obj.name_fields = (i.field.name_fields) ? createMultiFieldObj(i.field.name_fields) : ""; 
 		readTemplate(`inputs/${i.field.field_name}.mst`).then( template => {
 			generateHTML(template, obj, formTag)
+			selectField(i.field.field_id);
 			obj = {};
 			i.field.id == 7 && initFlatpicker()
 		} ).catch(e => console.error(e))
@@ -105,14 +113,6 @@ let createMultiFieldObj = (data) => {
 	for(let key in data){
 		data.hasOwnProperty(key) && data[key].set && arr.push(data[key])
 	}
-	/*if(data.street_address.set) arr.push(data.street_address)
-	if(data.address_line_2.set) arr.push(data.address_line_2)
-	if(data.city.set) arr.push(data.city)
-	if(data.state.set) arr.push(data.state)
-	if(data.zip.set) arr.push(data.zip)
-	if(data.country.set) arr.push(data.country)
-	if(data.first_name.set) arr.push(data.first_name)
-	if(data.last_name.set) arr.push(data.last_name)*/
 	arr.forEach(i=>{
 		i.attr = generateTagAttributes(i.attr);
 	})
@@ -129,4 +129,13 @@ let generateTagAttributes = (data) => {
 	})
 	let attributes = tempArr.join(" ");
 	return attributes;
+}
+
+let selectField = (id) => {
+	$(formTag).find(".form-field").removeClass("fb-selected").click(function(){
+		id = $(this).attr('id');
+		$(formTag).find(".form-field").removeClass("fb-selected")
+		$(formTag).find(`#${id}`).addClass("fb-selected", 800)
+	})
+	$(formTag).find(`#${id}`).addClass("fb-selected")
 }

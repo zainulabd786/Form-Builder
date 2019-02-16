@@ -12,7 +12,7 @@
 				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
@@ -47,16 +47,16 @@
 				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-control col-md-12"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
-					"text" : "Description",
+					"text" : "TextArea",
 					"label_placement" : "ai"
 				},
 				"input" : {
 					"tag" : "textarea",
-					"attr" : [{"maxlength":"34"}, {"class":"form-control"}, {"placeholder":"Your Description"}, {"required":"true"}],
+					"attr" : [{"maxlength":"34"}, {"class":"form-control"}, {"placeholder":"TextArea"}, {"required":"true"}],
 					"css" : "INPUT TAG CSS GOES HERE"
 				},
 				"conditional_logic" : {
@@ -82,16 +82,16 @@
 				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
-					"text" : "Your age",
+					"text" : "Number",
 					"label_placement" : "ai"
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"number"}, {"value":""}, {"min":"18"}, {"max":"50"}, {"class":"form-control"}, {"placeholder":"Your age"}, {"required":"true"}],
+					"attr" : [{"type":"number"}, {"value":""}, {"min":"18"}, {"max":"50"}, {"class":"form-control"}, {"placeholder":"Number"}, {"required":"true"}],
 					"css" : ""
 				},
 				"conditional_logic" : {
@@ -117,11 +117,11 @@
 				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-check"}],
+					"attr" : [{"class":"form-check form-field"}],
 					"css" : ""
 				},
 				"label" : {
-					"text" : "Number of Sessions",
+					"text" : "Radio Buttons",
 					"attr" : [{"class":"form-check-label"}]
 				},
 				"input" : {
@@ -146,7 +146,7 @@
 			"field" : {
 				"field_name" : "CheckBoxes",
 				"id" : "5",
-				"visibility" : "h(HIDE) or s(Show)",
+				"visibility" : "s",
 				"tooltip" : "Select Multiple options",
 				"column" : {
 					"width" : "2",
@@ -154,11 +154,11 @@
 				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-check"}],
+					"attr" : [{"class":"form-check form-field"}],
 					"css" : ""
 				},
 				"label" : {
-					"text" : "Photo Sizes",
+					"text" : "CheckBoxes",
 					"label_placement" : "ai"
 				},
 				"input" : {
@@ -191,11 +191,11 @@
 				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
-					"text" : "Pick from the list",
+					"text" : "Dropdown",
 					"label_placement" : "bi"
 				},
 				"input" : {
@@ -228,11 +228,11 @@
 				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
-					"text" : "Pick date",
+					"text" : "Date",
 					"label_placement" : "ai"
 				},
 				"input" : {
@@ -263,7 +263,7 @@
 			"field" : {
 				"field_name" : "Address",
 				"id" : "8",
-				"visibility" : "h(HIDE) or s(Show)",
+				"visibility" : "s",
 				"tooltip" : "Please fill in your address",
 				"column" : {
 					"width" : "1",
@@ -271,7 +271,7 @@
 				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
@@ -341,7 +341,7 @@
 				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
@@ -385,7 +385,7 @@
 				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
@@ -420,7 +420,7 @@
 				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
@@ -455,7 +455,7 @@
 				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {

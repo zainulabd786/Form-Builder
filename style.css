@@ -6,7 +6,7 @@
 	padding: 10px;
 
 }
-.fb-fields-list li{
+.fb-fields-list li, form li{
 	box-shadow: 1px 1px 5px -2px #000;
     margin: 10px 5px;
     padding: 10px;
@@ -26,6 +26,15 @@
 	background-color: #fff;
 	padding: 15px;
 }
+.form-check label{
+	display: block;
+}
+
 .drop-hover{
 	background-color: red;
+}
+.fb-selected{
+	border: 2px dotted #0077CC;
+	padding: 10px;
+	border-radius: 10px
 }
