@@ -25,7 +25,7 @@
 					"css" : "INPUT TAG CSS GOES HERE"
 				},
 				"conditional_logic" : {
-					"set" : "false",
+					"set" : false,
 					"visibility" : "s",
 					"if" : {
 						"field" : "field_0",
@@ -56,11 +56,11 @@
 				},
 				"input" : {
 					"tag" : "textarea",
-					"attr" : [{"maxlength":"34"}, {"class":"form-control"}, {"placeholder":"TextArea"}, {"required":"true"}],
+					"attr" : [{"maxlength":"34"}, {"class":"form-control"}, {"placeholder":"TextArea"}, {"required":true}],
 					"css" : "INPUT TAG CSS GOES HERE"
 				},
 				"conditional_logic" : {
-					"set" : "true",
+					"set" : true,
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_0",
@@ -91,11 +91,11 @@
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"number"}, {"value":""}, {"min":"18"}, {"max":"50"}, {"class":"form-control"}, {"placeholder":"Number"}, {"required":"true"}],
+					"attr" : [{"type":"number"}, {"value":""}, {"min":"18"}, {"max":"50"}, {"class":"form-control"}, {"placeholder":"Number"}, {"required":true}],
 					"css" : ""
 				},
 				"conditional_logic" : {
-					"set" : "false",
+					"set" : false,
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_3",
@@ -126,13 +126,13 @@
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"radio"}, {"value":""}, {"class":"form-check-input"}, {"required":"true"}],
+					"attr" : [{"type":"radio"}, {"value":""}, {"class":"form-check-input"}, {"required":true}],
 					"options" : ["one", "two", "three", "four"],
 					"selected" : ["2"],
 					"css" : ""
 				},
 				"conditional_logic" : {
-					"set" : "false",
+					"set" : false,
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_3",
@@ -163,13 +163,13 @@
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"checkbox"}, {"class":"form-check-input"}, {"required":"true"}],
+					"attr" : [{"type":"checkbox"}, {"class":"form-check-input"}, {"required":true}],
 					"options" : ["1024x800", "720x1200", "1920x1080"],
 					"selected" : [ "720x1200", "1920x1080" ],
 					"css" : ""
 				},
 				"conditional_logic" : {
-					"set" : "false",
+					"set" : false,
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_3",
@@ -206,7 +206,7 @@
 					"css" : ""
 				},
 				"conditional_logic" : {
-					"set" : "false",
+					"set" : false,
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_3",
@@ -241,7 +241,7 @@
 					"css" : ""
 				},
 				"conditional_logic" : {
-					"set" : "false",
+					"set" : false,
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_3",
@@ -250,7 +250,7 @@
 					}
 				},
 				"datepicker_settings" : {
-					"noWeekends" : "true",
+					"noWeekends" : true,
 					"minDate" : {"key":"days|weeks|months|years", "val":"2"},
 					"maxDate" : {"key":"days|weeks|months|years", "val":"2"},
 					"disabled_dates" : ["2013-03-14","2013-03-15","2013-03-16"],
@@ -319,7 +319,7 @@
 					}
 				},
 				"conditional_logic" : {
-					"set" : "false",
+					"set" : false,
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_0",
@@ -363,7 +363,7 @@
 					}
 				},
 				"conditional_logic" : {
-					"set" : "false",
+					"set" : false,
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_0",
@@ -398,7 +398,7 @@
 					"css" : ""
 				},
 				"conditional_logic" : {
-					"set" : "false",
+					"set" : false,
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_0",
@@ -433,7 +433,7 @@
 					"css" : ""
 				},
 				"conditional_logic" : {
-					"set" : "false",
+					"set" : false,
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_0",
@@ -468,7 +468,7 @@
 					"css" : ""
 				},
 				"conditional_logic" : {
-					"set" : "false",
+					"set" : false,
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_0",
@@ -503,7 +503,7 @@
 					"css" : ""
 				},
 				"conditional_logic" : {
-					"set" : "false",
+					"set" : false,
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_0",
