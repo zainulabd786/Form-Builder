@@ -2,7 +2,7 @@ import formBuilder, {readJSON} from './functions.js'
 
 (function($){
     $.fn.formBuilder = function(options){
-
+    	
     	readJSON("admin-form.json").then( i => {
     		let opts = $.extend({}, i, options )
         	formBuilder(opts);

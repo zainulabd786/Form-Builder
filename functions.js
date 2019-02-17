@@ -1,6 +1,8 @@
 const jsonPath = "./json"
 const templatePath = "./templates";
 const formTag = ".fb-form form";
+const fieldSettingsTemplate = "field_settings.mst";
+const fieldSettingsContainer = "#fb-field-settings .settings-wrapper";
 const formBuildingJSON = {
 	"form_fields" : []
 };
@@ -11,6 +13,7 @@ export default function formBuilder(opts){
 		initDrag()
 		/*initDrop()*/ 
 		initSortable()
+		
 
 	} ).catch(e => console.error(e))
 }
@@ -79,20 +82,25 @@ let afterDrop = (event, ui) => {
 		fieldData[0].field.field_id = Date.now();
 		formBuildingJSON.form_fields.push(fieldData[0]);
 		appendFieldsMarkup()
+		setTimeout(()=>selectField(fieldData[0].field.field_id), 100)
 	})
 	$(ui.helper[0]).remove()
 }
 
 let initFlatpicker = () => $("#date").flatpickr();
+
 let appendFieldsMarkup = () => {
 	let data = jQuery.extend(true, {}, formBuildingJSON);
 	data.form_fields.forEach( i => {
 		let obj = {};
 		obj.wrapperTag = i.field.wrapper.tag;
-		obj.field_id = (i.field.field_id) ? i.field.wrapper.attr.push({"id":i.field.field_id}) : ""; 
+		//obj.field_id = (i.field.field_id) ? i.field.wrapper.attr.push({"id":i.field.field_id}) : ""; 
+		i.field.wrapper.attr = (i.field.field_id) ? addAttr(i.field.wrapper.attr, "id", i.field.field_id) : ""; 
+		let visibility = (i.field.visibility === "s") ? true : false;
+		i.field.wrapper.attr = (!visibility) ? addAttr(i.field.wrapper.attr, "class", "fb-hidden") : i.field.wrapper.attr;
 		obj.wrapperAttributes = generateTagAttributes(i.field.wrapper.attr)
-		console.log(obj.wrapperAttributes);
 		obj.label = i.field.label.text;
+		obj.tooltip = (i.field.tooltip) ? i.field.tooltip : false;
 		obj.label_placement = i.field.label.label_placement;
 		obj.inputTag = (i.field.input && i.field.input.tag) ? i.field.input.tag : "";
 		obj.inputAttributes = (i.field.input && i.field.input.attr) ? generateTagAttributes(i.field.input.attr) : "";
@@ -102,7 +110,6 @@ let appendFieldsMarkup = () => {
 		if(i.field.id == 9) obj.name_fields = (i.field.name_fields) ? createMultiFieldObj(i.field.name_fields) : ""; 
 		readTemplate(`inputs/${i.field.field_name}.mst`).then( template => {
 			generateHTML(template, obj, formTag)
-			selectField(i.field.field_id);
 			obj = {};
 			i.field.id == 7 && initFlatpicker()
 		} ).catch(e => console.error(e))
@@ -132,10 +139,60 @@ let generateTagAttributes = (data) => {
 }
 
 let selectField = (id) => {
+	console.log(id);
 	$(formTag).find(".form-field").removeClass("fb-selected").click(function(){
 		id = $(this).attr('id');
 		$(formTag).find(".form-field").removeClass("fb-selected")
 		$(formTag).find(`#${id}`).addClass("fb-selected", 800)
+		onFieldSelect(id)
+		$(fieldSettingsContainer).empty();
 	})
 	$(formTag).find(`#${id}`).addClass("fb-selected")
+	onFieldSelect(id)
+	$(fieldSettingsContainer).empty();
 }
+
+let getFieldSettingsObject = (id) => {
+	let data = jQuery.extend(true, {}, formBuildingJSON);
+	data = data.form_fields.filter( i => parseInt(i.field.field_id) === parseInt(id) )[0].field;
+	let field = {};
+	field.type = data.field_name;
+	field.label = data.label.text;
+	field.tooltip = (data.tooltip) ? data.tooltip : false;
+	let required = data.input.attr.filter(i => (i.required) && i.required)
+	field.required = (required.length) ? required[0].required : false 
+	field.visibility = (data.visibility === "s") ? true : false;
+	field.conditional_logic = (data.conditional_logic.set) ? data.conditional_logic : false;
+	return field;
+}
+
+let onFieldSelect = (id) => {
+	let data = getFieldSettingsObject(id);
+	console.log(data);
+	readTemplate(fieldSettingsTemplate).then( template => {
+		generateHTML(template, data, fieldSettingsContainer)
+	} ).catch(e => console.error(e))
+}
+
+let addAttr = (attr, key, value) => {
+
+	if(ifKeyExist(attr, key)){ /*upadte existing attributes*/
+		attr.forEach((v, i)=>{
+			for(let k in v){
+				if(v.hasOwnProperty(k)){
+					if(k === key){
+						let atts = v[key]+" "+value
+						attr[i][k] = atts;
+					}
+				}
+			}
+		});
+	} else{ /*add new attribute*/
+		attr.push({[key]:value})
+	}
+	console.log(attr)
+	return attr
+}
+
+
+let ifKeyExist = ( arr, key ) => (arr.find(v => v[ key ])) ? true : false;

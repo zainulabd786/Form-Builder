@@ -43,7 +43,9 @@
 								</ul>
 							</div><!-- Add Field Tab -->
 							<div id="fb-field-settings" class="tab-pane fade"><!-- Settings Tab -->
-							    <p>Field Settings</p>
+							    <from class="settings-wrapper">
+
+							    </form>
 							</div><!-- Settings Tab -->
 			  			</div><!-- Form Tab Content -->
 			  			<!---------------------------------- Field Tabs---------------------------- -->

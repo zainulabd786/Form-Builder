@@ -1,8 +1,9 @@
-{{label}}
-{{#choices}}
+
 <{{wrapperTag}} {{{wrapperAttributes}}}>
+<label>{{label}} <a href="#" data-toggle="tooltip" data-placement="bottom" title="{{tooltip}}"><i class="fas fa-question-circle"></i></a></label></label>
+{{#choices}}
 	<label {{{label_attributes}}}>
 		<{{inputTag}} {{{inputAttributes}}} name="{{.}}">{{.}}
 	</label>
-</{{wrapperTag}}>
 {{/choices}}
+</{{wrapperTag}}>

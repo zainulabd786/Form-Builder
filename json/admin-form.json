@@ -16,16 +16,16 @@
 					"css" : ""
 				},
 				"label" : {
-					"text" : "First Name",
+					"text" : "Text",
 					"label_placement" : "ai"
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"text"}, {"class":"form-control"}, {"placeholder":"First Name"}],
-					"css" : "INPUT TAG CSS GOES HERE"
+					"attr" : [{"type":"text"}, {"class":"form-control"}, {"placeholder":"First Name"}, {"required":"required"}],
+					"css" : ""
 				},
 				"conditional_logic" : {
-					"set" : false,
+					"set" : true,
 					"visibility" : "s",
 					"if" : {
 						"field" : "field_0",
@@ -39,7 +39,7 @@
 			"field" : {
 				"field_name" : "TextArea",
 				"id" : "2",
-				"visibility" : "s",
+				"visibility" : "h",
 				"tooltip" : "Please Enter your Long description here here",
 				"column" : {
 					"width" : "1",
@@ -56,8 +56,8 @@
 				},
 				"input" : {
 					"tag" : "textarea",
-					"attr" : [{"maxlength":"34"}, {"class":"form-control"}, {"placeholder":"TextArea"}, {"required":true}],
-					"css" : "INPUT TAG CSS GOES HERE"
+					"attr" : [{"maxlength":"34"}, {"class":"form-control"}, {"placeholder":"TextArea"}, {"required":false}],
+					"css" : ""
 				},
 				"conditional_logic" : {
 					"set" : true,
