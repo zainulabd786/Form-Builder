@@ -13,7 +13,6 @@ export default function formBuilder(opts){
 		initDrag()
 		/*initDrop()*/ 
 		initSortable()
-		
 
 	} ).catch(e => console.error(e))
 }
@@ -95,6 +94,7 @@ let appendFieldsMarkup = () => {
 		let obj = {};
 		obj.wrapperTag = i.field.wrapper.tag;
 		//obj.field_id = (i.field.field_id) ? i.field.wrapper.attr.push({"id":i.field.field_id}) : ""; 
+		obj.field_id = (i.field.field_id) ? i.field.field_id : "";
 		i.field.wrapper.attr = (i.field.field_id) ? addAttr(i.field.wrapper.attr, "id", i.field.field_id) : ""; 
 		let visibility = (i.field.visibility === "s") ? true : false;
 		i.field.wrapper.attr = (!visibility) ? addAttr(i.field.wrapper.attr, "class", "fb-hidden") : i.field.wrapper.attr;
@@ -106,6 +106,8 @@ let appendFieldsMarkup = () => {
 		obj.inputAttributes = (i.field.input && i.field.input.attr) ? generateTagAttributes(i.field.input.attr) : "";
 		obj.choices = (i.field.input && i.field.input.options) ? i.field.input.options : "";
 		obj.label_attributes = (i.field.label.attr) ? generateTagAttributes(i.field.label.attr) : "";
+		let required = i.field.input.attr.filter(i => (i.required) && i.required)
+		obj.required = (required.length) ? true : false 
 		if(i.field.id == 8) obj.address_fields = (i.field.address_fields) ? createMultiFieldObj(i.field.address_fields) : ""; 
 		if(i.field.id == 9) obj.name_fields = (i.field.name_fields) ? createMultiFieldObj(i.field.name_fields) : ""; 
 		readTemplate(`inputs/${i.field.field_name}.mst`).then( template => {
@@ -139,13 +141,14 @@ let generateTagAttributes = (data) => {
 }
 
 let selectField = (id) => {
-	console.log(id);
 	$(formTag).find(".form-field").removeClass("fb-selected").click(function(){
 		id = $(this).attr('id');
 		$(formTag).find(".form-field").removeClass("fb-selected")
 		$(formTag).find(`#${id}`).addClass("fb-selected", 800)
-		onFieldSelect(id)
-		$(fieldSettingsContainer).empty();
+		if(!$(this).hasClass("fb-selected")){
+			onFieldSelect(id)
+			$(fieldSettingsContainer).empty();
+		}
 	})
 	$(formTag).find(`#${id}`).addClass("fb-selected")
 	onFieldSelect(id)
@@ -156,6 +159,7 @@ let getFieldSettingsObject = (id) => {
 	let data = jQuery.extend(true, {}, formBuildingJSON);
 	data = data.form_fields.filter( i => parseInt(i.field.field_id) === parseInt(id) )[0].field;
 	let field = {};
+	field.field_id = data.field_id;
 	field.type = data.field_name;
 	field.label = data.label.text;
 	field.tooltip = (data.tooltip) ? data.tooltip : false;
@@ -168,9 +172,9 @@ let getFieldSettingsObject = (id) => {
 
 let onFieldSelect = (id) => {
 	let data = getFieldSettingsObject(id);
-	console.log(data);
 	readTemplate(fieldSettingsTemplate).then( template => {
 		generateHTML(template, data, fieldSettingsContainer)
+	onSettingChange()
 	} ).catch(e => console.error(e))
 }
 
@@ -190,9 +194,45 @@ let addAttr = (attr, key, value) => {
 	} else{ /*add new attribute*/
 		attr.push({[key]:value})
 	}
-	console.log(attr)
 	return attr
 }
 
 
 let ifKeyExist = ( arr, key ) => (arr.find(v => v[ key ])) ? true : false;
+
+
+let onSettingChange = () => {
+	$(".field-setting").change(function(){
+		let fieldID = $(this).attr('data-id')
+		let setting_name = $(this).attr('name');
+		let setting_value = $(this).val();
+		formBuildingJSON.form_fields.forEach((val, index)=>{
+			if(val.field.field_id == fieldID){
+				let field = formBuildingJSON.form_fields[index].field;
+				switch(setting_name){
+					case "label_text":
+						field.label.text = setting_value;
+						$(`#${fieldID} .label_tag`).text(setting_value);
+					break;
+
+					case "tooltip":
+						field.tooltip = setting_value;
+						$(`#${fieldID} a[data-toggle="tooltip"]`).attr("title", setting_value);
+					break;
+
+					case "input_attr_required":
+						field.input.attr = addAttr(field.input.attr, "required", $(this).prop("checked") ? true : false);
+						$(this).prop("checked") ? $(`#${fieldID} input`).attr("required", true) : $(`#${fieldID} input`).attr("required", false);
+						$(this).prop("checked") ? $(`#${fieldID} .required-asterick`).text("*") : $(`#${fieldID} .required-asterick`).text("");
+					break;
+
+					case "visibility":
+						field.visibility = $(this).filter(':checked').val()
+						field.visibility === "s" ? $(`#${fieldID}`).removeClass("fb-hidden") : $(`#${fieldID}`).addClass("fb-hidden")
+					break;
+				} 
+			}
+		})
+	console.log(formBuildingJSON)
+	})
+}

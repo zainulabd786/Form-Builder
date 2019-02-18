@@ -1,7 +1,9 @@
 
 
 <{{wrapperTag}} {{{wrapperAttributes}}}>
-	<label {{{label_attributes}}}>{{label}} <a href="#" data-toggle="tooltip" data-placement="bottom" title="{{tooltip}}"><i class="fas fa-question-circle"></i></a></label></label>
+	<label {{{label_attributes}}}>{{label}}</label> 
+	<sup class="required-asterick">{{#required}}*{{/required}}</sup> 
+	<a href="#" data-toggle="tooltip" data-placement="bottom" title="{{tooltip}}"><i class="fas fa-question-circle"></i></a>
 	<{{inputTag}} {{{inputAttributes}}} >
 		{{#choices}} <option value="{{.}}">{{.}}</option> {{/choices}}
 	</{{inputTag}}>
