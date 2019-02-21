@@ -30,7 +30,7 @@
 					"visibility" : "s",
 					"if" : {
 						"field" : "field_0",
-						"condition" : "IS",
+						"condition" : "==",
 						"value" : "other"
 					}
 				}
@@ -62,11 +62,11 @@
 					"css" : ""
 				},
 				"conditional_logic" : {
-					"set" : true,
-					"visibility" : "s(SHOW) or h(HIDE)",
+					"set" : false,
+					"visibility" : "s",
 					"if" : {
 						"field" : "field_0",
-						"condition" : "IS or IS NOT",
+						"condition" : "==",
 						"value" : "other"
 					}
 				}
@@ -102,7 +102,7 @@
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_3",
-						"condition" : "IS or IS NOT",
+						"condition" : "==",
 						"value" : "other"
 					}
 				}
@@ -140,7 +140,7 @@
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_3",
-						"condition" : "IS or IS NOT",
+						"condition" : "==",
 						"value" : "other"
 					}
 				}
@@ -178,7 +178,7 @@
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_3",
-						"condition" : "IS or IS NOT",
+						"condition" : "==",
 						"value" : "other"
 					}
 				}
@@ -188,7 +188,7 @@
 			"field" : {
 				"field_name" : "Dropdown",
 				"id" : "6",
-				"visibility" : "h",
+				"visibility" : "s",
 				"tooltip" : "Select from dropdown",
 				"column" : {
 					"width" : "1",
@@ -216,7 +216,7 @@
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_3",
-						"condition" : "IS or IS NOT",
+						"condition" : "==",
 						"value" : "other"
 					}
 				}
@@ -252,7 +252,7 @@
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_3",
-						"condition" : "IS or IS NOT",
+						"condition" : "==",
 						"value" : "other"
 					}
 				},
@@ -260,7 +260,7 @@
 					"noWeekends" : true,
 					"minDate" : {"key":"days|weeks|months|years", "val":"2"},
 					"maxDate" : {"key":"days|weeks|months|years", "val":"2"},
-					"disabled_dates" : ["2013-03-14","2013-03-15","2013-03-16"],
+					"d==abled_dates" : ["2013-03-14","2013-03-15","2013-03-16"],
 					"theme" : "dark",
 					"css": "CSS GOES HERE"
 				}
@@ -331,7 +331,7 @@
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_0",
-						"condition" : "IS or IS NOT",
+						"condition" : "==",
 						"value" : "other"
 					}
 				}
@@ -376,7 +376,7 @@
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_0",
-						"condition" : "IS or IS NOT",
+						"condition" : "==",
 						"value" : "other"
 					}
 				}
@@ -412,7 +412,7 @@
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_0",
-						"condition" : "IS or IS NOT",
+						"condition" : "==",
 						"value" : "other"
 					}
 				}
@@ -448,7 +448,7 @@
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_0",
-						"condition" : "IS or IS NOT",
+						"condition" : "==",
 						"value" : "other"
 					}
 				}
@@ -484,7 +484,7 @@
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_0",
-						"condition" : "IS or IS NOT",
+						"condition" : "==",
 						"value" : "other"
 					}
 				}
@@ -520,60 +520,56 @@
 					"visibility" : "s(SHOW) or h(HIDE)",
 					"if" : {
 						"field" : "field_0",
-						"condition" : "IS or IS NOT",
+						"condition" : "==",
 						"value" : "other"
 					}
 				}
 			}
 		}
 	],
-	"form_settings" : {
-		"basics" : {
-			"title" : "My Custom Form",
-			"description": "This is my custom form description",
-			"ajax_url": "https://example.com/file.php"
-		},
-		"layout" : {
-			"label_placement" : "bi(BELOW INPUT) or ai(ABOVE INPUT)",
-			"attr" : [ {"class":"form-css-class"}, {"id":"form-id-1"}, {"autocomplete":"on"} ]
-		},
-		"button" : {
-			"text" : "Submit",
-			"attr" : [ {"class":"form-css-class"}, {"id":"form-id-1"}, {"data-id":"54321"}, {"type":"button"} ],
-			"css" : [ {"backgroundColor":"#543212"}, {"fontSize":"20px"}, {"color":"#ffffff"} ],
-			"wrapper" : "span"
-		},
-		"confirmation" : {
-			"type" : "m(MESSAGE) or r(REDIRECT)",
-			"message" : {
-				"text" : "Your Form Has been successfully submitted",
-				"wrapper" : "h1",
-				"attr" : [ {"class":"form-css-class"}, {"id":"form-id-1"}, {"data-id":"54321"} ],
-				"css" : [ {"backgroundColor":"#543212"}, {"fontSize":"20px"}, {"color":"#ffffff"} ]
+	"form_settings" : [{
+			"basics" : {
+				"title" : "My Custom Form",
+				"description": "This is my custom form description",
+				"ajax_url": "https://example.com/file.php",
+				"button" : {
+					"text" : "Submit",
+					"attr" : [ {"class":"form-css-class"}, {"id":"form-id-1"}, {"data-id":"54321"}, {"type":"button"} ],
+					"css" : [ {"backgroundColor":"#543212"}, {"fontSize":"20px"}, {"color":"#ffffff"} ],
+					"wrapper" : "span"
+				}
 			},
-			"redirect" : {
-				"url" : "https://example.com",
-				"query_string" : [ {"message":"Thank you"}, {"form_id":"1"} ]
-			}
-		},
-		"notifications" : {
-			"admin" : {
-				"to" : [ "abc@edensolutions.co.in", "xyz@premierlister.com" ],
-				"from" : "{user-email}",
-				"reply_to" : "{user-email}",
-				"bcc" : [ "someone@something.com" ],
-				"subject" : "Received an order from {user-name}",
-				"message" : "You jus received an order from {user-name} for a session"
+			"confirmation" : {
+				"type" : "m(MESSAGE) or r(REDIRECT)",
+				"message" : {
+					"text" : "Your Form Has been successfully submitted",
+					"wrapper" : "h1",
+					"attr" : [ {"class":"form-css-class"}, {"id":"form-id-1"}, {"data-id":"54321"} ],
+					"css" : [ {"backgroundColor":"#543212"}, {"fontSize":"20px"}, {"color":"#ffffff"} ]
+				},
+				"redirect" : {
+					"url" : "https://example.com",
+					"query_string" : [ {"message":"Thank you"}, {"form_id":"1"} ]
+				}
 			},
-			"user" : {
-				"to" : [ "{user-email}", "xyz@premierlister.com" ],
-				"from" : "{xyz@premierlister.com}",
-				"reply_to" : "{xyz@premierlister.com}",
-				"bcc" : [ "someone@something.com" ],
-				"subject" : "Your form has been submitted successfully",
-				"message" : "Hi {user-name}, you have successfully submitted the form at our website"
+			"notifications" : {
+				"admin" : {
+					"to" : [ "abc@edensolutions.co.in", "xyz@premierl==ter.com" ],
+					"from" : "{user-email}",
+					"reply_to" : "{user-email}",
+					"bcc" : [ "someone@something.com" ],
+					"subject" : "Received an order from {user-name}",
+					"message" : "You jus received an order from {user-name} for a session"
+				},
+				"user" : {
+					"to" : [ "{user-email}", "xyz@premierl==ter.com" ],
+					"from" : "{xyz@premierl==ter.com}",
+					"reply_to" : "{xyz@premierl==ter.com}",
+					"bcc" : [ "someone@something.com" ],
+					"subject" : "Your form has been submitted successfully",
+					"message" : "Hi {user-name}, you have successfully submitted the form at our website"
+				}
 			}
-		}
-	},
+		}],
 	"element" : "#form-builder"
 }

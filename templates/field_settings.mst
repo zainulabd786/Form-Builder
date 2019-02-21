@@ -38,3 +38,44 @@
 	  </label>
 	</div>
 </div>
+
+<div class="form-group">
+	<div class="form-check">
+	  <input class="form-check-input field-setting" name="conditional_logic_set" data-id="{{field_id}}" type="checkbox" id="conditional_logic_set" {{#conditional_logic_set}}checked{{/conditional_logic_set}}>
+	  <label class="form-check-label" for="conditional_logic_set">
+	    Conditional Logic
+	  </label>
+	</div>
+</div>
+
+<div class="form-group">
+	{{#choices}}
+		<div class="input-group">
+			<input type="text" class="form-control" placeholder="option">
+			<div class="input-group-append">
+				<button class="btn btn-primary add-choice" type="button">+ Add</button> 
+		  	</div>
+		</div>
+	{{/choices}}
+</div>
+
+<div class="align-center conditional_logic_settings {{#conditional_logic_set}}d-flex{{/conditional_logic_set}} {{^conditional_logic_set}}d-none{{/conditional_logic_set}}">
+	<div class="condition p-2">
+		<span>Show if</span>
+    </div>
+    <div class="condition">
+		<select class="form-control field-setting" id="conditional_logic_field_list" name="conditional_logic_field_list" data-id="{{field_id}}">
+			<option value="">Field</option>
+			{{{field_list_options}}}
+		</select>
+    </div>
+    <div class="condition">
+		<select class="form-control field-setting" id="conditional_logic_bool" name="conditional_logic_bool" data-id="{{field_id}}">
+			{{{field_condition_options}}}
+		</select>
+    </div>
+    <div class="condition">
+		<input type="text" placeholder="value" class="form-control field-setting" id="conditional_logic_val" value="{{condition_value}}" name="conditional_logic_val" data-id="{{field_id}}">
+    </div>
+</div>
+

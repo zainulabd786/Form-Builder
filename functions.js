@@ -13,7 +13,7 @@ export default function formBuilder(opts){
 		initDrag()
 		/*initDrop()*/ 
 		initSortable()
-
+		applyConditionalLogic()
 	} ).catch(e => console.error(e))
 }
 
@@ -103,6 +103,7 @@ let appendFieldsMarkup = () => {
 		obj.tooltip = (i.field.tooltip) ? i.field.tooltip : false;
 		obj.label_placement = i.field.label.label_placement;
 		obj.inputTag = (i.field.input && i.field.input.tag) ? i.field.input.tag : "";
+		i.field.input.attr = (i.field.input && i.field.input.attr) && addAttr(i.field.input.attr, "class", "fb-input")
 		obj.inputAttributes = (i.field.input && i.field.input.attr) ? generateTagAttributes(i.field.input.attr) : "";
 		obj.choices = (i.field.input && i.field.input.options) ? i.field.input.options : "";
 		obj.label_attributes = (i.field.label.attr) ? generateTagAttributes(i.field.label.attr) : "";
@@ -142,10 +143,11 @@ let generateTagAttributes = (data) => {
 
 let selectField = (id) => {
 	$(formTag).find(".form-field").removeClass("fb-selected").click(function(){
-		id = $(this).attr('id');
-		$(formTag).find(".form-field").removeClass("fb-selected")
-		$(formTag).find(`#${id}`).addClass("fb-selected", 800)
 		if(!$(this).hasClass("fb-selected")){
+			id = $(this).attr('id');
+			$(formTag).find(".form-field").removeClass("fb-selected")
+			$(formTag).find(`#${id}`).addClass("fb-selected", 800)
+		
 			onFieldSelect(id)
 			$(fieldSettingsContainer).empty();
 		}
@@ -159,6 +161,8 @@ let getFieldSettingsObject = (id) => {
 	let data = jQuery.extend(true, {}, formBuildingJSON);
 	data = data.form_fields.filter( i => parseInt(i.field.field_id) === parseInt(id) )[0].field;
 	let field = {};
+	let field_list_options = "";
+	let field_conditions_markup = "";
 	field.field_id = data.field_id;
 	field.type = data.field_name;
 	field.label = data.label.text;
@@ -166,7 +170,42 @@ let getFieldSettingsObject = (id) => {
 	let required = data.input.attr.filter(i => (i.required) && i.required)
 	field.required = (required.length) ? required[0].required : false 
 	field.visibility = (data.visibility === "s") ? true : false;
-	field.conditional_logic = (data.conditional_logic.set) ? data.conditional_logic : false;
+	/**********************************Conditional Logic*************************************/
+	field.conditional_logic_set = (data.conditional_logic.set) ? true : false;
+	field.selected_val = data.conditional_logic.if.field;
+	field.selected_condition = data.conditional_logic.if.condition;
+	field.condition_value = data.conditional_logic.if.value ? data.conditional_logic.if.value : "";
+
+	field_conditions_markup += "<option ";
+	field_conditions_markup += field.selected_condition == "==" ? "selected" : "";
+	field_conditions_markup += " value='==' selected>IS</option>" ;
+
+	field_conditions_markup += "<option ";
+	field_conditions_markup += field.selected_condition == "!=" ? "selected" : "";
+	field_conditions_markup += " value='!='>IS NOT</option>" ;
+
+	field_conditions_markup += "<option ";
+	field_conditions_markup += field.selected_condition == ">" ? "selected" : "";
+	field_conditions_markup += " value='<'>GREATER THAN</option>" ;
+
+	field_conditions_markup += "<option ";
+	field_conditions_markup += field.selected_condition == "<" ? "selected" : "";
+	field_conditions_markup += " value='>'>LESS THAN</option>" ;
+
+	formBuildingJSON.form_fields.forEach(i=>{
+		field_list_options += "<option ";
+		field_list_options += field.selected_val==i.field.field_id ? "selected" : "";
+		field_list_options += " value='"+i.field.field_id+"'>"+i.field.field_name+"</option>"
+	})
+
+	field.field_condition_options = field_conditions_markup;
+	field.field_list_options = field_list_options;
+	/**********************************Conditional Logic*************************************/
+
+	if(data.id == 4){ /*radio Buttons*/
+		field.choices = data.input.options
+	}
+
 	return field;
 }
 
@@ -174,7 +213,7 @@ let onFieldSelect = (id) => {
 	let data = getFieldSettingsObject(id);
 	readTemplate(fieldSettingsTemplate).then( template => {
 		generateHTML(template, data, fieldSettingsContainer)
-	onSettingChange()
+		onSettingChange()
 	} ).catch(e => console.error(e))
 }
 
@@ -230,9 +269,86 @@ let onSettingChange = () => {
 						field.visibility = $(this).filter(':checked').val()
 						field.visibility === "s" ? $(`#${fieldID}`).removeClass("fb-hidden") : $(`#${fieldID}`).addClass("fb-hidden")
 					break;
+
+					case "conditional_logic_set":
+						field.conditional_logic.set = $(this).prop("checked");
+						field.conditional_logic.set ? 
+							$(".conditional_logic_settings").removeClass("d-none").addClass("d-flex") : 
+							$(".conditional_logic_settings").removeClass("d-flex").addClass("d-none")
+					break;
+
+					case "conditional_logic_field_list":
+					case "conditional_logic_bool":
+					case "conditional_logic_val":
+						switch($(this).attr('id')){
+							case "conditional_logic_field_list":
+								field.conditional_logic.if.field = $(this).val();
+							break;
+
+							case "conditional_logic_bool":
+								field.conditional_logic.if.condition = $(this).val();
+							break;
+
+							case "conditional_logic_val":
+								field.conditional_logic.if.value = $(this).val();
+							break;
+
+						}
+						
+					/*	let field_list_val = $(`div[data-id=${fieldID}]#conditional_logic_field_list`).val()
+						$(`#${field_list_val} .fb-input`).change(function(){
+							console.log($(this).val())
+						})*/
+					break;
 				} 
 			}
 		})
-	console.log(formBuildingJSON)
+	//console.log(formBuildingJSON)
 	})
+}
+
+let getDependentFields = (id) => {
+	/*get all the fields that depends upon {id} field for their visibility set by conditional logic*/
+
+	let fields = formBuildingJSON.form_fields.filter( i => i.field.conditional_logic.if.field == id);
+
+	return fields
+}
+
+let applyConditionalLogic = () => {
+	$("body").on("change", ".fb-input", function(){
+		let input = $(this);
+		let fieldID = input.parent().attr('id');
+		let hiddenFields = getDependentFields(fieldID)
+		hiddenFields.forEach(i => {
+			let ifCondition = i.field.conditional_logic.if
+			//console.log(input.val(), ifCondition, ifCondition.value);
+			compareConditionalLogic(input.val(), ifCondition.condition, ifCondition.value) ? 
+				$(`#${i.field.field_id}`).addClass("fb-hidden") : $(`#${i.field.field_id}`).removeClass("fb-hidden")
+		});
+	})
+}
+
+let compareConditionalLogic = (val1, operator, val2) =>{
+	let ret;
+
+	switch(operator){
+		case "==":
+			ret = val1 == val2;
+		break;
+
+		case "!=":
+			ret = val1 != val2;
+		break;
+
+		case ">":
+			ret = val1 > val2;
+		break;
+
+		case "<":
+			ret = val1 < val2;
+		break;
+	}
+
+	return ret;
 }
