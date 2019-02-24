@@ -126,11 +126,11 @@
 				"label" : {
 					"text" : "Radio Buttons",
 					"label_placement" : "ai",
-					"attr": [{"class":"label_tag"}]
+					"attr": [{"class":"label_tag  d-inline-block"}]
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"radio"}, {"value":""}, {"class":"form-check-input"}, {"required":true}],
+					"attr" : [{"type":"radio"}, {"value":""}, {"class":"custom-control-input"}, {"required":true}],
 					"options" : ["one", "two", "three", "four"],
 					"selected" : ["2"],
 					"css" : ""
@@ -164,11 +164,11 @@
 				"label" : {
 					"text" : "CheckBoxes",
 					"label_placement" : "ai",
-					"attr": [{"class":"label_tag"}]
+					"attr": [{"class":"label_tag d-inline-block"}]
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"checkbox"}, {"class":"form-check-input"}, {"required":true}],
+					"attr" : [{"type":"checkbox"}, {"class":"custom-control-input"}, {"required":true}],
 					"options" : ["1024x800", "720x1200", "1920x1080"],
 					"selected" : [ "720x1200", "1920x1080" ],
 					"css" : ""
@@ -512,7 +512,7 @@
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"file"}, {"value":""}, {"class":"form-control"}, {"placeholder":"Email"}],
+					"attr" : [{"type":"file"}, {"value":""}, {"class":"custom-file-input"}, {"placeholder":"Email"}],
 					"css" : ""
 				},
 				"conditional_logic" : {

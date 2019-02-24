@@ -1,11 +1,13 @@
-
 <{{wrapperTag}} {{{wrapperAttributes}}}>
-<label {{{label_attributes}}}>{{label}}</label> 
-<sup class="required-asterick">{{#required}}*{{/required}}</sup> 
-<a href="#" data-toggle="tooltip" data-placement="bottom" title="{{tooltip}}"><i class="fas fa-question-circle"></i></a>
-{{#choices}}
-	<label>
-		<{{inputTag}} {{{inputAttributes}}} name="{{.}}">{{.}}
-	</label>
-{{/choices}}
+	<label {{{label_attributes}}}>{{label}}</label> 
+	<sup class="required-asterick">{{#required}}*{{/required}}</sup> 
+	<a href="#" data-toggle="tooltip" data-placement="bottom" title="{{tooltip}}"><i class="fas fa-question-circle"></i></a>
+	<div class="fb-check-wrapper">
+		{{#choices}}
+			<div data-id="{{.}}" class="custom-control custom-checkbox">
+				<{{inputTag}} {{{inputAttributes}}} name="{{.}}" value="{{.}}" id="{{.}}"><span class="choice-text">{{.}}</span>
+				<label for="{{.}}" class="custom-control-label"></label>
+			</div>
+		{{/choices}}
+	</div>
 </{{wrapperTag}}>

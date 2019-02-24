@@ -45,3 +45,11 @@
 .required-asterick{
 	color: red;
 }
+
+.input-group{
+	margin: 5px 0;
+}
+
+.fb-add-choice{
+	float: right;
+}

@@ -11,13 +11,19 @@ export default function formBuilder(opts){
 	readTemplate("template.mst").then( template => {
 		generateHTML(template, opts, opts.element);
 		initDrag()
-		/*initDrop()*/ 
 		initSortable()
-		applyConditionalLogic()
+		bindEvents()
 	} ).catch(e => console.error(e))
 }
 
 export let readJSON = async (file) => $.get(`${jsonPath}/${file}`)
+
+let bindEvents = () => {
+	applyConditionalLogic();
+	removeChoice();
+	updateChoice();
+	addChoice();
+}
 
 let readTemplate = async (file) => {
 	const request = async () => {
@@ -44,6 +50,11 @@ let getFieldData = async (id) => {
 		return fieldData;
 	} ).catch( e => console.error(e) );
 
+}
+
+let getUniqueFieldData = (id) => {
+	let fieldData = formBuildingJSON.form_fields.filter( i => parseInt(i.field.field_id) === parseInt(id) )
+	return fieldData[0];
 }
 
 /*let initDrop = () => {
@@ -124,6 +135,7 @@ let createMultiFieldObj = (data) => {
 		data.hasOwnProperty(key) && data[key].set && arr.push(data[key])
 	}
 	arr.forEach(i=>{
+		i.attr = addAttr(i.attr, "class", "fb-input")
 		i.attr = generateTagAttributes(i.attr);
 	})
 	return arr;
@@ -195,15 +207,16 @@ let getFieldSettingsObject = (id) => {
 	formBuildingJSON.form_fields.forEach(i=>{
 		field_list_options += "<option ";
 		field_list_options += field.selected_val==i.field.field_id ? "selected" : "";
-		field_list_options += " value='"+i.field.field_id+"'>"+i.field.field_name+"</option>"
+		field_list_options += " value='"+i.field.field_id+"'>"+i.field.label.text+"</option>"
 	})
 
 	field.field_condition_options = field_conditions_markup;
 	field.field_list_options = field_list_options;
 	/**********************************Conditional Logic*************************************/
 
-	if(data.id == 4){ /*radio Buttons*/
-		field.choices = data.input.options
+	if(data.id == 4 || data.id == 5 || data.id == 6){ /*radio Buttons*/
+		field.choices = data.input.options;
+		field.choiceField = true;
 	}
 
 	return field;
@@ -295,10 +308,6 @@ let onSettingChange = () => {
 
 						}
 						
-					/*	let field_list_val = $(`div[data-id=${fieldID}]#conditional_logic_field_list`).val()
-						$(`#${field_list_val} .fb-input`).change(function(){
-							console.log($(this).val())
-						})*/
 					break;
 				} 
 			}
@@ -352,3 +361,81 @@ let compareConditionalLogic = (val1, operator, val2) =>{
 
 	return ret;
 }
+
+let removeChoice = () => {
+	$("body").on("click", ".fb-remove-choice", function(){
+		let fieldID = $(this).attr("data-id");
+		let optionVal = $(this).val();
+		formBuildingJSON.form_fields.forEach((val, index)=>{
+			let field = formBuildingJSON.form_fields[index].field;
+			if(field.field_id==fieldID){
+				field.input.options = field.input.options.filter( i => i !== optionVal );
+				$(`#${fieldID}`).find(`option[value='${optionVal}'], .custom-control[data-id='${optionVal}']`).remove();
+				$(this).parents('.input-group').remove()
+			}
+		})
+	})
+}
+
+let updateChoice = () => {
+	$("body").on("focusin", ".choice-input", function(){
+		$(this).data('val', $(this).val());
+	}).on("change", ".choice-input", function(){
+		let fieldID = $(this).attr("data-id");
+		let optionVal = $(this).val()
+		let oldVal = $(this).data('val');
+		formBuildingJSON.form_fields.forEach((val, index)=>{
+			let field = formBuildingJSON.form_fields[index].field;
+			if(field.field_id==fieldID){
+				let options = field.input.options
+				options.forEach((v, i)=> options[i] = v == oldVal ? optionVal : v  )
+				$(`#${fieldID}`).find(`option[value='${oldVal}'], .custom-control[data-id='${oldVal}'] .choice-text`).text(optionVal); /*text in Form*/
+				$(`#${fieldID}`).find(`option[value='${oldVal}']`).attr("value", optionVal) /*option value in form*/
+				$(`#${fieldID}`).find(`.custom-control[data-id='${oldVal}']`).attr("data-id", optionVal) /*custom-control div data-id in form*/
+				$(`#${fieldID}`).find(`.custom-control input[id='${oldVal}']`).attr("id", optionVal) /*custom-control input id in form*/
+				$(`#${fieldID}`).find(`.custom-control label[for='${oldVal}']`).attr("for", optionVal) /*label for attribute in form*/
+				$(`.fb-remove-choice[value='${oldVal}'].fb-remove-choice[data-id='${fieldID}']`).val(optionVal) /*remove-button value in settings*/
+				$(`.fb-choices-wrapper input[value='${oldVal}']`).attr("value", optionVal) /*update input value in settings*/
+				$(this).data('val', optionVal);
+			}
+		})
+		console.log(formBuildingJSON);
+	})
+}
+
+
+let addChoice = () => {
+	$("body").on("click", ".fb-add-choice", function(){
+		let fieldID = $(this).attr("data-id");
+		let optionVal = "choice_"+Date.now();
+		let settingMarkup = '<div class="input-group">'+
+						'<input type="text" class="form-control choice-input" placeholder="option" value="'+optionVal+'" data-id="'+fieldID+'">'+
+						'<div class="input-group-append">'+
+							'<button class="btn btn-danger fb-remove-choice" type="button" value="'+optionVal+'" data-id="'+fieldID+'">x</button>'+
+			  			'</div>'+
+					'</div>';
+		let radioMarkup = '<div data-id="'+optionVal+'" class="custom-control custom-radio" >'+
+								'<'+getUniqueFieldData(fieldID).field.input.tag+' '+generateTagAttributes(getUniqueFieldData(fieldID).field.input.attr)+' name="radiobutton_'+fieldID+'" value="'+optionVal+'" id="'+optionVal+'"><span class="choice-text">'+optionVal+'</span>'+
+								'<label class="custom-control-label" for="'+optionVal+'"></label>'+
+							'</div>';
+		let checkboxMarkup = '<div data-id="'+optionVal+'" class="custom-control custom-checkbox">'+
+								'<{{inputTag}} {{{inputAttributes}}} name="'+optionVal+'" value="'+optionVal+'" id="'+optionVal+'"><span class="choice-text">'+optionVal+'</span>'+
+								'<label for="'+optionVal+'" class="custom-control-label"></label>'+
+							'</div>';
+		let dropdownMarkup = `<option value="${optionVal}">${optionVal}</option>`;
+		$(`#${fieldID} select`).append(dropdownMarkup)
+		$(`#${fieldID} .fb-radio-wrapper`).append(radioMarkup)
+		$(`#${fieldID} .fb-check-wrapper`).append(radioMarkup)
+		$(".fb-choices-wrapper").append(settingMarkup);
+
+		formBuildingJSON.form_fields.forEach((val, index)=>{
+			let field = formBuildingJSON.form_fields[index].field;
+			if(field.field_id==fieldID){
+				field.input.options.push(optionVal);
+			}
+		});
+		console.log(formBuildingJSON);
+	})
+}
+
+

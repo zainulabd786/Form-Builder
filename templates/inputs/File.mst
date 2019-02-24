@@ -2,5 +2,8 @@
 	<label {{{label_attributes}}}>{{label}}</label> 
 	<sup class="required-asterick">{{#required}}*{{/required}}</sup> 
 	<a href="#" data-toggle="tooltip" data-placement="bottom" title="{{tooltip}}"><i class="fas fa-question-circle"></i></a>
-	<{{inputTag}} {{{inputAttributes}}}>
+	<div class="custom-file">
+		<{{inputTag}} {{{inputAttributes}}}>
+		<label class="custom-file-label"></label>
+	</div>
 </{{wrapperTag}}>

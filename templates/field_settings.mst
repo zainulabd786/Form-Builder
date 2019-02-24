@@ -39,6 +39,24 @@
 	</div>
 </div>
 
+
+<div class="form-group">
+	{{#choiceField}}<label>Choices</label>{{/choiceField}}
+	<div class="fb-choices-wrapper">
+		{{#choices}}
+			<div class="input-group">
+				<input type="text" class="form-control choice-input" placeholder="option" value="{{.}}" data-id="{{field_id}}">
+				<div class="input-group-append">
+					<button class="btn btn-danger fb-remove-choice" type="button" value="{{.}}" data-id="{{field_id}}">x</button> 
+			  	</div>
+			</div>
+		{{/choices}}
+	</div>
+	{{#choiceField}}
+		<button class="btn btn-success fb-add-choice btn-sm" type="button" data-id="{{field_id}}">+ Add</button>
+	{{/choiceField}}
+</div>
+
 <div class="form-group">
 	<div class="form-check">
 	  <input class="form-check-input field-setting" name="conditional_logic_set" data-id="{{field_id}}" type="checkbox" id="conditional_logic_set" {{#conditional_logic_set}}checked{{/conditional_logic_set}}>
@@ -48,34 +66,23 @@
 	</div>
 </div>
 
-<div class="form-group">
-	{{#choices}}
-		<div class="input-group">
-			<input type="text" class="form-control" placeholder="option">
-			<div class="input-group-append">
-				<button class="btn btn-primary add-choice" type="button">+ Add</button> 
-		  	</div>
-		</div>
-	{{/choices}}
-</div>
 
-<div class="align-center conditional_logic_settings {{#conditional_logic_set}}d-flex{{/conditional_logic_set}} {{^conditional_logic_set}}d-none{{/conditional_logic_set}}">
-	<div class="condition p-2">
+<div class="align-center conditional_logic_settings align-items-center {{#conditional_logic_set}}d-flex{{/conditional_logic_set}} {{^conditional_logic_set}}d-none{{/conditional_logic_set}}">
+	<div class="condition col p-0 d-flex align-items-center border-right">
 		<span>Show if</span>
     </div>
-    <div class="condition">
-		<select class="form-control field-setting" id="conditional_logic_field_list" name="conditional_logic_field_list" data-id="{{field_id}}">
+    <div class="condition col p-0 border-right">
+		<select class="form-control field-setting border-0" id="conditional_logic_field_list" name="conditional_logic_field_list" data-id="{{field_id}}">
 			<option value="">Field</option>
 			{{{field_list_options}}}
 		</select>
     </div>
-    <div class="condition">
-		<select class="form-control field-setting" id="conditional_logic_bool" name="conditional_logic_bool" data-id="{{field_id}}">
+    <div class="condition col p-0 border-right">
+		<select class="form-control field-setting border-0" id="conditional_logic_bool" name="conditional_logic_bool" data-id="{{field_id}}">
 			{{{field_condition_options}}}
 		</select>
     </div>
-    <div class="condition">
-		<input type="text" placeholder="value" class="form-control field-setting" id="conditional_logic_val" value="{{condition_value}}" name="conditional_logic_val" data-id="{{field_id}}">
+    <div class="condition col p-0">
+		<input type="text" placeholder="value" class="form-control field-setting border-0" id="conditional_logic_val" value="{{condition_value}}" name="conditional_logic_val" data-id="{{field_id}}">
     </div>
 </div>
-
