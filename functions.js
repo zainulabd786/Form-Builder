@@ -3,6 +3,8 @@ const templatePath = "./templates";
 const formTag = ".fb-form form";
 const fieldSettingsTemplate = "field_settings.mst";
 const fieldSettingsContainer = "#fb-field-settings .settings-wrapper";
+const basicSettingsTemplate = "formSettings/basic.mst";
+const basicSettingsContainer = "#fb-basic-settings";
 const formBuildingJSON = {
 	"form_fields" : []
 };
@@ -23,6 +25,7 @@ let bindEvents = () => {
 	removeChoice();
 	updateChoice();
 	addChoice();
+	basicFormSettingsRender();
 }
 
 let readTemplate = async (file) => {
@@ -48,6 +51,14 @@ let getFieldData = async (id) => {
 	return await readJSON("admin-form.json").then( i => {
 		let fieldData = i.fields.filter( j => parseInt(j.field.id) === parseInt(id));
 		return fieldData;
+	} ).catch( e => console.error(e) );
+
+}
+
+let getSettingsData = async () => {
+
+	return await readJSON("admin-form.json").then( i => {
+		return i.form_settings;
 	} ).catch( e => console.error(e) );
 
 }
@@ -114,11 +125,11 @@ let appendFieldsMarkup = () => {
 		obj.tooltip = (i.field.tooltip) ? i.field.tooltip : false;
 		obj.label_placement = i.field.label.label_placement;
 		obj.inputTag = (i.field.input && i.field.input.tag) ? i.field.input.tag : "";
-		i.field.input.attr = (i.field.input && i.field.input.attr) && addAttr(i.field.input.attr, "class", "fb-input")
+		if(i.field.input) i.field.input.attr = (i.field.input && i.field.input.attr) && addAttr(i.field.input.attr, "class", "fb-input")
 		obj.inputAttributes = (i.field.input && i.field.input.attr) ? generateTagAttributes(i.field.input.attr) : "";
 		obj.choices = (i.field.input && i.field.input.options) ? i.field.input.options : "";
 		obj.label_attributes = (i.field.label.attr) ? generateTagAttributes(i.field.label.attr) : "";
-		let required = i.field.input.attr.filter(i => (i.required) && i.required)
+		let required = (i.field.input) ? i.field.input.attr.filter(i => (i.required) && i.required) : "";
 		obj.required = (required.length) ? true : false 
 		if(i.field.id == 8) obj.address_fields = (i.field.address_fields) ? createMultiFieldObj(i.field.address_fields) : ""; 
 		if(i.field.id == 9) obj.name_fields = (i.field.name_fields) ? createMultiFieldObj(i.field.name_fields) : ""; 
@@ -132,12 +143,14 @@ let appendFieldsMarkup = () => {
 let createMultiFieldObj = (data) => {
 	let arr = [];
 	for(let key in data){
-		data.hasOwnProperty(key) && data[key].set && arr.push(data[key])
+		data.hasOwnProperty(key) && arr.push(data[key])
 	}
 	arr.forEach(i=>{
+		i.attr = !i.set ? addAttr(i.attr, "class", "fb-hidden") : i.attr
 		i.attr = addAttr(i.attr, "class", "fb-input")
 		i.attr = generateTagAttributes(i.attr);
 	})
+	console.log(arr)
 	return arr;
 }
 
@@ -159,14 +172,32 @@ let selectField = (id) => {
 			id = $(this).attr('id');
 			$(formTag).find(".form-field").removeClass("fb-selected")
 			$(formTag).find(`#${id}`).addClass("fb-selected", 800)
-		
-			onFieldSelect(id)
+			onFieldSelect(id);
+			fieldInlineOptions();
 			$(fieldSettingsContainer).empty();
 		}
 	})
 	$(formTag).find(`#${id}`).addClass("fb-selected")
-	onFieldSelect(id)
+	onFieldSelect(id);
+	fieldInlineOptions()
 	$(fieldSettingsContainer).empty();
+}
+
+let fieldInlineOptions = () => {
+	$(".fb-inline-options").remove();
+	let markup = "<div class='fb-inline-options row'>"+
+					"<div class='col text-left'>"+
+						"<span class='p-2 one_by_four'>1</span>"+
+						"<span class='p-2 two_by_four'>2</span>"+
+						"<span class='p-2 three_by_four'>3</span>"+
+						"<span class='p-2 four_by_four'>4</span>"+
+					"</div>"+
+					"<div class='col text-right'>"+
+						"<i class='far fa-copy p-2'></i>"+
+						"<i class='far fa-trash-alt p-2'></i>"+
+					"</div>"+
+				"</div>"
+	$(".fb-selected").append(markup);
 }
 
 let getFieldSettingsObject = (id) => {
@@ -176,10 +207,12 @@ let getFieldSettingsObject = (id) => {
 	let field_list_options = "";
 	let field_conditions_markup = "";
 	field.field_id = data.field_id;
+	field.addr_true = false;
+	field.name_true = false;
 	field.type = data.field_name;
 	field.label = data.label.text;
 	field.tooltip = (data.tooltip) ? data.tooltip : false;
-	let required = data.input.attr.filter(i => (i.required) && i.required)
+	let required = (data.input) ? data.input.attr.filter(i => (i.required) && i.required) : "";
 	field.required = (required.length) ? required[0].required : false 
 	field.visibility = (data.visibility === "s") ? true : false;
 	/**********************************Conditional Logic*************************************/
@@ -214,9 +247,25 @@ let getFieldSettingsObject = (id) => {
 	field.field_list_options = field_list_options;
 	/**********************************Conditional Logic*************************************/
 
-	if(data.id == 4 || data.id == 5 || data.id == 6){ /*radio Buttons*/
+	if(data.id == 4 || data.id == 5 || data.id == 6){ /*radio Buttons, checkboes, dropdown*/
 		field.choices = data.input.options;
 		field.choiceField = true;
+	}
+
+	if(data.id == 8){ /*address field*/
+		field.addr_true = true;
+		field.street_address_disp = data.address_fields.street_address.set;
+		field.fb_addr_line2_disp = data.address_fields.address_line_2.set;
+		field.fb_addr_city_disp = data.address_fields.city.set;
+		field.fb_addr_state_disp = data.address_fields.state.set;
+		field.fb_addr_zip_disp = data.address_fields.zip.set;
+		field.fb_addr_country_disp = data.address_fields.country.set;
+	}
+
+	if(data.id == 9){ /*Name Field*/
+		field.name_true = true;
+		field.first_name_disp = data.name_fields.first_name.set;
+		field.first_last_disp = data.name_fields.last_name.set;
 	}
 
 	return field;
@@ -258,6 +307,7 @@ let onSettingChange = () => {
 		let fieldID = $(this).attr('data-id')
 		let setting_name = $(this).attr('name');
 		let setting_value = $(this).val();
+		console.log(setting_name)
 		formBuildingJSON.form_fields.forEach((val, index)=>{
 			if(val.field.field_id == fieldID){
 				let field = formBuildingJSON.form_fields[index].field;
@@ -289,6 +339,71 @@ let onSettingChange = () => {
 							$(".conditional_logic_settings").removeClass("d-none").addClass("d-flex") : 
 							$(".conditional_logic_settings").removeClass("d-flex").addClass("d-none")
 					break;
+
+					case "fb_addr_street":
+						field.address_fields.street_address.set = $(this).prop("checked") ? true : false;
+						$(this).prop("checked") &&
+							$(`#${fieldID} #fb_addr_street`).hasClass("fb-hidden") ?  
+							$(`#${fieldID} #fb_addr_street`).removeClass('fb-hidden') :
+							$(`#${fieldID} #fb_addr_street`).addClass("fb-hidden")
+					break;
+
+					case "fb_addr_line2":
+						field.address_fields.address_line_2.set = $(this).prop("checked") ? true : false;
+						$(this).prop("checked") &&
+							$(`#${fieldID} #fb_addr_line2`).hasClass("fb-hidden") ?  
+							$(`#${fieldID} #fb_addr_line2`).removeClass('fb-hidden') :
+							$(`#${fieldID} #fb_addr_line2`).addClass("fb-hidden")
+					break;
+
+					case "fb_addr_city":
+						field.address_fields.city.set = $(this).prop("checked") ? true : false;
+						$(this).prop("checked") &&
+							$(`#${fieldID} #fb_addr_city`).hasClass("fb-hidden") ?  
+							$(`#${fieldID} #fb_addr_city`).removeClass('fb-hidden') :
+							$(`#${fieldID} #fb_addr_city`).addClass("fb-hidden")
+					break;
+
+					case "fb_addr_state":
+						field.address_fields.state.set = $(this).prop("checked") ? true : false;
+						$(this).prop("checked") &&
+							$(`#${fieldID} #fb_addr_state`).hasClass("fb-hidden") ?  
+							$(`#${fieldID} #fb_addr_state`).removeClass('fb-hidden') :
+							$(`#${fieldID} #fb_addr_state`).addClass("fb-hidden")
+					break;
+
+					case "fb_addr_zip":
+						field.address_fields.zip.set = $(this).prop("checked") ? true : false;
+						$(this).prop("checked") &&
+							$(`#${fieldID} #fb_addr_zip`).hasClass("fb-hidden") ?  
+							$(`#${fieldID} #fb_addr_zip`).removeClass('fb-hidden') :
+							$(`#${fieldID} #fb_addr_zip`).addClass("fb-hidden")
+					break;
+
+					case "fb_addr_country":
+						field.address_fields.zip.set = $(this).prop("checked") ? true : false;
+						$(this).prop("checked") &&
+							$(`#${fieldID} #fb_addr_country`).hasClass("fb-hidden") ?  
+							$(`#${fieldID} #fb_addr_country`).removeClass('fb-hidden') :
+							$(`#${fieldID} #fb_addr_country`).addClass("fb-hidden")
+					break;
+
+					case "fb_last_name":
+						field.name_fields.last_name.set = $(this).prop("checked") ? true : false;
+						$(this).prop("checked") &&
+							$(`#${fieldID} #fb_last_name`).hasClass("fb-hidden") ?  
+							$(`#${fieldID} #fb_last_name`).removeClass('fb-hidden') :
+							$(`#${fieldID} #fb_last_name`).addClass("fb-hidden")
+					break;
+
+					case "fb_first_name":
+						field.name_fields.first_name.set = $(this).prop("checked") ? true : false;
+						$(this).prop("checked") &&
+							$(`#${fieldID} #fb_first_name`).hasClass("fb-hidden") ?  
+							$(`#${fieldID} #fb_first_name`).removeClass('fb-hidden') :
+							$(`#${fieldID} #fb_first_name`).addClass("fb-hidden")
+					break;
+
 
 					case "conditional_logic_field_list":
 					case "conditional_logic_bool":
@@ -438,4 +553,14 @@ let addChoice = () => {
 	})
 }
 
+
+let basicFormSettingsRender = () => {
+	getSettingsData().then( s => {
+		readTemplate(basicSettingsTemplate).then( template => {
+			generateHTML(template, s.basics, basicSettingsContainer)
+			
+		} ).catch(e => console.error(e))
+	} )
+	
+}
 

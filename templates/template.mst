@@ -70,7 +70,7 @@
 						<div class="tab-content"><!-- Form Tab Content -->
 						    <div id="fb-basic-settings" class="tab-pane active"><!-- Form Basic Settings Tab -->
 						    	<h3>Basic Settings</h3>
-							    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							    
 							</div><!-- Form Basic Settings Tab -->
 							<div id="fb-confirmation-settings" class="tab-pane fade"><!-- Form confirmation Settings Tab -->
 								<h3>Confirmation Settings</h3>

@@ -16,6 +16,7 @@
 	<input type="text" class="form-control field-setting" name="tooltip" data-id="{{field_id}}" value="{{#tooltip}}{{tooltip}}{{/tooltip}}">
 </div>
 
+
 <div class="form-group">
 	<div class="form-check">
 	  <input class="form-check-input field-setting" name="input_attr_required" data-id="{{field_id}}" type="checkbox" value="required" id="required" {{#required}}checked{{/required}}>
@@ -38,6 +39,28 @@
 	  </label>
 	</div>
 </div>
+
+
+
+{{#addr_true}}
+<div class="form-group">
+	<label><input class="field-setting" data-id="{{field_id}}" name="fb_addr_street" type="checkbox" {{#street_address_disp}}checked{{/street_address_disp}}> Street Address</label><br>
+	<label><input class="field-setting" data-id="{{field_id}}" name="fb_addr_line2" type="checkbox" {{#fb_addr_line2_disp}}checked{{/fb_addr_line2_disp}}> Address Line 2</label><br>
+	<label><input class="field-setting" data-id="{{field_id}}" name="fb_addr_city" type="checkbox" {{#fb_addr_city_disp}}checked{{/fb_addr_city_disp}}> City</label><br>
+	<label><input class="field-setting" data-id="{{field_id}}" name="fb_addr_state" type="checkbox" {{#fb_addr_state_disp}}checked{{/fb_addr_state_disp}}> State</label><br>
+	<label><input class="field-setting" data-id="{{field_id}}" name="fb_addr_zip" type="checkbox" {{#fb_addr_zip_disp}}checked{{/fb_addr_zip_disp}}> ZIP</label><br>
+	<label><input class="field-setting" data-id="{{field_id}}" name="fb_addr_country" type="checkbox" {{#fb_addr_zip_disp}}checked{{/fb_addr_zip_disp}}> Country</label><br>
+</div>
+{{/addr_true}}
+
+
+{{#name_true}}
+<div class="form-group">
+	<label><input class="field-setting" data-id="{{field_id}}" name="fb_first_name" type="checkbox" {{#first_name_disp}}checked{{/first_name_disp}}> First Name</label><br>
+	<label><input class="field-setting" data-id="{{field_id}}" name="fb_last_name" type="checkbox" {{#first_last_disp}}checked{{/first_last_disp}}> Last Name</label><br>
+</div>
+{{/name_true}}
+
 
 
 <div class="form-group">

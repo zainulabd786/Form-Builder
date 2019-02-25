@@ -5,14 +5,10 @@
 				"field_name" : "Text",
 				"id" : "1",
 				"visibility" : "s",
-				"tooltip" : "Please Enter your name here",
-				"column" : {
-					"width" : "4",
-					"sequence" : ["1", "2", "3", "4"]
-				},
+				"tooltip" : "Please Enter Some Text here",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group form-field col-md-12"}],
 					"css" : ""
 				},
 				"label" : {
@@ -22,7 +18,7 @@
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"text"}, {"class":"form-control"}, {"placeholder":"First Name"}, {"required":"required"}],
+					"attr" : [{"type":"text"}, {"class":"form-control"}, {"placeholder":"Text"}, {"required":"required"}],
 					"css" : ""
 				},
 				"conditional_logic" : {
@@ -42,13 +38,9 @@
 				"id" : "2",
 				"visibility" : "h",
 				"tooltip" : "Please Enter your Long description here here",
-				"column" : {
-					"width" : "1",
-					"sequence" : ["2"]
-				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group form-field col-md-12"}],
 					"css" : ""
 				},
 				"label" : {
@@ -78,13 +70,9 @@
 				"id" : "3",
 				"visibility" : "s",
 				"tooltip" : "type umbers only",
-				"column" : {
-					"width" : "1",
-					"sequence" : ["3"]
-				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group form-field col-md-12"}],
 					"css" : ""
 				},
 				"label" : {
@@ -114,13 +102,9 @@
 				"id" : "4",
 				"visibility" : "s",
 				"tooltip" : "Select one option",
-				"column" : {
-					"width" : "2",
-					"sequence" : ["4", "5"]
-				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-check form-field"}],
+					"attr" : [{"class":"form-check form-field col-md-12"}],
 					"css" : ""
 				},
 				"label" : {
@@ -152,13 +136,9 @@
 				"id" : "5",
 				"visibility" : "s",
 				"tooltip" : "Select Multiple options",
-				"column" : {
-					"width" : "2",
-					"sequence" : ["4", "5"]
-				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-check form-field"}],
+					"attr" : [{"class":"form-check form-field col-md-12"}],
 					"css" : ""
 				},
 				"label" : {
@@ -190,13 +170,9 @@
 				"id" : "6",
 				"visibility" : "s",
 				"tooltip" : "Select from dropdown",
-				"column" : {
-					"width" : "1",
-					"sequence" : ["6"]
-				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group form-field col-md-12"}],
 					"css" : ""
 				},
 				"label" : {
@@ -228,13 +204,9 @@
 				"id" : "7",
 				"visibility" : "s",
 				"tooltip" : "Select a date",
-				"column" : {
-					"width" : "1",
-					"sequence" : ["6"]
-				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group form-field col-md-12"}],
 					"css" : ""
 				},
 				"label" : {
@@ -272,13 +244,9 @@
 				"id" : "8",
 				"visibility" : "s",
 				"tooltip" : "Please fill in your address",
-				"column" : {
-					"width" : "1",
-					"sequence" : ["8"]
-				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group form-field col-md-12"}],
 					"css" : ""
 				},
 				"label" : {
@@ -288,39 +256,39 @@
 				},
 				"address_fields" : {
 					"street_address" : {
-						"set": true,
+						"set": false,
 						"tag" : "input",
-						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"placeholder":"Street Address"}],
+						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"id":"fb_addr_street"}, {"placeholder":"Street Address"}],
 						"css" : ""
 					},
 					"address_line_2" : {
 						"set": true,
 						"tag" : "input",
-						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"placeholder":"Address Line 2"}],
+						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"id":"fb_addr_line2"}, {"placeholder":"Address Line 2"}],
 						"css" : ""
 					},
 					"city" : {
 						"set": true,
 						"tag" : "input",
-						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"placeholder":"City"}],
+						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"id":"fb_addr_city"}, {"placeholder":"City"}],
 						"css" : ""
 					},
 					"state" : {
 						"set": true,
 						"tag" : "input",
-						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"placeholder":"State"}],
+						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"id":"fb_addr_state"}, {"placeholder":"State"}],
 						"css" : ""
 					},
 					"zip" : {
 						"set": true,
 						"tag" : "input",
-						"attr" : [{"type":"text"}, {"value":""},{"class":"form-control"}, {"placeholder":"ZIP"}],
+						"attr" : [{"type":"text"}, {"value":""},{"class":"form-control"}, {"id":"fb_addr_zip"}, {"placeholder":"ZIP"}],
 						"css" : ""
 					},
 					"country" : {
 						"set": true,
 						"tag" : "select",
-						"attr" : [{"class":"form-control"}],
+						"attr" : [{"class":"form-control"}, {"id":"fb_addr_country"}],
 						"options" : ["India", "US", "UK"],
 						"selected" : "India",
 						"css" : ""
@@ -343,13 +311,9 @@
 				"id" : "9",
 				"visibility" : "s",
 				"tooltip" : "Please Enter your name here",
-				"column" : {
-					"width" : "4",
-					"sequence" : ["9"]
-				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group form-field col-md-12"}],
 					"css" : ""
 				},
 				"label" : {
@@ -361,13 +325,13 @@
 					"first_name" : {
 						"set": true,
 						"tag" : "input",
-						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control"}, {"placeholder":"First Name"}],
+						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control"}, {"id":"fb_first_name"}, {"placeholder":"First Name"}],
 						"css" : ""
 					},
 					"last_name" : {
 						"set": true,
 						"tag" : "input",
-						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control"}, {"placeholder":"Last Name"}],
+						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control"}, {"id":"fb_last_name"}, {"placeholder":"Last Name"}],
 						"css" : ""
 					}
 				},
@@ -388,13 +352,9 @@
 				"id" : "10",
 				"visibility" : "h(HIDE) or s(Show)",
 				"tooltip" : "Please Enter your phone number",
-				"column" : {
-					"width" : "1",
-					"sequence" : ["10"]
-				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group form-field col-md-12"}],
 					"css" : ""
 				},
 				"label" : {
@@ -424,13 +384,9 @@
 				"id" : "11",
 				"visibility" : "h(HIDE) or s(Show)",
 				"tooltip" : "Please Enter your website",
-				"column" : {
-					"width" : "1",
-					"sequence" : ["11"]
-				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group form-field col-md-12"}],
 					"css" : ""
 				},
 				"label" : {
@@ -460,13 +416,9 @@
 				"id" : "12",
 				"visibility" : "s",
 				"tooltip" : "Please Enter your email",
-				"column" : {
-					"width" : "1",
-					"sequence" : ["12"]
-				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group form-field col-md-12"}],
 					"css" : ""
 				},
 				"label" : {
@@ -496,13 +448,9 @@
 				"id" : "13",
 				"visibility" : "s",
 				"tooltip" : "Select a File",
-				"column" : {
-					"width" : "1",
-					"sequence" : ["13"]
-				},
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group"}],
+					"attr" : [{"class":"form-group form-field col-md-12"}],
 					"css" : ""
 				},
 				"label" : {
@@ -527,16 +475,16 @@
 			}
 		}
 	],
-	"form_settings" : [{
+	"form_settings" : {
 			"basics" : {
 				"title" : "My Custom Form",
 				"description": "This is my custom form description",
-				"ajax_url": "https://example.com/file.php",
+				"admin_ajax_url": "https://example.com/file.php",
+				"client_ajax_url": "https://example.com/file.php",
 				"button" : {
 					"text" : "Submit",
-					"attr" : [ {"class":"form-css-class"}, {"id":"form-id-1"}, {"data-id":"54321"}, {"type":"button"} ],
-					"css" : [ {"backgroundColor":"#543212"}, {"fontSize":"20px"}, {"color":"#ffffff"} ],
-					"wrapper" : "span"
+					"attr" : [ {"id":"form-id-1"}, {"type":"button"} ],
+					"custom_classes" : "btn btn-primary"
 				}
 			},
 			"confirmation" : {
@@ -570,6 +518,6 @@
 					"message" : "Hi {user-name}, you have successfully submitted the form at our website"
 				}
 			}
-		}],
+		},
 	"element" : "#form-builder"
 }
