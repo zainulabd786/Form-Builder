@@ -5,6 +5,10 @@ const fieldSettingsTemplate = "field_settings.mst";
 const fieldSettingsContainer = "#fb-field-settings .settings-wrapper";
 const basicSettingsTemplate = "formSettings/basic.mst";
 const basicSettingsContainer = "#fb-basic-settings";
+const confSettingsTemplate = "formSettings/confirmation.mst";
+const confSettingsContainer = "#fb-confirmation-settings";
+const notifSettingsTemplate = "formSettings/notification.mst";
+const notifSettingsContainer = "#fb-notifications-settings";
 const formBuildingJSON = {
 	"form_fields" : []
 };
@@ -26,6 +30,8 @@ let bindEvents = () => {
 	updateChoice();
 	addChoice();
 	basicFormSettingsRender();
+	confirmationFormSettingsRender();
+	notificationFormSettingsRender();
 }
 
 let readTemplate = async (file) => {
@@ -557,8 +563,25 @@ let addChoice = () => {
 let basicFormSettingsRender = () => {
 	getSettingsData().then( s => {
 		readTemplate(basicSettingsTemplate).then( template => {
-			generateHTML(template, s.basics, basicSettingsContainer)
-			
+			generateHTML(template, s.basics, basicSettingsContainer)		
+		} ).catch(e => console.error(e))
+	} )
+	
+}
+
+let confirmationFormSettingsRender = () => {
+	getSettingsData().then( s => {
+		readTemplate(confSettingsTemplate).then( template => {
+			generateHTML(template, s.confirmation, confSettingsContainer)		
+		} ).catch(e => console.error(e))
+	} )
+	
+}
+
+let notificationFormSettingsRender = () => {
+	getSettingsData().then( s => {
+		readTemplate(notifSettingsTemplate).then( template => {
+			generateHTML(template, s.notifications, notifSettingsContainer)		
 		} ).catch(e => console.error(e))
 	} )
 	

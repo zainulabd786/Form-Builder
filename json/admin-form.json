@@ -488,12 +488,12 @@
 				}
 			},
 			"confirmation" : {
-				"type" : "m(MESSAGE) or r(REDIRECT)",
+				"type" : "m",
 				"message" : {
 					"text" : "Your Form Has been successfully submitted",
 					"wrapper" : "h1",
-					"attr" : [ {"class":"form-css-class"}, {"id":"form-id-1"}, {"data-id":"54321"} ],
-					"css" : [ {"backgroundColor":"#543212"}, {"fontSize":"20px"}, {"color":"#ffffff"} ]
+					"attr" : [ {"id":"form-id-1"}, {"data-id":"54321"} ],
+					"custom_classes" : "alert alert-success"
 				},
 				"redirect" : {
 					"url" : "https://example.com",
@@ -502,7 +502,7 @@
 			},
 			"notifications" : {
 				"admin" : {
-					"to" : [ "abc@edensolutions.co.in", "xyz@premierl==ter.com" ],
+					"to" : [ "abc@edensolutions.co.in", "xyz@premierlister.com" ],
 					"from" : "{user-email}",
 					"reply_to" : "{user-email}",
 					"bcc" : [ "someone@something.com" ],

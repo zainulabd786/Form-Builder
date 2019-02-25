@@ -74,11 +74,11 @@
 							</div><!-- Form Basic Settings Tab -->
 							<div id="fb-confirmation-settings" class="tab-pane fade"><!-- Form confirmation Settings Tab -->
 								<h3>Confirmation Settings</h3>
-								<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+								
 							</div><!-- Form confirmation Settings Tab -->
 							<div id="fb-notifications-settings" class="tab-pane fade"><!-- Form notification Settings Tab -->
 								<h3>notification Settings</h3>
-								<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+								
 							</div><!-- Form notification Settings Tab -->
 			  			</div><!-- Form Tab Content -->
 				    </div>
