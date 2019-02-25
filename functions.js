@@ -10,7 +10,51 @@ const confSettingsContainer = "#fb-confirmation-settings";
 const notifSettingsTemplate = "formSettings/notification.mst";
 const notifSettingsContainer = "#fb-notifications-settings";
 const formBuildingJSON = {
-	"form_fields" : []
+	"form_fields" : [],
+	"form_settings" : {
+			"basics" : {
+				"title" : "My Custom Form",
+				"description": "This is my custom form description",
+				"admin_ajax_url": "https://example.com/file.php",
+				"client_ajax_url": "https://example.com/file.php",
+				"button" : {
+					"text" : "Submit",
+					"attr" : [ {"id":"form-id-1"}, {"type":"button"} ],
+					"custom_classes" : "btn btn-primary"
+				}
+			},
+			"confirmation" : {
+				"type" : "m",
+				"message" : {
+					"text" : "Your Form Has been successfully submitted",
+					"wrapper" : "h1",
+					"attr" : [ {"id":"form-id-1"}, {"data-id":"54321"} ],
+					"custom_classes" : "alert alert-success"
+				},
+				"redirect" : {
+					"url" : "https://example.com",
+					"query_string" : [ {"message":"Thank you"}, {"form_id":"1"} ]
+				}
+			},
+			"notifications" : {
+				"admin" : {
+					"to" : [ "abc@edensolutions.co.in", "xyz@premierlister.com" ],
+					"from" : "{user-email}",
+					"reply_to" : "{user-email}",
+					"bcc" : [ "someone@something.com" ],
+					"subject" : "Received an order from {user-name}",
+					"message" : "You jus received an order from {user-name} for a session"
+				},
+				"user" : {
+					"to" : [ "{user-email}", "xyz@premierl==ter.com" ],
+					"from" : "{xyz@premierl==ter.com}",
+					"reply_to" : "{xyz@premierl==ter.com}",
+					"bcc" : [ "someone@something.com" ],
+					"subject" : "Your form has been submitted successfully",
+					"message" : "Hi {user-name}, you have successfully submitted the form at our website"
+				}
+			}
+		}
 };
 
 export default function formBuilder(opts){
@@ -29,9 +73,19 @@ let bindEvents = () => {
 	removeChoice();
 	updateChoice();
 	addChoice();
+	//defaultFormSettings();
 	basicFormSettingsRender();
 	confirmationFormSettingsRender();
 	notificationFormSettingsRender();
+	updateFormSettings();
+}
+
+let createFormSettingsObject = () => {
+	let data = jQuery.extend(true, {}, formBuildingJSON);
+	readJSON("admin-form.json").then( i => {
+		let fieldData = i.fields.filter( j => parseInt(j.field.id) === parseInt(id));
+		return fieldData;
+	} ).catch( e => console.error(e) );
 }
 
 let readTemplate = async (file) => {
@@ -61,10 +115,10 @@ let getFieldData = async (id) => {
 
 }
 
-let getSettingsData = async () => {
+let defaultFormSettings = () => {
 
-	return await readJSON("admin-form.json").then( i => {
-		return i.form_settings;
+	readJSON("admin-form.json").then( i => {
+		formBuildingJSON.form_settings = jQuery.extend(true, {}, i.form_settings);
 	} ).catch( e => console.error(e) );
 
 }
@@ -561,29 +615,72 @@ let addChoice = () => {
 
 
 let basicFormSettingsRender = () => {
-	getSettingsData().then( s => {
-		readTemplate(basicSettingsTemplate).then( template => {
-			generateHTML(template, s.basics, basicSettingsContainer)		
-		} ).catch(e => console.error(e))
-	} )
-	
+	let data = jQuery.extend(true, {}, formBuildingJSON.form_settings.basics);
+	readTemplate(basicSettingsTemplate).then( template => {
+		generateHTML(template, data, basicSettingsContainer)		
+	} ).catch(e => console.error(e))	
 }
 
 let confirmationFormSettingsRender = () => {
-	getSettingsData().then( s => {
-		readTemplate(confSettingsTemplate).then( template => {
-			generateHTML(template, s.confirmation, confSettingsContainer)		
-		} ).catch(e => console.error(e))
-	} )
-	
+	let data = jQuery.extend(true, {}, formBuildingJSON.form_settings.confirmation);
+	data.m_true = data.type === "m" ? true : false;
+	readTemplate(confSettingsTemplate).then( template => {
+		generateHTML(template, data, confSettingsContainer)		
+	} ).catch(e => console.error(e))
 }
 
 let notificationFormSettingsRender = () => {
-	getSettingsData().then( s => {
-		readTemplate(notifSettingsTemplate).then( template => {
-			generateHTML(template, s.notifications, notifSettingsContainer)		
-		} ).catch(e => console.error(e))
-	} )
-	
+	let data = jQuery.extend(true, {}, formBuildingJSON.form_settings.notifications);
+	readTemplate(notifSettingsTemplate).then( template => {
+		generateHTML(template, data, notifSettingsContainer)		
+	} ).catch(e => console.error(e))
+}
+
+let updateFormSettings = () => {
+	$("body").on("change", ".fb-form-setting", function(){
+		let settingName = $(this).attr("name");
+		let settingVal = $(this).val();
+		switch(settingName){
+			case "fb_form_title":
+				formBuildingJSON.form_settings.basics.title = settingVal;
+			break;
+
+			case "fb_form_description":
+				formBuildingJSON.form_settings.basics.description = settingVal;
+			break;
+
+			case "fb_form_admin_ajax_url":
+				formBuildingJSON.form_settings.basics.admin_ajax_url = settingVal;
+			break;
+
+			case "fb_form_client_ajax_url":
+				formBuildingJSON.form_settings.basics.client_ajax_url = settingVal;
+			break;
+
+			case "fb_form_button_text":
+				formBuildingJSON.form_settings.basics.button.text = settingVal;
+			break;
+
+			case "fb_form_button_class":
+				formBuildingJSON.form_settings.basics.button.custom_classes = settingVal;
+			break;
+
+			case "confirmation_type":
+				let selected_type = $("input[name='confirmation_type']:checked").val();
+				formBuildingJSON.form_settings.confirmation.type = selected_type;
+				if(selected_type === "m"){
+					$(".message-settings-wrapper input").attr("disabled", false);
+					$(".redirect-settings-wrapper input").attr("disabled", true);
+				} else{
+					$(".message-settings-wrapper input").attr("disabled", true);
+					$(".redirect-settings-wrapper input").attr("disabled", false);
+				}
+			break;
+
+			case "conf_message_text":
+				formBuildingJSON.form_settings.confirmation.message.text = settingVal;
+			break;
+		}
+	})
 }
 

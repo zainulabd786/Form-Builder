@@ -3,27 +3,27 @@
 	<h4>Admin Notification</h4>
 	<div class="form-group">
 		<label>To</label>
-		<input type="text" class="form-control" name="admin_notification_to" value="{{admin.to}}">
+		<input type="text" class="form-control fb-form-setting" name="admin_notification_to" value="{{admin.to}}">
 	</div>
 	<div class="form-group">
 		<label>From</label>
-		<input type="text" class="form-control" name="admin_notification_from" value="{{admin.from}}">
+		<input type="text" class="form-control fb-form-setting" name="admin_notification_from" value="{{admin.from}}">
 	</div>
 	<div class="form-group">
 		<label>Reply-To</label>
-		<input type="text" class="form-control" name="admin_notification_replyto" value="{{admin.reply_to}}">
+		<input type="text" class="form-control fb-form-setting" name="admin_notification_replyto" value="{{admin.reply_to}}">
 	</div>
 	<div class="form-group">
 		<label>BCC</label>
-		<input type="text" class="form-control" name="admin_notification_bcc" value="{{admin.bcc}}">
+		<input type="text" class="form-control fb-form-setting" name="admin_notification_bcc" value="{{admin.bcc}}">
 	</div>
 	<div class="form-group">
 		<label>Subject</label>
-		<input type="text" class="form-control" name="admin_notification_subject" value="{{admin.subject}}">
+		<input type="text" class="form-control fb-form-setting" name="admin_notification_subject" value="{{admin.subject}}">
 	</div>
 	<div class="form-group">
 		<label>Message</label>
-		<input type="text" class="form-control" name="admin_notification_message" value="{{admin.message}}">
+		<input type="text" class="form-control fb-form-setting" name="admin_notification_message" value="{{admin.message}}">
 	</div>
 </div>
 
@@ -31,26 +31,26 @@
 	<h4>User Notification</h4>
 	<div class="form-group">
 		<label>To</label>
-		<input type="text" class="form-control" name="user_notification_to" value="{{user.to}}">
+		<input type="text" class="form-control fb-form-setting" name="user_notification_to" value="{{user.to}}">
 	</div>
 	<div class="form-group">
 		<label>From</label>
-		<input type="text" class="form-control" name="user_notification_from" value="{{user.from}}">
+		<input type="text" class="form-control fb-form-setting" name="user_notification_from" value="{{user.from}}">
 	</div>
 	<div class="form-group">
 		<label>Reply-To</label>
-		<input type="text" class="form-control" name="user_notification_replyto" value="{{user.reply_to}}">
+		<input type="text" class="form-control fb-form-setting" name="user_notification_replyto" value="{{user.reply_to}}">
 	</div>
 	<div class="form-group">
 		<label>BCC</label>
-		<input type="text" class="form-control" name="user_notification_bcc" value="{{user.bcc}}">
+		<input type="text" class="form-control fb-form-setting" name="user_notification_bcc" value="{{user.bcc}}">
 	</div>
 	<div class="form-group">
 		<label>Subject</label>
-		<input type="text" class="form-control" name="user_notification_subject" value="{{user.subject}}">
+		<input type="text" class="form-control fb-form-setting" name="user_notification_subject" value="{{user.subject}}">
 	</div>
 	<div class="form-group">
 		<label>Message</label>
-		<input type="text" class="form-control" name="user_notification_message" value="{{user.message}}">
+		<input type="text" class="form-control fb-form-setting" name="user_notification_message" value="{{user.message}}">
 	</div>
 </div>

@@ -1,36 +1,36 @@
 <div class="form-check-inline">
   <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="confirmation" value="m">Message
+    <input type="radio" class="form-check-input fb-form-setting" name="confirmation_type" {{#m_true}}checked{{/m_true}} value="m">Message
   </label>
 </div>
 <div class="form-check-inline">
   <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="confirmation" value="r">Redirect
+    <input type="radio" class="form-check-input fb-form-setting" name="confirmation_type" {{^m_true}}checked{{/m_true}} value="r">Redirect
   </label>
 </div>
 
 <div class="message-settings-wrapper">
 	<div class="form-group">
 		<label>Text</label>
-		<input type="text" class="form-control" name="conf_message_text" value="{{message.text}}">
+		<input type="text" class="form-control fb-form-setting" name="conf_message_text" value="{{message.text}}" {{^m_true}}disabled{{/m_true}}>
 	</div>
 	<div class="form-group">
 		<label>Wrapper Tag</label>
-		<input type="text" class="form-control" name="conf_message_wrapper" value="{{message.wrapper}}">
+		<input type="text" class="form-control fb-form-setting" name="conf_message_wrapper" value="{{message.wrapper}}" {{^m_true}}disabled{{/m_true}}>
 	</div>
 	<div class="form-group">
 		<label>Custom Classes</label>
-		<input type="text" class="form-control" name="conf_message_classes" value="{{message.custom_classes}}">
+		<input type="text" class="form-control fb-form-setting" name="conf_message_classes" value="{{message.custom_classes}}" {{^m_true}}disabled{{/m_true}}>
 	</div>
 </div>
 
 <div class="redirect-settings-wrapper">
 	<div class="form-group">
 		<label>Redirect URL</label>
-		<input type="text" class="form-control" name="conf_redirect_url" value="{{redirect.url}}">
+		<input type="text" class="form-control fb-form-setting" name="conf_redirect_url" value="{{redirect.url}}" {{#m_true}}disabled{{/m_true}}>
 	</div>
 	<div class="form-group">
 		<label>Query Strings</label>
-		<input type="text" class="form-control" name="conf_redirect_qs" value="{{redirect.query_string}}">
+		<input type="text" class="form-control fb-form-setting" name="conf_redirect_qs" value="{{redirect.query_string}}" {{#m_true}}disabled{{/m_true}}>
 	</div>
 </div>
