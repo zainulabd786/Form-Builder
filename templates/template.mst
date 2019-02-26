@@ -17,7 +17,7 @@
 			    <div class="row"><!-- row -->
 			    	<div class="col-md-8 fb-build-area"><!-- col-md-8 -->
 						<div class="fb-form">
-							<form class="droppable sortable">
+							<form class="droppable sortable row">
 								
 							</form>
 						</div>

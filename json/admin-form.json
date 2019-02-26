@@ -6,9 +6,10 @@
 				"id" : "1",
 				"visibility" : "s",
 				"tooltip" : "Please Enter Some Text here",
+				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field col-md-12"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
@@ -38,9 +39,10 @@
 				"id" : "2",
 				"visibility" : "h",
 				"tooltip" : "Please Enter your Long description here here",
+				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field col-md-12"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
@@ -70,9 +72,10 @@
 				"id" : "3",
 				"visibility" : "s",
 				"tooltip" : "type umbers only",
+				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field col-md-12"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
@@ -102,9 +105,10 @@
 				"id" : "4",
 				"visibility" : "s",
 				"tooltip" : "Select one option",
+				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-check form-field col-md-12"}],
+					"attr" : [{"class":"form-check form-field"}],
 					"css" : ""
 				},
 				"label" : {
@@ -136,9 +140,10 @@
 				"id" : "5",
 				"visibility" : "s",
 				"tooltip" : "Select Multiple options",
+				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-check form-field col-md-12"}],
+					"attr" : [{"class":"form-check form-field"}],
 					"css" : ""
 				},
 				"label" : {
@@ -170,9 +175,10 @@
 				"id" : "6",
 				"visibility" : "s",
 				"tooltip" : "Select from dropdown",
+				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field col-md-12"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
@@ -204,9 +210,10 @@
 				"id" : "7",
 				"visibility" : "s",
 				"tooltip" : "Select a date",
+				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field col-md-12"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
@@ -244,9 +251,10 @@
 				"id" : "8",
 				"visibility" : "s",
 				"tooltip" : "Please fill in your address",
+				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field col-md-12"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
@@ -311,9 +319,10 @@
 				"id" : "9",
 				"visibility" : "s",
 				"tooltip" : "Please Enter your name here",
+				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field col-md-12"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
@@ -352,9 +361,10 @@
 				"id" : "10",
 				"visibility" : "h(HIDE) or s(Show)",
 				"tooltip" : "Please Enter your phone number",
+				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field col-md-12"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
@@ -384,9 +394,10 @@
 				"id" : "11",
 				"visibility" : "h(HIDE) or s(Show)",
 				"tooltip" : "Please Enter your website",
+				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field col-md-12"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
@@ -416,9 +427,10 @@
 				"id" : "12",
 				"visibility" : "s",
 				"tooltip" : "Please Enter your email",
+				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field col-md-12"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {
@@ -448,9 +460,10 @@
 				"id" : "13",
 				"visibility" : "s",
 				"tooltip" : "Select a File",
+				"width_class": "col-sm-6",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field col-md-12"}],
+					"attr" : [{"class":"form-group form-field"}],
 					"css" : ""
 				},
 				"label" : {

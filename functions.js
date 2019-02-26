@@ -9,6 +9,7 @@ const confSettingsTemplate = "formSettings/confirmation.mst";
 const confSettingsContainer = "#fb-confirmation-settings";
 const notifSettingsTemplate = "formSettings/notification.mst";
 const notifSettingsContainer = "#fb-notifications-settings";
+const assetsPath = "assets";
 const formBuildingJSON = {
 	"form_fields" : [],
 	"form_settings" : {
@@ -78,6 +79,8 @@ let bindEvents = () => {
 	confirmationFormSettingsRender();
 	notificationFormSettingsRender();
 	updateFormSettings();
+	fieldWidth();
+	duplicateField()
 }
 
 let createFormSettingsObject = () => {
@@ -180,6 +183,7 @@ let appendFieldsMarkup = () => {
 		i.field.wrapper.attr = (i.field.field_id) ? addAttr(i.field.wrapper.attr, "id", i.field.field_id) : ""; 
 		let visibility = (i.field.visibility === "s") ? true : false;
 		i.field.wrapper.attr = (!visibility) ? addAttr(i.field.wrapper.attr, "class", "fb-hidden") : i.field.wrapper.attr;
+		i.field.wrapper.attr = (i.field.width_class) ? addAttr(i.field.wrapper.attr, "class", i.field.width_class) : i.field.wrapper.attr;
 		obj.wrapperAttributes = generateTagAttributes(i.field.wrapper.attr)
 		obj.label = i.field.label.text;
 		obj.tooltip = (i.field.tooltip) ? i.field.tooltip : false;
@@ -210,7 +214,6 @@ let createMultiFieldObj = (data) => {
 		i.attr = addAttr(i.attr, "class", "fb-input")
 		i.attr = generateTagAttributes(i.attr);
 	})
-	console.log(arr)
 	return arr;
 }
 
@@ -231,15 +234,15 @@ let selectField = (id) => {
 		if(!$(this).hasClass("fb-selected")){
 			id = $(this).attr('id');
 			$(formTag).find(".form-field").removeClass("fb-selected")
-			$(formTag).find(`#${id}`).addClass("fb-selected", 800)
+			$(formTag).find(`#${id}`).addClass("fb-selected", 400)
 			onFieldSelect(id);
-			fieldInlineOptions();
+			setTimeout(()=> fieldInlineOptions(), 500);
 			$(fieldSettingsContainer).empty();
 		}
 	})
 	$(formTag).find(`#${id}`).addClass("fb-selected")
 	onFieldSelect(id);
-	fieldInlineOptions()
+	fieldInlineOptions();
 	$(fieldSettingsContainer).empty();
 }
 
@@ -247,16 +250,16 @@ let fieldInlineOptions = () => {
 	$(".fb-inline-options").remove();
 	let markup = "<div class='fb-inline-options row'>"+
 					"<div class='col text-left'>"+
-						"<span class='p-2 one_by_four'>1</span>"+
-						"<span class='p-2 two_by_four'>2</span>"+
-						"<span class='p-2 three_by_four'>3</span>"+
-						"<span class='p-2 four_by_four'>4</span>"+
+						"<span class='field-col-icons' id='one_by_four'><img src='"+assetsPath+"/col-icons/1.svg' /></span>"+
+						"<span class='field-col-icons' id='two_by_four'><img src='"+assetsPath+"/col-icons/2.svg' /></span>"+
+						"<span class='field-col-icons' id='three_by_four'><img src='"+assetsPath+"/col-icons/3.svg' /></span>"+
+						"<span class='field-col-icons' id='four_by_four'><img src='"+assetsPath+"/col-icons/4.svg' /></span>"+
 					"</div>"+
 					"<div class='col text-right'>"+
-						"<i class='far fa-copy p-2'></i>"+
-						"<i class='far fa-trash-alt p-2'></i>"+
+						"<i class='field-action far fa-copy p-2' id='fb-duplicate-field'></i>"+
+						"<i class='field-action far fa-trash-alt p-2' id='fb-delete-field'></i>"+
 					"</div>"+
-				"</div>"
+				"</div>";
 	$(".fb-selected").append(markup);
 }
 
@@ -746,7 +749,38 @@ let updateFormSettings = () => {
 				formBuildingJSON.form_settings.notifications.user.message = settingVal;
 			break;
 		}
-	console.log(formBuildingJSON)
 	})
 }
 
+let fieldWidth = () => {
+	$("body").on("click", ".field-col-icons", function(){
+		$(this).parents(".fb-selected").removeClass(function (index, className) {
+			    return (className.match (/(^|\s)col-\S+/g) || []).join(' ');
+		});
+		let currID = $(this).attr("id");
+		let fieldID = $(this).parents(".fb-selected").attr('id');
+		switch(currID){
+			case "one_by_four":
+				$(this).parents(".fb-selected").addClass("col-sm-12");
+				formBuildingJSON.form_fields.forEach( (v, i) => { if(v.field.field_id == fieldID) formBuildingJSON.form_fields[i].field.width_class = "col-sm-12" })
+			break;
+
+			case "two_by_four":
+				$(this).parents(".fb-selected").addClass("col-sm-6");
+				formBuildingJSON.form_fields.forEach( (v, i) => { if(v.field.field_id == fieldID) formBuildingJSON.form_fields[i].field.width_class = "col-sm-6"  })
+			break;
+
+			case "three_by_four":
+				$(this).parents(".fb-selected").addClass("col-sm-4");
+				formBuildingJSON.form_fields.forEach( (v, i) => { if(v.field.field_id == fieldID) formBuildingJSON.form_fields[i].field.width_class = "col-sm-4"  })
+			break;
+
+			case "four_by_four":
+				$(this).parents(".fb-selected").addClass("col-sm-3");
+				formBuildingJSON.form_fields.forEach( (v, i) => { if(v.field.field_id == fieldID) formBuildingJSON.form_fields[i].field.width_class = "col-sm-3"  })
+			break;
+		}
+		console.log(formBuildingJSON)
+	});
+	
+}

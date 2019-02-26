@@ -53,3 +53,12 @@
 .fb-add-choice{
 	float: right;
 }
+
+.field-col-icons img{
+	max-width: 20px;
+	cursor: pointer;
+}
+
+.fb-inline-options .field-action{
+	cursor: pointer;
+}
