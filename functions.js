@@ -624,6 +624,7 @@ let basicFormSettingsRender = () => {
 let confirmationFormSettingsRender = () => {
 	let data = jQuery.extend(true, {}, formBuildingJSON.form_settings.confirmation);
 	data.m_true = data.type === "m" ? true : false;
+	data.qs = [];
 	readTemplate(confSettingsTemplate).then( template => {
 		generateHTML(template, data, confSettingsContainer)		
 	} ).catch(e => console.error(e))
@@ -680,7 +681,72 @@ let updateFormSettings = () => {
 			case "conf_message_text":
 				formBuildingJSON.form_settings.confirmation.message.text = settingVal;
 			break;
+
+			case "conf_message_wrapper":
+				formBuildingJSON.form_settings.confirmation.message.wrapper = settingVal;
+			break;
+
+			case "conf_message_classes":
+				formBuildingJSON.form_settings.confirmation.message.custom_classes = settingVal;
+			break;
+
+			case "conf_redirect_url":
+				formBuildingJSON.form_settings.confirmation.redirect.url = settingVal;
+			break;	
+
+			case "conf_redirect_qs":
+				formBuildingJSON.form_settings.confirmation.redirect.query_string = settingVal;
+			break;
+
+			case "admin_notification_to":
+				formBuildingJSON.form_settings.notifications.admin.to = settingVal;
+			break;
+
+			case "admin_notification_from":
+				formBuildingJSON.form_settings.notifications.admin.from = settingVal;
+			break;
+
+			case "admin_notification_replyto":
+				formBuildingJSON.form_settings.notifications.admin.reply_to = settingVal;
+			break;
+
+			case "admin_notification_bcc":
+				formBuildingJSON.form_settings.notifications.admin.bcc = settingVal;
+			break;
+
+			case "admin_notification_subject":
+				formBuildingJSON.form_settings.notifications.admin.subject = settingVal;
+			break;
+
+			case "admin_notification_message":
+				formBuildingJSON.form_settings.notifications.admin.message = settingVal;
+			break;
+
+			case "user_notification_to":
+				formBuildingJSON.form_settings.notifications.user.to = settingVal;
+			break;
+			
+			case "user_notification_from":
+				formBuildingJSON.form_settings.notifications.user.from = settingVal;
+			break;
+
+			case "user_notification_replyto":
+				formBuildingJSON.form_settings.notifications.user.reply_to = settingVal;
+			break;
+
+			case "user_notification_bcc":
+				formBuildingJSON.form_settings.notifications.user.bcc = settingVal;
+			break;
+
+			case "user_notification_subject":
+				formBuildingJSON.form_settings.notifications.user.subject = settingVal;
+			break;
+
+			case "user_notification_message":
+				formBuildingJSON.form_settings.notifications.user.message = settingVal;
+			break;
 		}
+	console.log(formBuildingJSON)
 	})
 }
 
