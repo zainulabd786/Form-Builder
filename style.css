@@ -36,7 +36,7 @@
 .fb-selected{
 	border: 2px dotted #0077CC;
 	padding: 10px;
-	border-radius: 10px
+	background: #d5eeff;
 }
 .fb-hidden{
 	opacity: 0.5
