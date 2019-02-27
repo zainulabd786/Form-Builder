@@ -10,6 +10,9 @@
 			<li class="nav-item">
 			    <a class="nav-link" data-toggle="tab" href="#fb-settings">Settings</a>
 			</li>
+			<li class="nav-item">
+			    <a class="nav-link" data-toggle="tab" href="#fb-preview">Preview</a>
+			</li>
 		</ul><!-- Form Tabs -->
 
 		<div class="tab-content fb-full-width"><!-- Form Tab Content -->
@@ -44,6 +47,14 @@
 							</div><!-- Add Field Tab -->
 							<div id="fb-field-settings" class="tab-pane fade"><!-- Settings Tab -->
 							    <from class="settings-wrapper">
+
+							    	<div class="fb-fields"></div>
+
+							    	<!--Submit Button-->
+							    	<div class="submit-button-wrapper">
+										
+									</div>
+							    	<!--Submit Button-->
 
 							    </form>
 							</div><!-- Settings Tab -->
@@ -84,6 +95,17 @@
 				    </div>
 				</div><!-- row -->
 			</div><!-- Settings Tab -->
+
+			<div id="fb-preview" class="tab-pane fade"><!-- Preview Tab -->
+			    <div class="row"><!-- row -->
+			    	<div class="col-md-12">
+			    		<div class="fb-admin-form-preview">
+
+			    		</div>
+				    </div>
+				</div><!-- row -->
+			</div><!-- Settings Tab -->
+
   		</div><!-- Form Tab Content -->
 		<!-- ------------------------Form Tabs---------------- -->
 	</div><!-- BS row -->
