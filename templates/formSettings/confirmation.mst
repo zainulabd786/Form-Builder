@@ -31,6 +31,6 @@
 	</div>
 	<div class="form-group">
 		<label>Query Strings</label>
-		<input type="text" class="form-control fb-form-setting" name="conf_redirect_qs" value="{{query_string}}" {{#m_true}}disabled{{/m_true}}>
+		<input type="text" class="form-control fb-form-setting" name="conf_redirect_qs" value="{{redirect.query_string}}" {{#m_true}}disabled{{/m_true}}>
 	</div>
 </div>

@@ -74,13 +74,13 @@ let bindEvents = () => {
 	removeChoice();
 	updateChoice();
 	addChoice();
+	//defaultFormSettings();
 	basicFormSettingsRender();
 	confirmationFormSettingsRender();
 	notificationFormSettingsRender();
 	updateFormSettings();
 	fieldWidth();
-	deleteField();
-	duplicateFields();
+	duplicateField()
 }
 
 let createFormSettingsObject = () => {
@@ -165,7 +165,7 @@ let afterDrop = (event, ui) => {
 	getFieldData(fieldID).then(fieldData => {
 		fieldData[0].field.field_id = Date.now();
 		formBuildingJSON.form_fields.push(fieldData[0]);
-		appendFieldsMarkup();
+		appendFieldsMarkup()
 		setTimeout(()=>selectField(fieldData[0].field.field_id), 100)
 	})
 	$(ui.helper[0]).remove()
@@ -230,8 +230,7 @@ let generateTagAttributes = (data) => {
 }
 
 let selectField = (id) => {
-	$(formTag).find(".form-field").removeClass("fb-selected");
-	$("body").on("click",".form-field",function(){
+	$(formTag).find(".form-field").removeClass("fb-selected").click(function(){
 		if(!$(this).hasClass("fb-selected")){
 			id = $(this).attr('id');
 			$(formTag).find(".form-field").removeClass("fb-selected")
@@ -629,7 +628,6 @@ let confirmationFormSettingsRender = () => {
 	let data = jQuery.extend(true, {}, formBuildingJSON.form_settings.confirmation);
 	data.m_true = data.type === "m" ? true : false;
 	data.qs = [];
-	data.query_string = decodeQS(data.redirect.query_string, ":", ",");
 	readTemplate(confSettingsTemplate).then( template => {
 		generateHTML(template, data, confSettingsContainer)		
 	} ).catch(e => console.error(e))
@@ -700,7 +698,7 @@ let updateFormSettings = () => {
 			break;	
 
 			case "conf_redirect_qs":
-				formBuildingJSON.form_settings.confirmation.redirect.query_string = encodeQS(settingVal, ":", ",");
+				formBuildingJSON.form_settings.confirmation.redirect.query_string = settingVal;
 			break;
 
 			case "admin_notification_to":
@@ -782,83 +780,7 @@ let fieldWidth = () => {
 				formBuildingJSON.form_fields.forEach( (v, i) => { if(v.field.field_id == fieldID) formBuildingJSON.form_fields[i].field.width_class = "col-sm-3"  })
 			break;
 		}
+		console.log(formBuildingJSON)
 	});
 	
 }
-
-let deleteField = () => {
-	$("body").on("click", "#fb-delete-field", function(){
-		let fieldID = $(this).parents(".fb-selected").attr('id');
-		let elIndex;
-		formBuildingJSON.form_fields.find((v, i)=>{
-			if(v.field.field_id == fieldID){
-				elIndex = i
-			}
-		})
-		formBuildingJSON.form_fields.splice(elIndex, 1);
-		$(this).parents(".fb-selected").remove();
-	});
-
-}
-
-let decodeQS = (qsArray, kvSeparator, vSeparator) => {
-	let arr = [];
-	qsArray.forEach((v, i)=>{
-  	for(let key in v){
-    	arr.push(`${key}${kvSeparator}${v[key]}`);
-    }
-  })
-  return arr.join(vSeparator);
-}
-
-
-let encodeQS = (str, kvSeparator, vSeparator) => {
-	let array = str.split(vSeparator);
-	array.forEach((v, i) => {
-		let arr = v.split(kvSeparator);
-		array[i] = JSON.parse(`{"${arr[0]}":"${arr[1]}"}`);
-	})
-	return array;
-}
-
-let updateQSData = (qsArray, key, value) => {
-	if(ifKeyExist(qsArray, key)){ /*upadte existing attributes*/
-		qsArray.forEach((v, i)=>{
-			for(let k in v){
-				if(v.hasOwnProperty(k)){
-					if(k === key){
-						let atts = value
-						qsArray[i][k] = atts;
-					}
-				}
-			}
-		});
-	} else{ /*add new attribute*/
-		qsArray.push({[key]:value})
-	}
-	return qsArray;
-}
-
-let duplicateFields = () =>{
-	$("body").on("click", "#fb-duplicate-field", function(){
-		let fieldID = $(this).parents(".fb-selected").attr('id');
-		let elIndex;
-		let copiedJSON;
-		let copeidMarkup = $(`#${fieldID}`).clone()
-		formBuildingJSON.form_fields.find((v, i)=>{
-			if(v.field.field_id == fieldID){
-				elIndex = i;
-				copiedJSON = $.extend(true, {}, v);
-				copiedJSON.field.field_id = Date.now()
-			}
-		})
-		formBuildingJSON.form_fields.splice( elIndex, 0, copiedJSON );
-		copeidMarkup.attr('id', copiedJSON.field.field_id);
-		copeidMarkup.removeClass("fb-selected");
-		$(`#${fieldID}`).after(copeidMarkup.wrap('<p/>').parent().html());
-		//$(this).parents(".form-field").removeClass("fb-selected");
-		//$(this).parents(".form-field").find(".fb-inline-options").remove();
-		//$(".fb-field-settings").find("input, select, button").attr("data-id", copiedJSON.field.field_id);
-	})
-}
-
