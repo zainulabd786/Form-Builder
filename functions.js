@@ -10,6 +10,8 @@ const confSettingsContainer = "#fb-confirmation-settings";
 const notifSettingsTemplate = "formSettings/notification.mst";
 const notifSettingsContainer = "#fb-notifications-settings";
 const assetsPath = "assets";
+const orderArr = [];
+const alreadyInFormFields = [];
 const formBuildingJSON = {
 	"form_fields" : [],
 	"form_settings" : {
@@ -144,26 +146,30 @@ let initDrag = () => {
 		connectToSortable: ".droppable",
 	    helper: "clone",
 	    revert: "invalid",
-	    stop: function(event, ui){
-	    	setTimeout(()=>{
-	    		$(formTag).empty();
-	    		afterDrop(event, ui);
-	    	}, 1000)
-	    }
+	    stop: afterDrop
 	})
 }
 let initSortable = () => {
 	$( ".droppable" ).sortable({
 		revert: true
-		//update: afterDrop
 	});
 }
 
+let reArrangeJSON = () => {
+	let arr = [];
+	$(".form-field").each(function(){
+		
+	})
+}
+
 let afterDrop = (event, ui) => {
-	//let fieldID = ui.item.attr("data-id")
+	//let fieldID = ui.item.attr("data-id")	
+	console.log(ui.offset)
 	let fieldID = $(event.target).attr("data-id")
+	
 	getFieldData(fieldID).then(fieldData => {
 		fieldData[0].field.field_id = Date.now();
+		alreadyInFormFields.push(fieldData[0].field.field_id);
 		formBuildingJSON.form_fields.push(fieldData[0]);
 		appendFieldsMarkup();
 		setTimeout(()=>selectField(fieldData[0].field.field_id), 100)
@@ -173,8 +179,25 @@ let afterDrop = (event, ui) => {
 
 let initFlatpicker = () => $("#date").flatpickr();
 
+/*let alreadyInFormFields = () => {
+	let arr = [];
+	$(".form-field").each(function(){
+		let id = $(this).attr("id");
+		arr.push(id);
+	})
+	return arr;
+}*/
+
 let appendFieldsMarkup = () => {
 	let data = jQuery.extend(true, {}, formBuildingJSON);
+	
+	$(".form-field").each(function(){
+		let id = $(this).attr("id");
+		data.form_fields.forEach((v, i)=>{
+			v.field.field_id == id && data.form_fields.splice(i, 1);
+		})
+	})
+	
 	data.form_fields.forEach( i => {
 		let obj = {};
 		obj.wrapperTag = i.field.wrapper.tag;
@@ -187,6 +210,7 @@ let appendFieldsMarkup = () => {
 		obj.wrapperAttributes = generateTagAttributes(i.field.wrapper.attr)
 		obj.label = i.field.label.text;
 		obj.tooltip = (i.field.tooltip) ? i.field.tooltip : false;
+		//obj.placeholder = getAttrVal(i.field.input.attr, "placeholder");
 		obj.label_placement = i.field.label.label_placement;
 		obj.inputTag = (i.field.input && i.field.input.tag) ? i.field.input.tag : "";
 		if(i.field.input) i.field.input.attr = (i.field.input && i.field.input.attr) && addAttr(i.field.input.attr, "class", "fb-input")
@@ -198,7 +222,8 @@ let appendFieldsMarkup = () => {
 		if(i.field.id == 8) obj.address_fields = (i.field.address_fields) ? createMultiFieldObj(i.field.address_fields) : ""; 
 		if(i.field.id == 9) obj.name_fields = (i.field.name_fields) ? createMultiFieldObj(i.field.name_fields) : ""; 
 		readTemplate(`inputs/${i.field.field_name}.mst`).then( template => {
-			generateHTML(template, obj, formTag)
+			//generateHTML(template, obj, formTag)
+			$(".ui-sortable-placeholder").after(Mustache.render(template, obj)).fadeIn('slow');
 			obj = {};
 			i.field.id == 7 && initFlatpicker()
 		} ).catch(e => console.error(e))
@@ -217,6 +242,20 @@ let createMultiFieldObj = (data) => {
 	return arr;
 }
 
+let getAttrVal = (array, key) => {
+	if(!ifKeyExist(array, key)) return;
+	let val;
+	array.find((v, i)=> {
+		for(let k in v){
+				if(v.hasOwnProperty(k)){
+					if(k === key){
+						val = v[k];
+					}
+				}
+			}
+	})
+	return val;
+}
 
 let generateTagAttributes = (data) => {
 	let tempArr = [];
@@ -273,6 +312,7 @@ let getFieldSettingsObject = (id) => {
 	field.field_id = data.field_id;
 	field.addr_true = false;
 	field.name_true = false;
+	field.placeholder = getAttrVal(data.input.attr, "placeholder");
 	field.type = data.field_name;
 	field.label = data.label.text;
 	field.tooltip = (data.tooltip) ? data.tooltip : false;
@@ -466,6 +506,12 @@ let onSettingChange = () => {
 							$(`#${fieldID} #fb_first_name`).hasClass("fb-hidden") ?  
 							$(`#${fieldID} #fb_first_name`).removeClass('fb-hidden') :
 							$(`#${fieldID} #fb_first_name`).addClass("fb-hidden")
+					break;
+
+					case "placeholder_text":
+						field.input.attr = updateQSData(field.input.attr, "placeholder", setting_value);
+						$(`#${fieldID} input`).attr("placeholder", setting_value);
+						console.log(formBuildingJSON)
 					break;
 
 
