@@ -151,27 +151,37 @@ let initDrag = () => {
 }
 let initSortable = () => {
 	$( ".droppable" ).sortable({
-		revert: true
+		revert: true,
+		update: reArrangeJSON
 	});
 }
 
 let reArrangeJSON = () => {
-	let arr = [];
-	$(".form-field").each(function(){
-		
-	})
+	let data = [];
+	let array = [];
+	 $(".form-field").each(function(){
+        let id = $(this).attr('id');
+        array.find((v,i)=>v==id && array.splice(i, 1))
+        array.push(id);
+    });
+    array.forEach((v, i)=>{
+    	let field = formBuildingJSON.form_fields.filter(val=>val.field.field_id == v)[0];
+    	field && data.push(field);
+    })
+    formBuildingJSON.form_fields = data;
+    console.log(formBuildingJSON);
 }
 
 let afterDrop = (event, ui) => {
 	//let fieldID = ui.item.attr("data-id")	
-	console.log(ui.offset)
 	let fieldID = $(event.target).attr("data-id")
 	
 	getFieldData(fieldID).then(fieldData => {
 		fieldData[0].field.field_id = Date.now();
 		alreadyInFormFields.push(fieldData[0].field.field_id);
 		formBuildingJSON.form_fields.push(fieldData[0]);
-		appendFieldsMarkup();
+		appendFieldsMarkup()
+		setTimeout(()=>reArrangeJSON(), 100)
 		setTimeout(()=>selectField(fieldData[0].field.field_id), 100)
 	})
 	$(ui.helper[0]).remove()
@@ -179,14 +189,6 @@ let afterDrop = (event, ui) => {
 
 let initFlatpicker = () => $("#date").flatpickr();
 
-/*let alreadyInFormFields = () => {
-	let arr = [];
-	$(".form-field").each(function(){
-		let id = $(this).attr("id");
-		arr.push(id);
-	})
-	return arr;
-}*/
 
 let appendFieldsMarkup = () => {
 	let data = jQuery.extend(true, {}, formBuildingJSON);
