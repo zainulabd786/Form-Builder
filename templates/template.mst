@@ -37,6 +37,9 @@
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#fb-settings">Settings</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#fb-preview">Preview</a>
+        </li>
       </ul><!-- Form Tabs -->
 
       <div class="tab-content fb-full-width">
@@ -127,6 +130,16 @@
             </div>
           </div><!-- row -->
         </div><!-- Settings Tab -->
+
+        <div id="fb-preview" class="tab-pane fade">
+          <!-- Settings Tab -->
+          <div class="row">
+            <!-- row -->
+            <div class="col-md-12">
+              <h1>preview</h1>
+            </div>
+          </div><!-- row -->
+        </div><!-- Preview Tab -->
       </div><!-- Form Tab Content -->
       <!-- ------------------------Form Tabs---------------- -->
     </div>
