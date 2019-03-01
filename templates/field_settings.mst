@@ -24,6 +24,12 @@
 
 
 <div class="form-group">
+	<label>Custom Classes:</label>
+	<input type="text" class="form-control field-setting" name="custom_classes" data-id="{{field_id}}" value="{{#custom_classes}}{{custom_classes}}{{/custom_classes}}">
+</div>
+
+
+<div class="form-group">
 	<div class="form-check">
 	  <input class="form-check-input field-setting" name="input_attr_required" data-id="{{field_id}}" type="checkbox" value="required" id="required" {{#required}}checked{{/required}}>
 	  <label class="form-check-label" for="required">

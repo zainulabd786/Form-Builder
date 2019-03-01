@@ -209,10 +209,10 @@ let appendFieldsMarkup = () => {
 		let visibility = (i.field.visibility === "s") ? true : false;
 		i.field.wrapper.attr = (!visibility) ? addAttr(i.field.wrapper.attr, "class", "fb-hidden") : i.field.wrapper.attr;
 		i.field.wrapper.attr = (i.field.width_class) ? addAttr(i.field.wrapper.attr, "class", i.field.width_class) : i.field.wrapper.attr;
+		i.field.wrapper.attr = (i.field.wrapper.custom_classes) ? addAttr(i.field.wrapper.attr, "class", i.field.wrapper.custom_classes) : i.field.wrapper.attr; /*Add custom Class*/
 		obj.wrapperAttributes = generateTagAttributes(i.field.wrapper.attr)
 		obj.label = i.field.label.text;
 		obj.tooltip = (i.field.tooltip) ? i.field.tooltip : false;
-		//obj.placeholder = getAttrVal(i.field.input.attr, "placeholder");
 		obj.label_placement = i.field.label.label_placement;
 		obj.inputTag = (i.field.input && i.field.input.tag) ? i.field.input.tag : "";
 		if(i.field.input) i.field.input.attr = (i.field.input && i.field.input.attr) && addAttr(i.field.input.attr, "class", "fb-input")
@@ -321,6 +321,7 @@ let getFieldSettingsObject = (id) => {
 	let required = (data.input) ? data.input.attr.filter(i => (i.required) && i.required) : "";
 	field.required = (required.length) ? required[0].required : false 
 	field.visibility = (data.visibility === "s") ? true : false;
+	field.custom_classes = data.wrapper.custom_classes;
 	/**********************************Conditional Logic*************************************/
 	field.conditional_logic_set = (data.conditional_logic.set) ? true : false;
 	field.selected_val = data.conditional_logic.if.field;
@@ -516,6 +517,11 @@ let onSettingChange = () => {
 						console.log(formBuildingJSON)
 					break;
 
+					case "custom_classes":
+						field.wrapper.custom_classes = setting_value;
+						$(`#${fieldID}`).addClass(setting_value);
+					break;
+
 
 					case "conditional_logic_field_list":
 					case "conditional_logic_bool":
@@ -539,7 +545,7 @@ let onSettingChange = () => {
 				} 
 			}
 		})
-	//console.log(formBuildingJSON)
+	console.log(formBuildingJSON)
 	})
 }
 
