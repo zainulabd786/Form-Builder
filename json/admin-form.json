@@ -10,7 +10,7 @@
 				"wrapper" : {
 					"tag" : "div",
 					"attr" : [{"class":"form-group form-field"}],
-					"css" : ""
+					"custom_classes" : ""
 				},
 				"label" : {
 					"text" : "Text",
@@ -19,8 +19,7 @@
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"text"}, {"class":"form-control"}, {"placeholder":"Text"}, {"required":"required"}],
-					"css" : ""
+					"attr" : [{"type":"text"}, {"class":"form-control"}, {"placeholder":"Text"}, {"required":"required"}]
 				},
 				"conditional_logic" : {
 					"set" : true,
@@ -43,7 +42,7 @@
 				"wrapper" : {
 					"tag" : "div",
 					"attr" : [{"class":"form-group form-field"}],
-					"css" : ""
+					"custom_classes" : ""
 				},
 				"label" : {
 					"text" : "TextArea",
@@ -52,8 +51,7 @@
 				},
 				"input" : {
 					"tag" : "textarea",
-					"attr" : [{"maxlength":"34"}, {"class":"form-control"}, {"placeholder":"TextArea"}, {"required":false}],
-					"css" : ""
+					"attr" : [{"maxlength":"34"}, {"class":"form-control"}, {"placeholder":"TextArea"}, {"required":false}]
 				},
 				"conditional_logic" : {
 					"set" : false,
@@ -76,7 +74,7 @@
 				"wrapper" : {
 					"tag" : "div",
 					"attr" : [{"class":"form-group form-field"}],
-					"css" : ""
+					"custom_classes" : ""
 				},
 				"label" : {
 					"text" : "Number",
@@ -85,8 +83,7 @@
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"number"}, {"value":""}, {"min":"18"}, {"max":"50"}, {"class":"form-control"}, {"placeholder":"Number"}, {"required":true}],
-					"css" : ""
+					"attr" : [{"type":"number"}, {"value":""}, {"min":"18"}, {"max":"50"}, {"class":"form-control"}, {"placeholder":"Number"}, {"required":true}]
 				},
 				"conditional_logic" : {
 					"set" : false,
@@ -109,7 +106,7 @@
 				"wrapper" : {
 					"tag" : "div",
 					"attr" : [{"class":"form-check form-field"}],
-					"css" : ""
+					"custom_classes" : ""
 				},
 				"label" : {
 					"text" : "Radio Buttons",
@@ -120,8 +117,7 @@
 					"tag" : "input",
 					"attr" : [{"type":"radio"}, {"value":""}, {"class":"custom-control-input"}, {"required":true}],
 					"options" : ["one", "two", "three", "four"],
-					"selected" : ["2"],
-					"css" : ""
+					"selected" : ["2"]
 				},
 				"conditional_logic" : {
 					"set" : false,
@@ -144,7 +140,7 @@
 				"wrapper" : {
 					"tag" : "div",
 					"attr" : [{"class":"form-check form-field"}],
-					"css" : ""
+					"custom_classes" : ""
 				},
 				"label" : {
 					"text" : "CheckBoxes",
@@ -155,8 +151,7 @@
 					"tag" : "input",
 					"attr" : [{"type":"checkbox"}, {"class":"custom-control-input"}, {"required":true}],
 					"options" : ["1024x800", "720x1200", "1920x1080"],
-					"selected" : [ "720x1200", "1920x1080" ],
-					"css" : ""
+					"selected" : [ "720x1200", "1920x1080" ]
 				},
 				"conditional_logic" : {
 					"set" : false,
@@ -179,7 +174,7 @@
 				"wrapper" : {
 					"tag" : "div",
 					"attr" : [{"class":"form-group form-field"}],
-					"css" : ""
+					"custom_classes" : ""
 				},
 				"label" : {
 					"text" : "Dropdown",
@@ -190,8 +185,7 @@
 					"tag" : "select",
 					"attr" : [{"class":"form-control"}],
 					"options" : ["", "option1", "option2", "option3"],
-					"selected" : "option2",
-					"css" : ""
+					"selected" : "option2"
 				},
 				"conditional_logic" : {
 					"set" : false,
@@ -214,7 +208,7 @@
 				"wrapper" : {
 					"tag" : "div",
 					"attr" : [{"class":"form-group form-field"}],
-					"css" : ""
+					"custom_classes" : ""
 				},
 				"label" : {
 					"text" : "Date",
@@ -223,8 +217,7 @@
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"text"}, {"class":"form-control"}, {"id":"date"}],
-					"css" : ""
+					"attr" : [{"type":"text"}, {"class":"form-control"}, {"id":"date"}]
 				},
 				"conditional_logic" : {
 					"set" : false,
@@ -239,7 +232,7 @@
 					"noWeekends" : true,
 					"minDate" : {"key":"days|weeks|months|years", "val":"2"},
 					"maxDate" : {"key":"days|weeks|months|years", "val":"2"},
-					"d==abled_dates" : ["2013-03-14","2013-03-15","2013-03-16"],
+					"disabled_dates" : ["2013-03-14","2013-03-15","2013-03-16"],
 					"theme" : "dark",
 					"css": "CSS GOES HERE"
 				}
@@ -255,7 +248,7 @@
 				"wrapper" : {
 					"tag" : "div",
 					"attr" : [{"class":"form-group form-field"}],
-					"css" : ""
+					"custom_classes" : ""
 				},
 				"label" : {
 					"text" : "Address",
@@ -266,40 +259,34 @@
 					"street_address" : {
 						"set": false,
 						"tag" : "input",
-						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"id":"fb_addr_street"}, {"placeholder":"Street Address"}],
-						"css" : ""
+						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"id":"fb_addr_street"}, {"placeholder":"Street Address"}]
 					},
 					"address_line_2" : {
 						"set": true,
 						"tag" : "input",
-						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"id":"fb_addr_line2"}, {"placeholder":"Address Line 2"}],
-						"css" : ""
+						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"id":"fb_addr_line2"}, {"placeholder":"Address Line 2"}]
 					},
 					"city" : {
 						"set": true,
 						"tag" : "input",
-						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"id":"fb_addr_city"}, {"placeholder":"City"}],
-						"css" : ""
+						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"id":"fb_addr_city"}, {"placeholder":"City"}]
 					},
 					"state" : {
 						"set": true,
 						"tag" : "input",
-						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"id":"fb_addr_state"}, {"placeholder":"State"}],
-						"css" : ""
+						"attr" : [{"type":"text"}, {"value":""}, {"class":"form-control"}, {"id":"fb_addr_state"}, {"placeholder":"State"}]
 					},
 					"zip" : {
 						"set": true,
 						"tag" : "input",
-						"attr" : [{"type":"text"}, {"value":""},{"class":"form-control"}, {"id":"fb_addr_zip"}, {"placeholder":"ZIP"}],
-						"css" : ""
+						"attr" : [{"type":"text"}, {"value":""},{"class":"form-control"}, {"id":"fb_addr_zip"}, {"placeholder":"ZIP"}]
 					},
 					"country" : {
 						"set": true,
 						"tag" : "select",
 						"attr" : [{"class":"form-control"}, {"id":"fb_addr_country"}],
 						"options" : ["India", "US", "UK"],
-						"selected" : "India",
-						"css" : ""
+						"selected" : "India"
 					}
 				},
 				"conditional_logic" : {
@@ -323,7 +310,7 @@
 				"wrapper" : {
 					"tag" : "div",
 					"attr" : [{"class":"form-group form-field"}],
-					"css" : ""
+					"custom_classes" : ""
 				},
 				"label" : {
 					"text" : "Name",
@@ -334,14 +321,12 @@
 					"first_name" : {
 						"set": true,
 						"tag" : "input",
-						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control"}, {"id":"fb_first_name"}, {"placeholder":"First Name"}],
-						"css" : ""
+						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control"}, {"id":"fb_first_name"}, {"placeholder":"First Name"}]
 					},
 					"last_name" : {
 						"set": true,
 						"tag" : "input",
-						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control"}, {"id":"fb_last_name"}, {"placeholder":"Last Name"}],
-						"css" : ""
+						"attr" : [{"type":"text"}, {"value":""}, {"maxlength":"14"}, {"class":"form-control"}, {"id":"fb_last_name"}, {"placeholder":"Last Name"}]
 					}
 				},
 				"conditional_logic" : {
@@ -365,7 +350,7 @@
 				"wrapper" : {
 					"tag" : "div",
 					"attr" : [{"class":"form-group form-field"}],
-					"css" : ""
+					"custom_classes" : ""
 				},
 				"label" : {
 					"text" : "Phone",
@@ -374,8 +359,7 @@
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"tel"}, {"value":""}, {"minlength":"10"}, {"maxlength":"10"}, {"pattern":"^\\/d{4}-\\/d{3}-\\/d{4}$"}, {"class":"form-control"}, {"placeholder":"Phone Number"}],
-					"css" : ""
+					"attr" : [{"type":"tel"}, {"value":""}, {"minlength":"10"}, {"maxlength":"10"}, {"pattern":"^\\/d{4}-\\/d{3}-\\/d{4}$"}, {"class":"form-control"}, {"placeholder":"Phone Number"}]
 				},
 				"conditional_logic" : {
 					"set" : false,
@@ -398,7 +382,7 @@
 				"wrapper" : {
 					"tag" : "div",
 					"attr" : [{"class":"form-group form-field"}],
-					"css" : ""
+					"custom_classes" : ""
 				},
 				"label" : {
 					"text" : "Website",
@@ -407,8 +391,7 @@
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"url"}, {"value":""}, {"class":"form-control"}, {"placeholder":"Website"}],
-					"css" : ""
+					"attr" : [{"type":"url"}, {"value":""}, {"class":"form-control"}, {"placeholder":"Website"}]
 				},
 				"conditional_logic" : {
 					"set" : false,
@@ -431,7 +414,7 @@
 				"wrapper" : {
 					"tag" : "div",
 					"attr" : [{"class":"form-group form-field"}],
-					"css" : ""
+					"custom_classes" : ""
 				},
 				"label" : {
 					"text" : "E-mail",
@@ -440,8 +423,7 @@
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"email"}, {"value":""}, {"class":"form-control"}, {"placeholder":"Email"}],
-					"css" : ""
+					"attr" : [{"type":"email"}, {"value":""}, {"class":"form-control"}, {"placeholder":"Email"}]
 				},
 				"conditional_logic" : {
 					"set" : false,
@@ -464,7 +446,7 @@
 				"wrapper" : {
 					"tag" : "div",
 					"attr" : [{"class":"form-group form-field"}],
-					"css" : ""
+					"custom_classes" : ""
 				},
 				"label" : {
 					"text" : "Select a file",
@@ -473,8 +455,7 @@
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"file"}, {"value":""}, {"class":"custom-file-input"}, {"placeholder":"Email"}],
-					"css" : ""
+					"attr" : [{"type":"file"}, {"value":""}, {"class":"custom-file-input"}, {"placeholder":"Email"}]
 				},
 				"conditional_logic" : {
 					"set" : false,
