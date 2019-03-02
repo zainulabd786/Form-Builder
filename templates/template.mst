@@ -38,7 +38,10 @@
           <a class="nav-link" data-toggle="tab" href="#fb-settings">Settings</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#fb-preview">Preview</a>
+          <a class="nav-link" data-toggle="tab" href="#fb-custom-css">Custom CSS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link preview-tab" data-toggle="tab" href="#fb-preview">Preview</a>
         </li>
       </ul><!-- Form Tabs -->
 
@@ -132,7 +135,7 @@
         </div><!-- Settings Tab -->
 
         <div id="fb-preview" class="tab-pane fade">
-          <!-- Settings Tab -->
+          <!-- Preview Tab -->
           <div class="row">
             <!-- row -->
             <div class="col-md-12">
@@ -140,6 +143,12 @@
             </div>
           </div><!-- row -->
         </div><!-- Preview Tab -->
+
+        <div id="fb-custom-css" class="tab-pane fade">
+          <!-- Custom CSS Tab -->
+          
+        </div><!-- Custom CSS Tab -->
+
       </div><!-- Form Tab Content -->
       <!-- ------------------------Form Tabs---------------- -->
     </div>

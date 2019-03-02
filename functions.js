@@ -9,11 +9,16 @@ const confSettingsTemplate = "formSettings/confirmation.mst";
 const confSettingsContainer = "#fb-confirmation-settings";
 const notifSettingsTemplate = "formSettings/notification.mst";
 const notifSettingsContainer = "#fb-notifications-settings";
+const fieldMainClass = "form-field";
+const customCSSTemplate = "custom_css.mst";
+const customCSScontainer = "#fb-custom-css";
+
 const assetsPath = "assets";
 const orderArr = [];
 const alreadyInFormFields = [];
 const formBuildingJSON = {
 	"form_fields" : [],
+	"custom_css": "",
 	"form_settings" : {
 			"basics" : {
 				"title" : "My Custom Form",
@@ -83,6 +88,7 @@ let bindEvents = () => {
 	fieldWidth();
 	deleteField();
 	duplicateFields();
+	customCSSTabRender();
 }
 
 let createFormSettingsObject = () => {
@@ -159,7 +165,7 @@ let initSortable = () => {
 let reArrangeJSON = () => {
 	let data = [];
 	let array = [];
-	 $(".form-field").each(function(){
+	 $(`.${fieldMainClass}`).each(function(){
         let id = $(this).attr('id');
         array.find((v,i)=>v==id && array.splice(i, 1))
         array.push(id);
@@ -193,7 +199,7 @@ let initFlatpicker = () => $("#date").flatpickr();
 let appendFieldsMarkup = () => {
 	let data = jQuery.extend(true, {}, formBuildingJSON);
 	
-	$(".form-field").each(function(){
+	$(`.${fieldMainClass}`).each(function(){
 		let id = $(this).attr("id");
 		data.form_fields.forEach((v, i)=>{
 			v.field.field_id == id && data.form_fields.splice(i, 1);
@@ -209,6 +215,7 @@ let appendFieldsMarkup = () => {
 		let visibility = (i.field.visibility === "s") ? true : false;
 		i.field.wrapper.attr = (!visibility) ? addAttr(i.field.wrapper.attr, "class", "fb-hidden") : i.field.wrapper.attr;
 		i.field.wrapper.attr = (i.field.width_class) ? addAttr(i.field.wrapper.attr, "class", i.field.width_class) : i.field.wrapper.attr;
+		i.field.wrapper.attr = addAttr(i.field.wrapper.attr, "class", fieldMainClass);
 		i.field.wrapper.attr = (i.field.wrapper.custom_classes) ? addAttr(i.field.wrapper.attr, "class", i.field.wrapper.custom_classes) : i.field.wrapper.attr; /*Add custom Class*/
 		obj.wrapperAttributes = generateTagAttributes(i.field.wrapper.attr)
 		obj.label = i.field.label.text;
@@ -271,11 +278,11 @@ let generateTagAttributes = (data) => {
 }
 
 let selectField = (id) => {
-	$(formTag).find(".form-field").removeClass("fb-selected");
-	$("body").on("click",".form-field",function(){
+	$(formTag).find(`.${fieldMainClass}`).removeClass("fb-selected");
+	$("body").on("click",`.${fieldMainClass}`,function(){
 		if(!$(this).hasClass("fb-selected")){
 			id = $(this).attr('id');
-			$(formTag).find(".form-field").removeClass("fb-selected")
+			$(formTag).find(`.${fieldMainClass}`).removeClass("fb-selected")
 			$(formTag).find(`#${id}`).addClass("fb-selected", 400)
 			onFieldSelect(id);
 			setTimeout(()=> fieldInlineOptions(), 500);
@@ -696,6 +703,13 @@ let notificationFormSettingsRender = () => {
 	} ).catch(e => console.error(e))
 }
 
+let customCSSTabRender = () => {
+	let data = jQuery.extend(true, {}, formBuildingJSON.custom_css);
+	readTemplate(customCSSTemplate).then( template => {
+		generateHTML(template, data, customCSScontainer)		
+	} ).catch(e => console.error(e))
+}
+
 let updateFormSettings = () => {
 	$("body").on("change", ".fb-form-setting", function(){
 		let settingName = $(this).attr("name");
@@ -914,5 +928,41 @@ let duplicateFields = () =>{
 		//$(this).parents(".form-field").find(".fb-inline-options").remove();
 		//$(".fb-field-settings").find("input, select, button").attr("data-id", copiedJSON.field.field_id);
 	})
+}
+
+
+let renderform = () => {
+	let data = jQuery.extend(true, {}, formBuildingJSON);
+	data.form_fields.forEach( i => {
+		let obj = {};
+		obj.wrapperTag = i.field.wrapper.tag;
+		//obj.field_id = (i.field.field_id) ? i.field.wrapper.attr.push({"id":i.field.field_id}) : ""; 
+		obj.field_id = (i.field.field_id) ? i.field.field_id : "";
+		i.field.wrapper.attr = (i.field.field_id) ? addAttr(i.field.wrapper.attr, "id", i.field.field_id) : ""; 
+		let visibility = (i.field.visibility === "s") ? true : false;
+		i.field.wrapper.attr = (!visibility) ? addAttr(i.field.wrapper.attr, "class", "fb-hidden") : i.field.wrapper.attr;
+		i.field.wrapper.attr = (i.field.width_class) ? addAttr(i.field.wrapper.attr, "class", i.field.width_class) : i.field.wrapper.attr;
+		i.field.wrapper.attr = addAttr(i.field.wrapper.attr, "class", `client_${fieldMainClass}`);
+		i.field.wrapper.attr = (i.field.wrapper.custom_classes) ? addAttr(i.field.wrapper.attr, "class", i.field.wrapper.custom_classes) : i.field.wrapper.attr; /*Add custom Class*/
+		obj.wrapperAttributes = generateTagAttributes(i.field.wrapper.attr)
+		obj.label = i.field.label.text;
+		obj.tooltip = (i.field.tooltip) ? i.field.tooltip : false;
+		obj.label_placement = i.field.label.label_placement;
+		obj.inputTag = (i.field.input && i.field.input.tag) ? i.field.input.tag : "";
+		if(i.field.input) i.field.input.attr = (i.field.input && i.field.input.attr) && addAttr(i.field.input.attr, "class", "fb-input")
+		obj.inputAttributes = (i.field.input && i.field.input.attr) ? generateTagAttributes(i.field.input.attr) : "";
+		obj.choices = (i.field.input && i.field.input.options) ? i.field.input.options : "";
+		obj.label_attributes = (i.field.label.attr) ? generateTagAttributes(i.field.label.attr) : "";
+		let required = (i.field.input) ? i.field.input.attr.filter(i => (i.required) && i.required) : "";
+		obj.required = (required.length) ? true : false 
+		if(i.field.id == 8) obj.address_fields = (i.field.address_fields) ? createMultiFieldObj(i.field.address_fields) : ""; 
+		if(i.field.id == 9) obj.name_fields = (i.field.name_fields) ? createMultiFieldObj(i.field.name_fields) : ""; 
+		readTemplate(`inputs/${i.field.field_name}.mst`).then( template => {
+			//generateHTML(template, obj, formTag)
+			$(".ui-sortable-placeholder").after(Mustache.render(template, obj)).fadeIn('slow');
+			obj = {};
+			i.field.id == 7 && initFlatpicker()
+		} ).catch(e => console.error(e))
+	} );
 }
 

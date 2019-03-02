@@ -9,7 +9,7 @@
 				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group"}],
 					"custom_classes" : ""
 				},
 				"label" : {
@@ -41,7 +41,7 @@
 				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group"}],
 					"custom_classes" : ""
 				},
 				"label" : {
@@ -73,7 +73,7 @@
 				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group"}],
 					"custom_classes" : ""
 				},
 				"label" : {
@@ -105,7 +105,7 @@
 				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-check form-field"}],
+					"attr" : [{"class":"form-check"}],
 					"custom_classes" : ""
 				},
 				"label" : {
@@ -139,7 +139,7 @@
 				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-check form-field"}],
+					"attr" : [{"class":"form-check"}],
 					"custom_classes" : ""
 				},
 				"label" : {
@@ -173,7 +173,7 @@
 				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group"}],
 					"custom_classes" : ""
 				},
 				"label" : {
@@ -207,7 +207,7 @@
 				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group"}],
 					"custom_classes" : ""
 				},
 				"label" : {
@@ -247,7 +247,7 @@
 				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group"}],
 					"custom_classes" : ""
 				},
 				"label" : {
@@ -309,7 +309,7 @@
 				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group"}],
 					"custom_classes" : ""
 				},
 				"label" : {
@@ -349,7 +349,7 @@
 				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group"}],
 					"custom_classes" : ""
 				},
 				"label" : {
@@ -381,7 +381,7 @@
 				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group"}],
 					"custom_classes" : ""
 				},
 				"label" : {
@@ -413,7 +413,7 @@
 				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group"}],
 					"custom_classes" : ""
 				},
 				"label" : {
@@ -445,7 +445,7 @@
 				"width_class": "col-sm-6",
 				"wrapper" : {
 					"tag" : "div",
-					"attr" : [{"class":"form-group form-field"}],
+					"attr" : [{"class":"form-group"}],
 					"custom_classes" : ""
 				},
 				"label" : {
