@@ -18,7 +18,7 @@ const orderArr = [];
 const alreadyInFormFields = [];
 const formBuildingJSON = {
 	"form_fields" : [],
-	"custom_css": "",
+	"custom_css": ".form-field{text-color:red}",
 	"form_settings" : {
 			"basics" : {
 				"title" : "My Custom Form",
@@ -526,7 +526,11 @@ let onSettingChange = () => {
 
 					case "custom_classes":
 						field.wrapper.custom_classes = setting_value;
+						let oldVal = $(this).data('val');
+						console.log(oldVal)
+						$(`#${fieldID}`).removeClass(oldVal);
 						$(`#${fieldID}`).addClass(setting_value);
+
 					break;
 
 
@@ -552,7 +556,9 @@ let onSettingChange = () => {
 				} 
 			}
 		})
-	console.log(formBuildingJSON)
+	})
+	$("body").on("focusin", ".custom-class-input", function(){
+		$(this).data('val', $(this).val());
 	})
 }
 
@@ -639,7 +645,6 @@ let updateChoice = () => {
 				$(this).data('val', optionVal);
 			}
 		})
-		console.log(formBuildingJSON);
 	})
 }
 
@@ -704,7 +709,7 @@ let notificationFormSettingsRender = () => {
 }
 
 let customCSSTabRender = () => {
-	let data = jQuery.extend(true, {}, formBuildingJSON.custom_css);
+	let data = jQuery.extend(true, {}, formBuildingJSON);
 	readTemplate(customCSSTemplate).then( template => {
 		generateHTML(template, data, customCSScontainer)		
 	} ).catch(e => console.error(e))
@@ -817,6 +822,11 @@ let updateFormSettings = () => {
 
 			case "user_notification_message":
 				formBuildingJSON.form_settings.notifications.user.message = settingVal;
+			break;
+
+			case "custom_css_text":
+				formBuildingJSON.custom_css = settingVal;
+				$("head").append(`<style>${settingVal}</style>`);
 			break;
 		}
 	})

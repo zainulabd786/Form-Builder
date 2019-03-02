@@ -25,7 +25,7 @@
 
 <div class="form-group">
 	<label>Custom Classes:</label>
-	<input type="text" class="form-control field-setting" name="custom_classes" data-id="{{field_id}}" value="{{#custom_classes}}{{custom_classes}}{{/custom_classes}}">
+	<input type="text" class="form-control field-setting custom-class-input" name="custom_classes" data-id="{{field_id}}" value="{{#custom_classes}}{{custom_classes}}{{/custom_classes}}">
 </div>
 
 
