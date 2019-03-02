@@ -12,7 +12,7 @@ const notifSettingsContainer = "#fb-notifications-settings";
 const fieldMainClass = "form-field";
 const customCSSTemplate = "custom_css.mst";
 const customCSScontainer = "#fb-custom-css";
-
+let isFieldClicked = false;
 const assetsPath = "assets";
 const orderArr = [];
 const alreadyInFormFields = [];
@@ -89,6 +89,7 @@ let bindEvents = () => {
 	deleteField();
 	duplicateFields();
 	customCSSTabRender();
+	clickAppendField();
 }
 
 let createFormSettingsObject = () => {
@@ -180,7 +181,6 @@ let reArrangeJSON = () => {
 let afterDrop = (event, ui) => {
 	//let fieldID = ui.item.attr("data-id")	
 	let fieldID = $(event.target).attr("data-id")
-	
 	getFieldData(fieldID).then(fieldData => {
 		fieldData[0].field.field_id = Date.now();
 		alreadyInFormFields.push(fieldData[0].field.field_id);
@@ -190,6 +190,21 @@ let afterDrop = (event, ui) => {
 		setTimeout(()=>selectField(fieldData[0].field.field_id), 100)
 	})
 	$(ui.helper[0]).remove()
+}
+
+let clickAppendField = () => {
+	$("body").on("click", ".draggable-field", function(){
+		isFieldClicked = !isFieldClicked;
+		let fieldID = $(this).attr('data-id');
+		getFieldData(fieldID).then(fieldData => {
+			fieldData[0].field.field_id = Date.now();
+			alreadyInFormFields.push(fieldData[0].field.field_id);
+			formBuildingJSON.form_fields.push(fieldData[0]);
+			appendFieldsMarkup()
+			setTimeout(()=>reArrangeJSON(), 100)
+			setTimeout(()=>selectField(fieldData[0].field.field_id), 100)
+		})
+	})
 }
 
 let initFlatpicker = () => $("#date").flatpickr();
@@ -229,8 +244,8 @@ let appendFieldsMarkup = () => {
 		if(i.field.id == 8) obj.address_fields = (i.field.address_fields) ? createMultiFieldObj(i.field.address_fields) : ""; 
 		if(i.field.id == 9) obj.name_fields = (i.field.name_fields) ? createMultiFieldObj(i.field.name_fields) : ""; 
 		readTemplate(`inputs/${i.field.field_name}.mst`).then( template => {
-			//generateHTML(template, obj, formTag)
-			$(".ui-sortable-placeholder").after(Mustache.render(template, obj)).fadeIn('slow');
+			!isFieldClicked && $(".ui-sortable-placeholder").after(Mustache.render(template, obj)).fadeIn('slow');
+			isFieldClicked && (generateHTML(template, obj, formTag), isFieldClicked = false)
 			obj = {};
 			i.field.id == 7 && initFlatpicker()
 		} ).catch(e => console.error(e))

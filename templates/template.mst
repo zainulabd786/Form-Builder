@@ -78,7 +78,7 @@
                   <ul class="fb-fields-list">
                     {{#fields}}
                     {{#field}}
-                    <li class="draggable" data-id="{{field.id}}">{{field.field_name}}</li>
+                    <li class="draggable draggable-field" data-id="{{field.id}}">{{field.field_name}}</li>
                     {{/field}}
                     {{/fields}}
                   </ul>
