@@ -175,7 +175,6 @@ let reArrangeJSON = () => {
     	field && data.push(field);
     })
     formBuildingJSON.form_fields = data;
-    console.log(formBuildingJSON);
 }
 
 let afterDrop = (event, ui) => {
@@ -194,7 +193,6 @@ let afterDrop = (event, ui) => {
 }
 
 let initFlatpicker = () => $("#date").flatpickr();
-
 
 let appendFieldsMarkup = () => {
 	let data = jQuery.extend(true, {}, formBuildingJSON);
@@ -278,6 +276,7 @@ let generateTagAttributes = (data) => {
 }
 
 let selectField = (id) => {
+	console.log(formBuildingJSON)
 	$(formTag).find(`.${fieldMainClass}`).removeClass("fb-selected");
 	$("body").on("click",`.${fieldMainClass}`,function(){
 		if(!$(this).hasClass("fb-selected")){
@@ -314,6 +313,7 @@ let fieldInlineOptions = () => {
 
 let getFieldSettingsObject = (id) => {
 	let data = jQuery.extend(true, {}, formBuildingJSON);
+	console.log(data.form_fields)
 	data = data.form_fields.filter( i => parseInt(i.field.field_id) === parseInt(id) )[0].field;
 	let field = {};
 	let field_list_options = "";
@@ -321,7 +321,7 @@ let getFieldSettingsObject = (id) => {
 	field.field_id = data.field_id;
 	field.addr_true = false;
 	field.name_true = false;
-	field.placeholder = getAttrVal(data.input.attr, "placeholder");
+	field.placeholder = data.input ? getAttrVal(data.input.attr, "placeholder") : false;
 	field.type = data.field_name;
 	field.label = data.label.text;
 	field.tooltip = (data.tooltip) ? data.tooltip : false;
@@ -527,7 +527,6 @@ let onSettingChange = () => {
 					case "custom_classes":
 						field.wrapper.custom_classes = setting_value;
 						let oldVal = $(this).data('val');
-						console.log(oldVal)
 						$(`#${fieldID}`).removeClass(oldVal);
 						$(`#${fieldID}`).addClass(setting_value);
 

@@ -16,11 +16,12 @@
 	<input type="text" class="form-control field-setting" name="tooltip" data-id="{{field_id}}" value="{{#tooltip}}{{tooltip}}{{/tooltip}}">
 </div>
 
-
+{{#placeholder}}
 <div class="form-group">
 	<label>Placeholder Text:</label>
 	<input type="text" class="form-control field-setting" name="placeholder_text" data-id="{{field_id}}" value="{{#placeholder}}{{placeholder}}{{/placeholder}}">
 </div>
+{{/placeholder}}
 
 
 <div class="form-group">
