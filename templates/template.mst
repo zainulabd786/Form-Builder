@@ -1,5 +1,6 @@
 
-<div class="container py-5">
+<div class="container py-5 form-builder-container">
+  <style></style>
   <div class="row mb-5">
     <div class="col-12">
       <h3 class="mb-4">Form builder</h3>

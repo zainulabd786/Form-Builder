@@ -18,7 +18,7 @@ const orderArr = [];
 const alreadyInFormFields = [];
 const formBuildingJSON = {
 	"form_fields" : [],
-	"custom_css": ".form-field{text-color:red}",
+	"custom_css": ".red{color:red}",
 	"form_settings" : {
 			"basics" : {
 				"title" : "My Custom Form",
@@ -90,6 +90,11 @@ let bindEvents = () => {
 	duplicateFields();
 	customCSSTabRender();
 	clickAppendField();
+	loadSavedStyle();
+}
+
+let loadSavedStyle = () => {
+	$(".form-builder-container style").text(formBuildingJSON.custom_css);
 }
 
 let createFormSettingsObject = () => {
@@ -864,7 +869,7 @@ let updateFormSettings = () => {
 
 			case "custom_css_text":
 				formBuildingJSON.custom_css = settingVal;
-				$("head").append(`<style>${settingVal}</style>`);
+				$(".form-builder-container style").text(settingVal);
 			break;
 		}
 	})
