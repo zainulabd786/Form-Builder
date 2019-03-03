@@ -1,5 +1,6 @@
 const jsonPath = "./json"
 const templatePath = "./templates";
+const datepicker_theme_dir = "./datepicker-themes";
 const formTag = ".fb-form form";
 const fieldSettingsTemplate = "field_settings.mst";
 const fieldSettingsContainer = "#fb-field-settings .settings-wrapper";
@@ -14,6 +15,7 @@ const customCSSTemplate = "custom_css.mst";
 const customCSScontainer = "#fb-custom-css";
 let isFieldClicked = false;
 const assetsPath = "assets";
+const datepicker_themes = ["dark", "material_blue", "material_green", "material_red", "orange", "airbnb", "confetti"];
 const orderArr = [];
 const alreadyInFormFields = [];
 const formBuildingJSON = {
@@ -94,6 +96,7 @@ let bindEvents = () => {
 	renderform();
 	formEmbedCode();
 	buttonOldClass();
+	loadDatepickerTheme();
 	saveForm();
 }
 
@@ -220,7 +223,7 @@ let clickAppendField = () => {
 	})
 }
 
-let initFlatpicker = () => $(".fb-date-input").flatpickr();
+let initFlatpicker = () => $(".fb-date-input input").flatpickr();
 
 let appendFieldsMarkup = () => {
 	let data = jQuery.extend(true, {}, formBuildingJSON);
@@ -355,7 +358,7 @@ let getFieldSettingsObject = (id) => {
 	let field_list_options = "";
 	let field_conditions_markup = "";
 	let isHeading = data.id == 14 ? true : false;
-	
+	let isDate = data.id == 7 ? true : false;
 	field.field_id = data.field_id;
 	field.addr_true = false;
 	field.name_true = false;
@@ -429,6 +432,17 @@ let getFieldSettingsObject = (id) => {
 		field.required = false;
 		field.tooltip = false;
 		field.label = false;
+	}
+
+	if(isDate){
+		field.isDate = isDate;
+		let datepicker_theme_options;
+		datepicker_themes.forEach(i=>{
+			datepicker_theme_options += '<option ';
+			datepicker_theme_options += data.datepicker_settings.theme == i ? "selected" : "";
+			datepicker_theme_options += " value='"+i+"'>"+i+"</option>"
+		})
+		field.datepicker_theme_options = datepicker_theme_options;
 	}
 
 	return field;
@@ -587,6 +601,10 @@ let onSettingChange = () => {
 					case "heading_text":
 						field.heading.text = setting_value;
 						$(`#${fieldID} ${field.heading.tag}`).text(setting_value)
+					break;
+
+					case "datepicker_theme":
+						field.datepicker_settings.theme = setting_value;
 					break;
 
 					case "conditional_logic_field_list":
@@ -1015,7 +1033,11 @@ let renderform = () => {
 let formEmbedCode = () => {
 	$("body").on("click", ".fb-embed-button", function(){
 		$(".preview-tab").trigger("click");
-		$("#fb-preview .external-scripts-container").append('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script><script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>')
+		let scriptsNstyles = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">'+
+							'<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>'+
+							'<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>'+
+							'<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>';
+		$("#fb-preview .external-scripts-container").append(scriptsNstyles);
 		//let scriptsCode = "if(!window.jQuery)"
 		let embedCode = $("#fb-preview").html();
 		$(".embed-text").val(embedCode);
@@ -1046,4 +1068,13 @@ let saveForm = () => {
 	})
 }
 
+let loadDatepickerTheme = () => {
+	$("body").on("click", ".fb-date-input", function(){
+		let fieldID = $(this).attr("id");
+		let fieldTheme = formBuildingJSON.form_fields.filter( i => i.field.field_id == fieldID)[0].field.datepicker_settings.theme;
+		$.get(`${datepicker_theme_dir}/${fieldTheme}.css`, function(resp){
+			$("#fb-datepicker-theme-styles").text(resp);
+		})
+	})
+}
 

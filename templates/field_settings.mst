@@ -38,6 +38,16 @@
 {{/placeholder}}
 
 
+{{#isDate}}
+<div class="form-group">
+	<label>Datepicker Theme:</label>
+	<select class="form-control field-setting border-0" id="datepicker_theme" name="datepicker_theme" data-id="{{field_id}}">
+		<option value="">Default</option>
+		{{{datepicker_theme_options}}}
+	</select>
+</div>
+{{/isDate}}
+
 <div class="form-group">
 	<label>Custom Classes:</label>
 	<input type="text" class="form-control field-setting custom-class-input" name="custom_classes" data-id="{{field_id}}" value="{{#custom_classes}}{{custom_classes}}{{/custom_classes}}">
