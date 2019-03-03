@@ -442,7 +442,7 @@
 				"id" : "13",
 				"visibility" : "s",
 				"tooltip" : "Select a File",
-				"width_class": "col-sm-6",
+				"width_class": "col-sm-12",
 				"wrapper" : {
 					"tag" : "div",
 					"attr" : [{"class":"form-group"}],
@@ -456,6 +456,33 @@
 				"input" : {
 					"tag" : "input",
 					"attr" : [{"type":"file"}, {"value":""}, {"class":"custom-file-input"}, {"placeholder":"Email"}]
+				},
+				"conditional_logic" : {
+					"set" : false,
+					"visibility" : "s(SHOW) or h(HIDE)",
+					"if" : {
+						"field" : "field_0",
+						"condition" : "==",
+						"value" : "other"
+					}
+				}
+			}
+		},
+		{
+			"field" : {
+				"field_name" : "Heading",
+				"id" : "14",
+				"visibility" : "s",
+				"width_class": "col-sm-12",
+				"wrapper" : {
+					"tag" : "div",
+					"attr" : [],
+					"custom_classes" : ""
+				},
+				"heading" : {
+					"tag" : "h1",
+					"attr" : [],
+					"text" : "Heading"
 				},
 				"conditional_logic" : {
 					"set" : false,

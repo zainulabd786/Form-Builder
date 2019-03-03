@@ -231,18 +231,25 @@ let appendFieldsMarkup = () => {
 		i.field.wrapper.attr = addAttr(i.field.wrapper.attr, "class", fieldMainClass);
 		i.field.wrapper.attr = (i.field.wrapper.custom_classes) ? addAttr(i.field.wrapper.attr, "class", i.field.wrapper.custom_classes) : i.field.wrapper.attr; /*Add custom Class*/
 		obj.wrapperAttributes = generateTagAttributes(i.field.wrapper.attr)
-		obj.label = i.field.label.text;
+		obj.label = i.field.label ? i.field.label.text : "";
 		obj.tooltip = (i.field.tooltip) ? i.field.tooltip : false;
-		obj.label_placement = i.field.label.label_placement;
+		obj.label_placement = i.field.label ? i.field.label.label_placement : "";
 		obj.inputTag = (i.field.input && i.field.input.tag) ? i.field.input.tag : "";
 		if(i.field.input) i.field.input.attr = (i.field.input && i.field.input.attr) && addAttr(i.field.input.attr, "class", "fb-input")
 		obj.inputAttributes = (i.field.input && i.field.input.attr) ? generateTagAttributes(i.field.input.attr) : "";
 		obj.choices = (i.field.input && i.field.input.options) ? i.field.input.options : "";
-		obj.label_attributes = (i.field.label.attr) ? generateTagAttributes(i.field.label.attr) : "";
+		obj.label_attributes = (i.field.label) ? generateTagAttributes(i.field.label.attr) : "";
 		let required = (i.field.input) ? i.field.input.attr.filter(i => (i.required) && i.required) : "";
 		obj.required = (required.length) ? true : false 
 		if(i.field.id == 8) obj.address_fields = (i.field.address_fields) ? createMultiFieldObj(i.field.address_fields) : ""; 
 		if(i.field.id == 9) obj.name_fields = (i.field.name_fields) ? createMultiFieldObj(i.field.name_fields) : ""; 
+		if(i.field.id == 14){ /*for heading field*/
+			obj.heading = true;
+			obj.tag = i.field.heading.tag;
+			obj.headingText = i.field.heading.text;
+			obj.headingAttributes = generateTagAttributes(i.field.heading.attr);
+
+		}
 		readTemplate(`inputs/${i.field.field_name}.mst`).then( template => {
 			!isFieldClicked && $(".ui-sortable-placeholder").after(Mustache.render(template, obj)).fadeIn('slow');
 			isFieldClicked && (generateHTML(template, obj, formTag), isFieldClicked = false)
@@ -291,7 +298,6 @@ let generateTagAttributes = (data) => {
 }
 
 let selectField = (id) => {
-	console.log(formBuildingJSON)
 	$(formTag).find(`.${fieldMainClass}`).removeClass("fb-selected");
 	$("body").on("click",`.${fieldMainClass}`,function(){
 		if(!$(this).hasClass("fb-selected")){
@@ -328,17 +334,18 @@ let fieldInlineOptions = () => {
 
 let getFieldSettingsObject = (id) => {
 	let data = jQuery.extend(true, {}, formBuildingJSON);
-	console.log(data.form_fields)
 	data = data.form_fields.filter( i => parseInt(i.field.field_id) === parseInt(id) )[0].field;
 	let field = {};
 	let field_list_options = "";
 	let field_conditions_markup = "";
+	let isHeading = data.id == 14 ? true : false;
+	
 	field.field_id = data.field_id;
 	field.addr_true = false;
 	field.name_true = false;
 	field.placeholder = data.input ? getAttrVal(data.input.attr, "placeholder") : false;
 	field.type = data.field_name;
-	field.label = data.label.text;
+	field.label = data.label ? data.label.text : "";
 	field.tooltip = (data.tooltip) ? data.tooltip : false;
 	let required = (data.input) ? data.input.attr.filter(i => (i.required) && i.required) : "";
 	field.required = (required.length) ? required[0].required : false 
@@ -367,9 +374,11 @@ let getFieldSettingsObject = (id) => {
 	field_conditions_markup += " value='>'>LESS THAN</option>" ;
 
 	formBuildingJSON.form_fields.forEach(i=>{
+		let isHeading = i.field.id == 14 ? true : false;
+		let headOrLabel = isHeading ? "heading" : "label";
 		field_list_options += "<option ";
 		field_list_options += field.selected_val==i.field.field_id ? "selected" : "";
-		field_list_options += " value='"+i.field.field_id+"'>"+i.field.label.text+"</option>"
+		field_list_options += " value='"+i.field.field_id+"'>"+i.field[headOrLabel].text+"</option>"
 	})
 
 	field.field_condition_options = field_conditions_markup;
@@ -395,6 +404,15 @@ let getFieldSettingsObject = (id) => {
 		field.name_true = true;
 		field.first_name_disp = data.name_fields.first_name.set;
 		field.first_last_disp = data.name_fields.last_name.set;
+	}
+
+	if(isHeading){
+		field.isHeading = isHeading;
+		field.hTag = data.heading.tag;
+		field.hText = data.heading.text;
+		field.required = false;
+		field.tooltip = false;
+		field.label = false;
 	}
 
 	return field;
@@ -436,7 +454,6 @@ let onSettingChange = () => {
 		let fieldID = $(this).attr('data-id')
 		let setting_name = $(this).attr('name');
 		let setting_value = $(this).val();
-		console.log(setting_name)
 		formBuildingJSON.form_fields.forEach((val, index)=>{
 			if(val.field.field_id == fieldID){
 				let field = formBuildingJSON.form_fields[index].field;
@@ -536,7 +553,6 @@ let onSettingChange = () => {
 					case "placeholder_text":
 						field.input.attr = updateQSData(field.input.attr, "placeholder", setting_value);
 						$(`#${fieldID} input`).attr("placeholder", setting_value);
-						console.log(formBuildingJSON)
 					break;
 
 					case "custom_classes":
@@ -547,6 +563,15 @@ let onSettingChange = () => {
 
 					break;
 
+					case "heading_tag":
+						$(`#${fieldID} ${field.heading.tag}`).replaceWith(`<${setting_value}>${$(`#${fieldID} ${field.heading.tag}`).html()}</${setting_value}>`);
+						field.heading.tag = setting_value;
+					break;
+
+					case "heading_text":
+						field.heading.text = setting_value;
+						$(`#${fieldID} ${field.heading.tag}`).text(setting_value)
+					break;
 
 					case "conditional_logic_field_list":
 					case "conditional_logic_bool":
@@ -592,7 +617,7 @@ let applyConditionalLogic = () => {
 		hiddenFields.forEach(i => {
 			let ifCondition = i.field.conditional_logic.if
 			//console.log(input.val(), ifCondition, ifCondition.value);
-			compareConditionalLogic(input.val(), ifCondition.condition, ifCondition.value) ? 
+			!compareConditionalLogic(input.val(), ifCondition.condition, ifCondition.value) ? 
 				$(`#${i.field.field_id}`).addClass("fb-hidden") : $(`#${i.field.field_id}`).removeClass("fb-hidden")
 		});
 	})
@@ -693,7 +718,6 @@ let addChoice = () => {
 				field.input.options.push(optionVal);
 			}
 		});
-		console.log(formBuildingJSON);
 	})
 }
 
@@ -989,4 +1013,6 @@ let renderform = () => {
 		} ).catch(e => console.error(e))
 	} );
 }
+
+
 

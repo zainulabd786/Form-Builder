@@ -1,0 +1,3 @@
+<{{wrapperTag}} {{{wrapperAttributes}}}>
+	<{{tag}} {{headingAttributes}}>{{headingText}}</{{tag}}>
+</{{wrapperTag}}>

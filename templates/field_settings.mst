@@ -4,17 +4,31 @@
 	<input type="text" class="form-control field-setting" name="fieldName" data-id="{{field_id}}" value="{{#type}}{{type}}{{/type}}" disabled>
 </div>
 
-
+{{#label}}
 <div class="form-group">
 	<label>Field Label:</label>
 	<input type="text" class="form-control field-setting" name="label_text" data-id="{{field_id}}" value="{{#label}}{{label}}{{/label}}">
 </div>
+{{/label}}
 
+{{#isHeading}}
+<div class="form-group">
+	<label>Heading Tag:</label>
+	<input type="text" class="form-control field-setting" name="heading_tag" data-id="{{field_id}}" value="{{#hTag}}{{hTag}}{{/hTag}}">
+</div>
 
+<div class="form-group">
+	<label>Heading Text:</label>
+	<input type="text" class="form-control field-setting" name="heading_text" data-id="{{field_id}}" value="{{#hText}}{{hText}}{{/hText}}">
+</div>
+{{/isHeading}}
+
+{{#tooltip}}
 <div class="form-group">
 	<label>Helper Text:</label>
 	<input type="text" class="form-control field-setting" name="tooltip" data-id="{{field_id}}" value="{{#tooltip}}{{tooltip}}{{/tooltip}}">
 </div>
+{{/tooltip}}
 
 {{#placeholder}}
 <div class="form-group">
@@ -30,6 +44,7 @@
 </div>
 
 
+{{#required}}
 <div class="form-group">
 	<div class="form-check">
 	  <input class="form-check-input field-setting" name="input_attr_required" data-id="{{field_id}}" type="checkbox" value="required" id="required" {{#required}}checked{{/required}}>
@@ -38,6 +53,7 @@
 	  </label>
 	</div>
 </div>
+{{/required}}
 
 <div class="form-group">
 	<label>Visibility: </label>
