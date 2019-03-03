@@ -137,12 +137,7 @@
 
         <div id="fb-preview" class="tab-pane fade">
           <!-- Preview Tab -->
-          <div class="row">
-            <!-- row -->
-            <div class="col-md-12">
-              <h1>preview</h1>
-            </div>
-          </div><!-- row -->
+          
         </div><!-- Preview Tab -->
 
         <div id="fb-custom-css" class="tab-pane fade">
