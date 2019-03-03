@@ -27,7 +27,7 @@ const formBuildingJSON = {
 				"client_ajax_url": "https://example.com/file.php",
 				"button" : {
 					"text" : "Submit",
-					"attr" : [ {"id":"form-id-1"}, {"type":"button"} ],
+					"attr" : [ {"type":"button"} ],
 					"custom_classes" : "btn btn-primary"
 				}
 			},
@@ -92,10 +92,13 @@ let bindEvents = () => {
 	clickAppendField();
 	loadSavedStyle();
 	renderform();
+	formEmbedCode();
+	buttonOldClass();
+	saveForm();
 }
 
 let loadSavedStyle = () => {
-	$(".form-builder-container style").text(formBuildingJSON.custom_css);
+	$("#fb-custom-css-styles").text(formBuildingJSON.custom_css);
 	$(".fb-form-title").text(formBuildingJSON.form_settings.basics.title)
 }
 
@@ -193,8 +196,9 @@ let afterDrop = (event, ui) => {
 		alreadyInFormFields.push(fieldData[0].field.field_id);
 		formBuildingJSON.form_fields.push(fieldData[0]);
 		appendFieldsMarkup()
-		setTimeout(()=>reArrangeJSON(), 100)
-		setTimeout(()=>selectField(fieldData[0].field.field_id), 100)
+		setTimeout(()=>appendSubmitButton(), 250)
+		setTimeout(()=>reArrangeJSON(), 199)
+		setTimeout(()=>selectField(fieldData[0].field.field_id), 199)
 	})
 	$(ui.helper[0]).remove()
 }
@@ -208,8 +212,10 @@ let clickAppendField = () => {
 			alreadyInFormFields.push(fieldData[0].field.field_id);
 			formBuildingJSON.form_fields.push(fieldData[0]);
 			appendFieldsMarkup()
-			setTimeout(()=>reArrangeJSON(), 100)
-			setTimeout(()=>selectField(fieldData[0].field.field_id), 100)
+			appendSubmitButton()
+			setTimeout(()=>appendSubmitButton(), 250)
+			setTimeout(()=>reArrangeJSON(), 199)
+			setTimeout(()=>selectField(fieldData[0].field.field_id), 199)
 		})
 	})
 }
@@ -244,6 +250,7 @@ let appendFieldsMarkup = () => {
 		obj.label_placement = i.field.label ? i.field.label.label_placement : "";
 		obj.inputTag = (i.field.input && i.field.input.tag) ? i.field.input.tag : "";
 		if(i.field.input) i.field.input.attr = (i.field.input && i.field.input.attr) && addAttr(i.field.input.attr, "class", "fb-input")
+		if(i.field.input) i.field.input.attr = (i.field.input && i.field.input.attr) && addAttr(i.field.input.attr, "name", i.field.field_name+"_"+Date.now())
 		obj.inputAttributes = (i.field.input && i.field.input.attr) ? generateTagAttributes(i.field.input.attr) : "";
 		obj.choices = (i.field.input && i.field.input.options) ? i.field.input.options : "";
 		obj.label_attributes = (i.field.label) ? generateTagAttributes(i.field.label.attr) : "";
@@ -274,6 +281,7 @@ let createMultiFieldObj = (data) => {
 	arr.forEach(i=>{
 		i.attr = !i.set ? addAttr(i.attr, "class", "fb-hidden") : i.attr
 		i.attr = addAttr(i.attr, "class", "fb-input")
+		i.attr = addAttr(i.attr, "name", getAttrVal(i.attr, "id")+"_"+Date.now())
 		i.attr = generateTagAttributes(i.attr);
 	})
 	return arr;
@@ -785,10 +793,14 @@ let updateFormSettings = () => {
 
 			case "fb_form_button_text":
 				formBuildingJSON.form_settings.basics.button.text = settingVal;
+				$(".fb-submit-button").text(settingVal);
 			break;
 
 			case "fb_form_button_class":
 				formBuildingJSON.form_settings.basics.button.custom_classes = settingVal;
+				let oldVal = $(this).data('val');
+				$(".fb-submit-button").removeClass(oldVal);
+				$(".fb-submit-button").addClass(settingVal);
 			break;
 
 			case "confirmation_type":
@@ -873,7 +885,7 @@ let updateFormSettings = () => {
 
 			case "custom_css_text":
 				formBuildingJSON.custom_css = settingVal;
-				$(".form-builder-container style").text(settingVal);
+				$("#fb-custom-css-styles").text(settingVal);
 			break;
 		}
 	})
@@ -993,9 +1005,45 @@ let renderform = () => {
 		$("#fb-preview").html($(".fb-form").html())
 		$("#fb-preview .form-field").removeClass("fb-selected");
 		$("#fb-preview .fb-inline-options").remove()
+		$("#fb-preview .fb-hidden").attr("required", false)
+		$("#fb-preview .fb-hidden").css({"display":"none", "visibility":"hidden"});
 		initFlatpicker()
 	})
 }
 
+
+let formEmbedCode = () => {
+	$("body").on("click", ".fb-embed-button", function(){
+		$(".preview-tab").trigger("click");
+		$("#fb-preview .external-scripts-container").append('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script><script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>')
+		//let scriptsCode = "if(!window.jQuery)"
+		let embedCode = $("#fb-preview").html();
+		$(".embed-text").val(embedCode);
+	})
+}
+
+let appendSubmitButton = () => {
+	$(".fb-submit-button").remove();
+	let buttonOpt = formBuildingJSON.form_settings.basics.button;
+	buttonOpt.attr = addAttr(buttonOpt.attr, "class", buttonOpt.custom_classes);
+	buttonOpt.attr = addAttr(buttonOpt.attr, "class", "fb-submit-button");
+	console.log(buttonOpt)
+	$(formTag).append(`<button ${generateTagAttributes(buttonOpt.attr)}>${buttonOpt.text}</button>`)
+}
+
+let buttonOldClass = () => {
+	$("body").on("focusin", "#fb_form_button_class", function(){
+		$(this).data('val', $(this).val());
+	})
+}
+
+let saveForm = () => {
+	$("body").on("click", "#fb-save-form", function(){
+		let ajax_url = formBuildingJSON.form_settings.basics.admin_ajax_url;
+		$.post(ajax_url, formBuildingJSON, function(resp){
+			console.log(resp);
+		})
+	})
+}
 
 
