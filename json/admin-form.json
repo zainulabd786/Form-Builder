@@ -217,7 +217,7 @@
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"text"}, {"class":"form-control"}, {"id":"date"}]
+					"attr" : [{"type":"text"}, {"class":"form-control"}]
 				},
 				"conditional_logic" : {
 					"set" : false,
@@ -233,8 +233,7 @@
 					"minDate" : {"key":"days|weeks|months|years", "val":"2"},
 					"maxDate" : {"key":"days|weeks|months|years", "val":"2"},
 					"disabled_dates" : ["2013-03-14","2013-03-15","2013-03-16"],
-					"theme" : "dark",
-					"css": "CSS GOES HERE"
+					"theme" : "dark"
 				}
 			}
 		},

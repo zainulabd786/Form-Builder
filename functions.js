@@ -96,6 +96,7 @@ let bindEvents = () => {
 
 let loadSavedStyle = () => {
 	$(".form-builder-container style").text(formBuildingJSON.custom_css);
+	$(".fb-form-title").text(formBuildingJSON.form_settings.basics.title)
 }
 
 let createFormSettingsObject = () => {
@@ -213,7 +214,7 @@ let clickAppendField = () => {
 	})
 }
 
-let initFlatpicker = () => $("#date").flatpickr();
+let initFlatpicker = () => $(".fb-date-input").flatpickr();
 
 let appendFieldsMarkup = () => {
 	let data = jQuery.extend(true, {}, formBuildingJSON);
@@ -236,6 +237,7 @@ let appendFieldsMarkup = () => {
 		i.field.wrapper.attr = (i.field.width_class) ? addAttr(i.field.wrapper.attr, "class", i.field.width_class) : i.field.wrapper.attr;
 		i.field.wrapper.attr = addAttr(i.field.wrapper.attr, "class", fieldMainClass);
 		i.field.wrapper.attr = (i.field.wrapper.custom_classes) ? addAttr(i.field.wrapper.attr, "class", i.field.wrapper.custom_classes) : i.field.wrapper.attr; /*Add custom Class*/
+		if(i.field.id == 7) i.field.wrapper.attr = addAttr(i.field.wrapper.attr, "class", "fb-date-input")
 		obj.wrapperAttributes = generateTagAttributes(i.field.wrapper.attr)
 		obj.label = i.field.label ? i.field.label.text : "";
 		obj.tooltip = (i.field.tooltip) ? i.field.tooltip : false;
@@ -766,6 +768,7 @@ let updateFormSettings = () => {
 		switch(settingName){
 			case "fb_form_title":
 				formBuildingJSON.form_settings.basics.title = settingVal;
+				$(".fb-form-title").text(settingVal);
 			break;
 
 			case "fb_form_description":
@@ -990,6 +993,7 @@ let renderform = () => {
 		$("#fb-preview").html($(".fb-form").html())
 		$("#fb-preview .form-field").removeClass("fb-selected");
 		$("#fb-preview .fb-inline-options").remove()
+		initFlatpicker()
 	})
 }
 

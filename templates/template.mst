@@ -55,6 +55,7 @@
             <div class="col-md-8 fb-build-area">
               <!-- col-md-8 -->
               <div class="fb-form">
+                <h4 class="fb-form-title"></h4>
                 <form class="droppable sortable row">
 
                 </form>
