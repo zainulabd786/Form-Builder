@@ -25,7 +25,7 @@ const formBuildingJSON = {
 			"basics" : {
 				"title" : "My Custom Form",
 				"description": "This is my custom form description",
-				"admin_ajax_url": "https://example.com/file.php",
+				"admin_ajax_url": "http://localhost/test.php",
 				"client_ajax_url": "https://example.com/file.php",
 				"button" : {
 					"text" : "Submit",
@@ -98,6 +98,11 @@ let bindEvents = () => {
 	buttonOldClass();
 	loadDatepickerTheme();
 	saveForm();
+	generateFormID();
+}
+
+let generateFormID = () => {
+	formBuildingJSON.form_id = Date.now()
 }
 
 let loadSavedStyle = () => {
@@ -772,13 +777,13 @@ let addChoice = () => {
 								'<label class="custom-control-label" for="'+optionVal+'"></label>'+
 							'</div>';
 		let checkboxMarkup = '<div data-id="'+optionVal+'" class="custom-control custom-checkbox">'+
-								'<{{inputTag}} {{{inputAttributes}}} name="'+optionVal+'" value="'+optionVal+'" id="'+optionVal+'"><span class="choice-text">'+optionVal+'</span>'+
+								'<'+getUniqueFieldData(fieldID).field.input.tag+' '+generateTagAttributes(getUniqueFieldData(fieldID).field.input.attr)+' name="'+optionVal+'" value="'+optionVal+'" id="'+optionVal+'"><span class="choice-text">'+optionVal+'</span>'+
 								'<label for="'+optionVal+'" class="custom-control-label"></label>'+
 							'</div>';
 		let dropdownMarkup = `<option value="${optionVal}">${optionVal}</option>`;
 		$(`#${fieldID} select`).append(dropdownMarkup)
 		$(`#${fieldID} .fb-radio-wrapper`).append(radioMarkup)
-		$(`#${fieldID} .fb-check-wrapper`).append(radioMarkup)
+		$(`#${fieldID} .fb-check-wrapper`).append(checkboxMarkup)
 		$(".fb-choices-wrapper").append(settingMarkup);
 
 		formBuildingJSON.form_fields.forEach((val, index)=>{
@@ -1102,6 +1107,7 @@ let buttonOldClass = () => {
 let saveForm = () => {
 	$("body").on("click", "#fb-save-form", function(){
 		let ajax_url = formBuildingJSON.form_settings.basics.admin_ajax_url;
+		formBuildingJSON.action = "save_form";
 		$.post(ajax_url, formBuildingJSON, function(resp){
 			console.log(resp);
 		})
