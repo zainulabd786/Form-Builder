@@ -37,6 +37,13 @@
 </div>
 {{/placeholder}}
 
+{{#is_default_value}}
+<div class="form-group">
+	<label>Default Value:</label>
+	<input type="text" class="form-control field-setting" name="default_value" data-id="{{field_id}}" value="{{#default_value}}{{default_value}}{{/default_value}}">
+</div>
+{{/is_default_value}}
+
 
 {{#isDate}}
 <div class="form-group">

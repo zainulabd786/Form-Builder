@@ -19,7 +19,7 @@
 				},
 				"input" : {
 					"tag" : "input",
-					"attr" : [{"type":"text"}, {"class":"form-control"}, {"placeholder":"Text"}, {"required":"required"}]
+					"attr" : [{"type":"text"}, {"class":"form-control"}, {"placeholder":"Text"}, {"required":"required"}, {"value":"default"}]
 				},
 				"conditional_logic" : {
 					"set" : true,

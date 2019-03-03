@@ -266,7 +266,9 @@ let appendFieldsMarkup = () => {
 			obj.tag = i.field.heading.tag;
 			obj.headingText = i.field.heading.text;
 			obj.headingAttributes = generateTagAttributes(i.field.heading.attr);
-
+		}
+		if(i.field.id == 4 || i.field.id == 5 || i.field.id == 6){
+			obj.default_value = i.field.input.selected;
 		}
 		readTemplate(`inputs/${i.field.field_name}.mst`).then( template => {
 			!isFieldClicked && $(".ui-sortable-placeholder").after(Mustache.render(template, obj)).fadeIn('slow');
@@ -407,6 +409,21 @@ let getFieldSettingsObject = (id) => {
 	if(data.id == 4 || data.id == 5 || data.id == 6){ /*radio Buttons, checkboes, dropdown*/
 		field.choices = data.input.options;
 		field.choiceField = true;
+	} 
+
+	if(data.input) {
+		if(data.input.selected){
+			field.is_default_value = true;
+			field.default_value = Array.isArray(data.input.selected) ? data.input.selected.join(",") : data.input.selected;
+			Array.isArray(data.input.selected) ? data.input.selected.forEach(i => {
+				$(`#${field.field_id} #${i}`).attr("checked", true);
+			}) : $(`#${field.field_id} option[value="${data.input.selected}"]`).attr("selected", true)
+			
+		} else{
+			field.is_default_value = true;
+			field.default_value = getAttrVal(data.input.attr, "value");	
+		}
+		
 	}
 
 	if(data.id == 8){ /*address field*/
@@ -605,6 +622,24 @@ let onSettingChange = () => {
 
 					case "datepicker_theme":
 						field.datepicker_settings.theme = setting_value;
+					break;
+
+					case "default_value":
+						if(field.id == 4){ /*Radio*/
+							field.input.selected = [setting_value];
+							$(`#${fieldID} #${setting_value}`).attr("checked", true);
+						} else if(field.id == 5) { /*Checkbox*/
+							$(`#${fieldID} input`).attr("checked", false)
+							field.input.selected = setting_value.split(",");
+							setting_value.split(",").forEach(i=>$(`#${fieldID} #${i}`).attr("checked", true))
+						} else if(field.id == 6){ /*dropdown*/
+							field.input.selected = setting_value;
+							$(`#${fieldID} option[value='${setting_value}']`).attr("selected", true)
+						} else{
+							field.input.attr = updateQSData(field.input.attr, "value", setting_value)
+							$(`#${fieldID} input`).val(setting_value);
+						}
+						console.log(formBuildingJSON)
 					break;
 
 					case "conditional_logic_field_list":
@@ -1033,13 +1068,19 @@ let renderform = () => {
 let formEmbedCode = () => {
 	$("body").on("click", ".fb-embed-button", function(){
 		$(".preview-tab").trigger("click");
+		let embedCode;
 		let scriptsNstyles = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">'+
 							'<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>'+
 							'<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>'+
-							'<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>';
+							'<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>'+
+							'<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>'+
+							'<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">'+
+							'<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>';
+
 		$("#fb-preview .external-scripts-container").append(scriptsNstyles);
-		//let scriptsCode = "if(!window.jQuery)"
-		let embedCode = $("#fb-preview").html();
+		embedCode = "";
+		embedCode += $("#fb-preview").html();
+		embedCode += '<script>jQuery(".fb-date-input input").flatpickr();</script>';
 		$(".embed-text").val(embedCode);
 	})
 }
@@ -1049,7 +1090,6 @@ let appendSubmitButton = () => {
 	let buttonOpt = formBuildingJSON.form_settings.basics.button;
 	buttonOpt.attr = addAttr(buttonOpt.attr, "class", buttonOpt.custom_classes);
 	buttonOpt.attr = addAttr(buttonOpt.attr, "class", "fb-submit-button");
-	console.log(buttonOpt)
 	$(formTag).append(`<button ${generateTagAttributes(buttonOpt.attr)}>${buttonOpt.text}</button>`)
 }
 
@@ -1073,7 +1113,7 @@ let loadDatepickerTheme = () => {
 		let fieldID = $(this).attr("id");
 		let fieldTheme = formBuildingJSON.form_fields.filter( i => i.field.field_id == fieldID)[0].field.datepicker_settings.theme;
 		$.get(`${datepicker_theme_dir}/${fieldTheme}.css`, function(resp){
-			$("#fb-datepicker-theme-styles").text(resp);
+			$(".fb-datepicker-theme-styles").text(resp);
 		})
 	})
 }

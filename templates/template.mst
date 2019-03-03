@@ -82,7 +82,7 @@
                   .fb-full-width{width:100%}.fb-fields-list{list-style-type:none;padding:10px}.fb-fields-list li,form li{box-shadow:1px 1px 5px -2px #000;margin:10px 5px;padding:10px;text-align:center;background-color:#f2f2f2}.fb-form{display:flex;justify-content:center;align-items:center;flex-direction:column;background-color:#f2f2f2}.fb-form form{width:80%;min-height:100px;margin:10px;background-color:#fff;padding:15px}.form-check label{display:block}.drop-hover{background-color:red}.fb-selected{border:2px dotted #07C;padding:10px;background:#d5eeff}.fb-hidden{opacity:.5}.required-asterick{color:red}.input-group{margin:5px 0}.fb-add-choice{float:right}.field-col-icons img{max-width:20px;cursor:pointer}.fb-inline-options .field-action{cursor:pointer}
                 </style>
                 <style id="fb-custom-css-styles"></style>
-                <style id="fb-datepicker-theme-styles"></style>
+                <style class="fb-datepicker-theme-styles"></style>
                 <h4 class="fb-form-title"></h4>
                 <form class="droppable sortable row">
 
@@ -181,6 +181,6 @@
   </div><!-- BS row -->
 
   <div class="row">
-    <button type="button" class="btn btn-primary" id="fb-save-form">Save Form</button>
+    <button type="button" class="btn btn-primary my-10" id="fb-save-form">Save Form</button>
   </div>
 </div>
