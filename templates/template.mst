@@ -8,7 +8,7 @@
     <div class="col-12">
       <div class="row">
         <div class="col-12 col-md-5">
-          <select class="form-control d-block">
+          <select id="fb-forms-dropdown" class="form-control d-block">
             <option>Default select</option>
             <option>Default 1</option>
             <option>Default 2</option>
@@ -106,11 +106,20 @@
                 <div id="fb-add-field" class="tab-pane active">
                   <!-- Add Field Tab -->
                   <ul class="fb-fields-list">
-                    {{#fields}}
-                    {{#field}}
-                    <li class="draggable draggable-field" data-id="{{field.id}}">{{field.field_name}}</li>
-                    {{/field}}
-                    {{/fields}}
+                    <li class="draggable draggable-field ui-draggable ui-draggable-handle" data-id="1">Text</li>
+                    <li class="draggable draggable-field ui-draggable ui-draggable-handle" data-id="2">TextArea</li>
+                    <li class="draggable draggable-field ui-draggable ui-draggable-handle" data-id="3">Number</li>
+                    <li class="draggable draggable-field ui-draggable ui-draggable-handle" data-id="4">Radio Buttons</li>
+                    <li class="draggable draggable-field ui-draggable ui-draggable-handle" data-id="5">CheckBoxes</li>
+                    <li class="draggable draggable-field ui-draggable ui-draggable-handle" data-id="6">Dropdown</li>
+                    <li class="draggable draggable-field ui-draggable ui-draggable-handle" data-id="7">Date</li>
+                    <li class="draggable draggable-field ui-draggable ui-draggable-handle" data-id="8">Address</li>
+                    <li class="draggable draggable-field ui-draggable ui-draggable-handle" data-id="9">Name</li>
+                    <li class="draggable draggable-field ui-draggable ui-draggable-handle" data-id="10">Phone</li>
+                    <li class="draggable draggable-field ui-draggable ui-draggable-handle" data-id="11">Website</li>
+                    <li class="draggable draggable-field ui-draggable ui-draggable-handle" data-id="12">Email</li>
+                    <li class="draggable draggable-field ui-draggable ui-draggable-handle" data-id="13">File</li>
+                    <li class="draggable draggable-field ui-draggable ui-draggable-handle" data-id="14">Heading</li>
                   </ul>
                 </div><!-- Add Field Tab -->
                 <div id="fb-field-settings" class="tab-pane fade">

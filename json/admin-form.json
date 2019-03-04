@@ -1,4 +1,50 @@
 {
+	"element" : "#form-builder",
+	"custom_css": "",
+	"form_settings" : {
+			"basics" : {
+				"title" : "My Custom Form",
+				"description": "This is my custom form description",
+				"admin_ajax_url": "http://localhost/test.php",
+				"client_ajax_url": "https://example.com/file.php",
+				"button" : {
+					"text" : "Submit",
+					"attr" : [ {"type":"button"} ],
+					"custom_classes" : "btn btn-primary"
+				}
+			},
+			"confirmation" : {
+				"type" : "m",
+				"message" : {
+					"text" : "Your Form Has been successfully submitted",
+					"wrapper" : "h1",
+					"attr" : [ {"id":"form-id-1"}, {"data-id":"54321"} ],
+					"custom_classes" : "alert alert-success"
+				},
+				"redirect" : {
+					"url" : "https://example.com",
+					"query_string" : [ {"message":"Thank you"}, {"form_id":"1"} ]
+				}
+			},
+			"notifications" : {
+				"admin" : {
+					"to" : [ "abc@edensolutions.co.in", "xyz@premierlister.com" ],
+					"from" : "{user-email}",
+					"reply_to" : "{user-email}",
+					"bcc" : [ "someone@something.com" ],
+					"subject" : "Received an order from {user-name}",
+					"message" : "You jus received an order from {user-name} for a session"
+				},
+				"user" : {
+					"to" : [ "{user-email}", "xyz@premierl==ter.com" ],
+					"from" : "{xyz@premierl==ter.com}",
+					"reply_to" : "{xyz@premierl==ter.com}",
+					"bcc" : [ "someone@something.com" ],
+					"subject" : "Your form has been submitted successfully",
+					"message" : "Hi {user-name}, you have successfully submitted the form at our website"
+				}
+			}
+	},
 	"fields" : [
 		{
 			"field" : {

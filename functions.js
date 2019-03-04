@@ -14,71 +14,31 @@ const fieldMainClass = "form-field";
 const customCSSTemplate = "custom_css.mst";
 const customCSScontainer = "#fb-custom-css";
 let isFieldClicked = false;
+let formSelected = false;
+let isDropped = false;
 const assetsPath = "assets";
 const datepicker_themes = ["dark", "material_blue", "material_green", "material_red", "orange", "airbnb", "confetti"];
 const orderArr = [];
 const alreadyInFormFields = [];
-const formBuildingJSON = {
-	"form_fields" : [],
-	"custom_css": ".red{color:red}",
-	"form_settings" : {
-			"basics" : {
-				"title" : "My Custom Form",
-				"description": "This is my custom form description",
-				"admin_ajax_url": "http://localhost/test.php",
-				"client_ajax_url": "https://example.com/file.php",
-				"button" : {
-					"text" : "Submit",
-					"attr" : [ {"type":"button"} ],
-					"custom_classes" : "btn btn-primary"
-				}
-			},
-			"confirmation" : {
-				"type" : "m",
-				"message" : {
-					"text" : "Your Form Has been successfully submitted",
-					"wrapper" : "h1",
-					"attr" : [ {"id":"form-id-1"}, {"data-id":"54321"} ],
-					"custom_classes" : "alert alert-success"
-				},
-				"redirect" : {
-					"url" : "https://example.com",
-					"query_string" : [ {"message":"Thank you"}, {"form_id":"1"} ]
-				}
-			},
-			"notifications" : {
-				"admin" : {
-					"to" : [ "abc@edensolutions.co.in", "xyz@premierlister.com" ],
-					"from" : "{user-email}",
-					"reply_to" : "{user-email}",
-					"bcc" : [ "someone@something.com" ],
-					"subject" : "Received an order from {user-name}",
-					"message" : "You jus received an order from {user-name} for a session"
-				},
-				"user" : {
-					"to" : [ "{user-email}", "xyz@premierl==ter.com" ],
-					"from" : "{xyz@premierl==ter.com}",
-					"reply_to" : "{xyz@premierl==ter.com}",
-					"bcc" : [ "someone@something.com" ],
-					"subject" : "Your form has been submitted successfully",
-					"message" : "Hi {user-name}, you have successfully submitted the form at our website"
-				}
-			}
-		}
+let formBuildingJSON = {
+	"form_fields" : []
 };
+let ajax_url;
+
 
 export default function formBuilder(opts){
+	getFormSettings()
 	readTemplate("template.mst").then( template => {
 		generateHTML(template, opts, opts.element);
-		initDrag()
-		initSortable()
-		bindEvents()
+		initEvents()
 	} ).catch(e => console.error(e))
 }
 
 export let readJSON = async (file) => $.get(`${jsonPath}/${file}`)
 
-let bindEvents = () => {
+let initEvents = () => {
+	initDrag()
+	initSortable()
 	applyConditionalLogic();
 	removeChoice();
 	updateChoice();
@@ -99,6 +59,8 @@ let bindEvents = () => {
 	loadDatepickerTheme();
 	saveForm();
 	generateFormID();
+	fetchSavedForms();
+	loadSelectedFrom()
 }
 
 let generateFormID = () => {
@@ -137,10 +99,18 @@ let generateHTML = (template, data, element) => {
 }
 
 let getFieldData = async (id) => {
-
 	return await readJSON("admin-form.json").then( i => {
 		let fieldData = i.fields.filter( j => parseInt(j.field.id) === parseInt(id));
 		return fieldData;
+	} ).catch( e => console.error(e) );
+
+}
+
+let getFormSettings = () => {
+	readJSON("admin-form.json").then( i => {
+		formBuildingJSON.form_settings = jQuery.extend(true, {}, i.form_settings);
+		ajax_url = formBuildingJSON.form_settings.basics.admin_ajax_url;
+		console.log(formBuildingJSON)
 	} ).catch( e => console.error(e) );
 
 }
@@ -158,13 +128,6 @@ let getUniqueFieldData = (id) => {
 	return fieldData[0];
 }
 
-/*let initDrop = () => {
-	$( ".droppable" ).droppable({
-		activeClass: "ui-state-highlight",
-		hoverClass: "drop-hover",
-		drop: afterDrop
-	})
-}*/
 
 let initDrag = () => {
 	$( ".draggable" ).draggable({
@@ -199,7 +162,9 @@ let reArrangeJSON = () => {
 let afterDrop = (event, ui) => {
 	//let fieldID = ui.item.attr("data-id")	
 	let fieldID = $(event.target).attr("data-id")
+	isDropped = !isDropped;
 	getFieldData(fieldID).then(fieldData => {
+		console.log(fieldData)
 		fieldData[0].field.field_id = Date.now();
 		alreadyInFormFields.push(fieldData[0].field.field_id);
 		formBuildingJSON.form_fields.push(fieldData[0]);
@@ -232,15 +197,14 @@ let initFlatpicker = () => $(".fb-date-input input").flatpickr();
 
 let appendFieldsMarkup = () => {
 	let data = jQuery.extend(true, {}, formBuildingJSON);
-	
 	$(`.${fieldMainClass}`).each(function(){
 		let id = $(this).attr("id");
 		data.form_fields.forEach((v, i)=>{
 			v.field.field_id == id && data.form_fields.splice(i, 1);
 		})
 	})
-	
-	data.form_fields.forEach( i => {
+
+	data.form_fields.forEach( (i, k) => {
 		let obj = {};
 		obj.wrapperTag = i.field.wrapper.tag;
 		//obj.field_id = (i.field.field_id) ? i.field.wrapper.attr.push({"id":i.field.field_id}) : ""; 
@@ -276,8 +240,16 @@ let appendFieldsMarkup = () => {
 			obj.default_value = i.field.input.selected;
 		}
 		readTemplate(`inputs/${i.field.field_name}.mst`).then( template => {
-			!isFieldClicked && $(".ui-sortable-placeholder").after(Mustache.render(template, obj)).fadeIn('slow');
-			isFieldClicked && (generateHTML(template, obj, formTag), isFieldClicked = false)
+			
+			if(formSelected){
+				generateHTML(template, obj, formTag)
+			} else if(isFieldClicked){
+				generateHTML(template, obj, formTag);
+				isFieldClicked = false;
+			} else if (isDropped){
+				$(".ui-sortable-placeholder").after(Mustache.render(template, obj)).fadeIn('slow'); 
+				isDropped = false;
+			}
 			obj = {};
 			i.field.id == 7 && initFlatpicker()
 		} ).catch(e => console.error(e))
@@ -498,7 +470,7 @@ let addAttr = (attr, key, value) => {
 }
 
 
-let ifKeyExist = ( arr, key ) => (arr.find(v => v[ key ])) ? true : false;
+let ifKeyExist = ( arr, key ) => (Array.isArray(arr) && arr.find(v => v[ key ])) ? true : false;
 
 
 let onSettingChange = () => {
@@ -1106,9 +1078,10 @@ let buttonOldClass = () => {
 
 let saveForm = () => {
 	$("body").on("click", "#fb-save-form", function(){
-		let ajax_url = formBuildingJSON.form_settings.basics.admin_ajax_url;
-		formBuildingJSON.action = "save_form";
-		$.post(ajax_url, formBuildingJSON, function(resp){
+		let data = {};
+		data.action = "save_form";
+		data.data = formBuildingJSON;
+		$.post(ajax_url, data, function(resp){
 			console.log(resp);
 		})
 	})
@@ -1124,3 +1097,28 @@ let loadDatepickerTheme = () => {
 	})
 }
 
+let fetchSavedForms = () => {
+	$.get(ajax_url, { action : "get_forms"}, function(resp){
+		resp = JSON.parse(resp);
+		let optionsMarkup = "";
+		resp.forEach(i => optionsMarkup += `<option value="${i.form_id}">${i.form_name}</option>`);
+		$("#fb-forms-dropdown").html(optionsMarkup);
+	})
+}
+
+/*let loadSelectedFrom = () => {
+	$("body").on("change", "#fb-forms-dropdown", function(){
+		formSelected = true;
+		let formID = $(this).val();
+		$.post(ajax_url, {action:"get_form_data_by_id", formID: formID}, function(resp){
+			resp = JSON.parse(resp)
+			formBuildingJSON = resp;
+			$(formTag).empty()
+			appendFieldsMarkup()
+			selectField(formBuildingJSON.form_fields[0].field.field_id);
+			//appendSubmitButton();
+			//initEvents()
+		})
+	})
+}
+*/
