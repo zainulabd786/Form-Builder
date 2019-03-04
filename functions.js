@@ -60,7 +60,7 @@ let initEvents = () => {
 	saveForm();
 	generateFormID();
 	fetchSavedForms();
-	loadSelectedFrom()
+	//loadSelectedFrom()
 }
 
 let generateFormID = () => {
