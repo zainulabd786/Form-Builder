@@ -1,4 +1,3 @@
-
 <div class="container py-5 form-builder-container">
   <div class="row mb-5">
     <div class="col-12">
@@ -52,7 +51,7 @@
   <div class="row">
     <div class="col-12">
       <!-- ------------------------Form Tabs---------------- -->
-      <ul class="nav nav-tabs fb-full-width" role="tablist">
+      <ul class="nav nav-tabs w-100 mb-4 main-tab" role="tablist">
         <!-- Form Tabs -->
         <li class="nav-item">
           <a class="nav-link active" data-toggle="tab" href="#fb-build-it">Build it</a>
@@ -66,9 +65,10 @@
         <li class="nav-item">
           <a class="nav-link preview-tab" data-toggle="tab" href="#fb-preview">Preview</a>
         </li>
+        <li class="nav-item ml-auto d-flex"><button type="button" class="d-flex flex-grow-1 btn btn-lg btn-primary rounded-0" id="fb-save-form">Save Form</button></li>
       </ul><!-- Form Tabs -->
 
-      <div class="tab-content fb-full-width">
+      <div class="tab-content w-100">
         <!-- Form Tab Content -->
         <div id="fb-build-it" class="tab-pane active">
           <!-- Build it Tab -->
@@ -76,15 +76,13 @@
             <!-- row -->
             <div class="col-md-8 fb-build-area">
               <!-- col-md-8 -->
-              <div class="fb-form">
+              <div class="fb-form py-4 px-3">
                 <div class="external-scripts-container"></div>
-                <style>
-                  .fb-full-width{width:100%}.fb-fields-list{list-style-type:none;padding:10px}.fb-fields-list li,form li{box-shadow:1px 1px 5px -2px #000;margin:10px 5px;padding:10px;text-align:center;background-color:#f2f2f2}.fb-form{display:flex;justify-content:center;align-items:center;flex-direction:column;background-color:#f2f2f2}.fb-form form{width:80%;min-height:100px;margin:10px;background-color:#fff;padding:15px}.form-check label{display:block}.drop-hover{background-color:red}.fb-selected{border:2px dotted #07C;padding:10px;background:#d5eeff}.fb-hidden{opacity:.5}.required-asterick{color:red}.input-group{margin:5px 0}.fb-add-choice{float:right}.field-col-icons img{max-width:20px;cursor:pointer}.fb-inline-options .field-action{cursor:pointer}
-                </style>
+                <style></style>
                 <style id="fb-custom-css-styles"></style>
                 <style class="fb-datepicker-theme-styles"></style>
-                <h4 class="fb-form-title"></h4>
-                <form class="droppable sortable row">
+                <h4 class="fb-form-title mb-4"></h4>
+                <form class="droppable droppable-style sortable row">
 
                 </form>
               </div>
@@ -92,7 +90,7 @@
             <div class="col-md-4">
               <!-- col-md-4 -->
               <!---------------------------------- Field Tabs---------------------------- -->
-              <ul class="nav nav-tabs" role="tablist">
+              <ul class="nav nav-tabs section-tab mb-4" role="tablist">
                 <!-- field Tabs -->
                 <li class="nav-item">
                   <a class="nav-link active" data-toggle="tab" href="#fb-add-field">Add Field</a>
@@ -105,7 +103,7 @@
                 <!-- Form Tab Content -->
                 <div id="fb-add-field" class="tab-pane active">
                   <!-- Add Field Tab -->
-                  <ul class="fb-fields-list">
+                  <ul class="nav flex-column fb-fields-list">
                     <li class="draggable draggable-field ui-draggable ui-draggable-handle" data-id="1">Text</li>
                     <li class="draggable draggable-field ui-draggable ui-draggable-handle" data-id="2">TextArea</li>
                     <li class="draggable draggable-field ui-draggable ui-draggable-handle" data-id="3">Number</li>
@@ -124,9 +122,9 @@
                 </div><!-- Add Field Tab -->
                 <div id="fb-field-settings" class="tab-pane fade">
                   <!-- Settings Tab -->
-                  <from class="settings-wrapper">
+                  <form class="settings-wrapper">
 
-                    </form>
+                  </form>
                 </div><!-- Settings Tab -->
               </div><!-- Form Tab Content -->
               <!---------------------------------- Field Tabs---------------------------- -->
@@ -139,7 +137,7 @@
           <div class="row">
             <!-- row -->
             <div class="col-md-12">
-              <ul class="nav nav-tabs" role="tablist">
+              <ul class="nav nav-tabs section-tab mb-4" role="tablist">
                 <!-- Form Settings Tabs -->
                 <li class="nav-item">
                   <a class="nav-link active" data-toggle="tab" href="#fb-basic-settings">Basic</a>
@@ -155,17 +153,17 @@
                 <!-- Form Tab Content -->
                 <div id="fb-basic-settings" class="tab-pane active">
                   <!-- Form Basic Settings Tab -->
-                  <h3>Basic Settings</h3>
+                  <h3 class="mb-4">Basic Settings</h3>
 
                 </div><!-- Form Basic Settings Tab -->
                 <div id="fb-confirmation-settings" class="tab-pane fade">
                   <!-- Form confirmation Settings Tab -->
-                  <h3>Confirmation Settings</h3>
+                  <h3 class="mb-4">Confirmation Settings</h3>
 
                 </div><!-- Form confirmation Settings Tab -->
                 <div id="fb-notifications-settings" class="tab-pane fade">
                   <!-- Form notification Settings Tab -->
-                  <h3>notification Settings</h3>
+                  <h3 class="mb-4">Notification Settings</h3>
 
                 </div><!-- Form notification Settings Tab -->
               </div><!-- Form Tab Content -->
@@ -175,12 +173,12 @@
 
         <div id="fb-preview" class="tab-pane fade">
           <!-- Preview Tab -->
-          
+
         </div><!-- Preview Tab -->
 
         <div id="fb-custom-css" class="tab-pane fade">
           <!-- Custom CSS Tab -->
-          
+
         </div><!-- Custom CSS Tab -->
 
       </div><!-- Form Tab Content -->
@@ -188,8 +186,4 @@
     </div>
     <!-- end col -->
   </div><!-- BS row -->
-
-  <div class="row">
-    <button type="button" class="btn btn-primary my-10" id="fb-save-form">Save Form</button>
-  </div>
 </div>
